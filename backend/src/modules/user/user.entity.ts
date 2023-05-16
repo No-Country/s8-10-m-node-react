@@ -7,10 +7,10 @@ export class UserEntity extends BaseEntityApp {
 
   @Column()
   userId: string;
-  
+
   @Column()
   isVerify: boolean;
-  
+
   @Column()
   phone: string;
 
