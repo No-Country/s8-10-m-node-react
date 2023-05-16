@@ -11,25 +11,13 @@ export class UserEntity extends BaseEntityApp {
   isVerify: boolean;
   
   @Column()
-  phone: string;
+  typeCountId: string;
 
   @Column()
-  email: string;
+  alias: string;
 
   @Column()
-  password: string;
-
-  @Column()
-  address: string;
-
-  @Column()
-  dni: string;
-
-  @Column()
-  country: string;
-
-  @Column()
-  postalCode: string;
+  numberCount: string;
 
   // Relations 
 
