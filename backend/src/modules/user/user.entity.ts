@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, Generated, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
@@ -6,6 +6,7 @@ import { AccountUserEntity } from "../accountUser/accountUser.entity";
 export class UserEntity extends BaseEntityApp {
 
   @Column()
+  @Generated("uuid")
   userId: string;
 
   @Column()

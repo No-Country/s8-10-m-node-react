@@ -10,6 +10,4 @@ export class recoveryPassword extends BaseEntityApp {
 
     @Column()
     token: string;
-
-    //Relations
-};
+}
