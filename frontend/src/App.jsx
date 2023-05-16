@@ -4,23 +4,23 @@ import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
 
-function App() {
+function App () {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Home />
     },
     {
-      path: "/register",
+      path: '/register',
       element: <Register />
     },
     {
-      path: "/login",
+      path: '/login',
       element: <Login />
     }])
 
   return (
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   )
 }
 
