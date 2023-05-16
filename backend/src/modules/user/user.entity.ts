@@ -1,5 +1,6 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
+import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
 @Entity()
 export class UserEntity extends BaseEntityApp {
@@ -31,6 +32,9 @@ export class UserEntity extends BaseEntityApp {
   @Column()
   postalCode: string;
 
-  // Relations 
+  // Relations
+
+  @OneToMany(() => AccountUserEntity, account => account.user)
+  account: AccountUserEntity[];
 
 }

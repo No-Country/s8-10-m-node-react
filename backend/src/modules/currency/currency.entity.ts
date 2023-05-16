@@ -1,8 +1,9 @@
-import { Entity, Column } from "typeorm";
+import { Entity, Column, ManyToOne } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
+import { BusinessEntity } from "../business/business.entity";
 
 @Entity()
-export class Currency extends BaseEntityApp {
+export class CurrencyEntity extends BaseEntityApp {
   
   @Column()
   name: string;
@@ -11,5 +12,8 @@ export class Currency extends BaseEntityApp {
   acronym: string;
 
   // Relations
+
+  @ManyToOne(() => BusinessEntity, business => business.currency)
+  business: BusinessEntity;
 
 }
