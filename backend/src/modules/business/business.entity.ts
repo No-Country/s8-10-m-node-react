@@ -1,44 +1,60 @@
-import { Entity, Column } from "typeorm";
+import { Entity, Column, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
+import { AccountUserEntity } from "../accountUser/accountUser.entity";
+import { CurrencyEntity } from "../currency/currency.entity";
 
 export enum Status {
   PENDING = "PENDING",
   APPROVED = "APPROVED",
-  REJECTED = "REJECTED"
+  REJECTED = "REJECTED",
+}
+
+export enum Transaction {
+  PAY = "PAY",
+  DEPOSIT = "DEPOSIT",
+  EXTRACTION = "EXTRACTION",
+  TRANSFER = "TRANSFER",
 }
 
 @Entity()
 export class BusinessEntity extends BaseEntityApp {
 
   @Column()
-  sender_id: string;
+  senderId: string;
 
   @Column()
-  receiver_id: string;
+  receiverId: string;
 
   @Column()
-  currency_id: string
-  
+  currencyId: string;
+
   @Column()
-  type_tras_id: string
-  
+  typeTransId: string;
+
   @Column()
   date: Date;
 
-  @Column()
+  @Column({ type: "money" })
   amount: number;
 
-  @Column({ 
-    type: "enum", 
+  @Column({
+    type: "enum",
     enum: Status,
-    default: Status.PENDING 
+    default: Status.PENDING,
   })
   status: Status;
 
-  // Relations
-    // sender_id
-    // receiver_id
-    // currency_id
-    // type_tras_id
+  @Column({
+    type: "enum",
+    enum: Transaction,
+  })
+  transaction: Transaction;
+
+
+  @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.business)
+  accountUser: AccountUserEntity;
+
+  @OneToMany(() => CurrencyEntity, (currency) => currency.business)
+  currency: CurrencyEntity[];
 
 }

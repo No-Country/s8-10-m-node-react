@@ -1,23 +1,29 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, Generated, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
+import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
 @Entity()
 export class UserEntity extends BaseEntityApp {
 
   @Column()
+  @Generated("uuid")
   userId: string;
 
-  @Column()
-  isVerify: boolean;
-
-  @Column()
-  phone: string;
-
-  @Column()
+  @Column({
+    type: "varchar",
+    length: 150,
+    unique: true
+  })
   email: string;
 
   @Column()
   password: string;
+
+  @Column({ default: false })
+  isVerify: boolean;
+
+  @Column()
+  phone: string;
 
   @Column()
   address: string;
@@ -31,6 +37,8 @@ export class UserEntity extends BaseEntityApp {
   @Column()
   postalCode: string;
 
-  // Relations 
+
+  @OneToMany(() => AccountUserEntity, account => account.user)
+  account: AccountUserEntity[];
 
 }
