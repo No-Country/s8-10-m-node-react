@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, OneToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne, Generated } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountTypeEntity } from "../accountType/accountType.entity";
 import { BusinessEntity } from "../business/business.entity";
@@ -10,22 +10,22 @@ import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
 export class AccountUserEntity extends BaseEntityApp {
 
   @Column()
+  @Generated("uuid")
   userId: string;
   
-  @Column()
+  @Column({ default: false })
   isVerify: boolean;
   
+  @Column({ length: 100 })
+  alias: string;
+
   @Column()
   typeCountId: string;
 
   @Column()
-  alias: string;
+  accountNumber: string;
 
-  @Column()
-  numberCount: string;
-
-  // Relations
-
+  
   @ManyToOne(() => UserEntity, user => user.account) 
   user: UserEntity;
 

@@ -11,11 +11,11 @@ export class CurrencyEntity extends BaseEntityApp {
   @Column()
   acronym: string;
 
-  // Relations
 
   @ManyToOne(() => BusinessEntity, business => business.currency)
   business: BusinessEntity;
 
   @ManyToOne(() => AccountAmountEntity, accountAmount => accountAmount.currency)
   accountAmount: AccountAmountEntity;
+  
 }

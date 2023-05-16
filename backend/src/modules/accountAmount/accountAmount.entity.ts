@@ -5,7 +5,8 @@ import { CurrencyEntity } from "../currency/currency.entity";
 
 @Entity()
 export class AccountAmountEntity extends BaseEntityApp {
-  @Column("float", { default: 0 })
+
+  @Column({ type: "money", default: 0 })
   amount: number;
 
   @Column()
@@ -14,8 +15,11 @@ export class AccountAmountEntity extends BaseEntityApp {
   @Column()
   accountId: string;
 
+  
   @OneToMany(() => AccountUserEntity, (accountUser) => accountUser.accountAmount)
   accountUser: AccountUserEntity[];
+
   @OneToMany(() => CurrencyEntity, (currency) => currency.accountAmount)
   currency: CurrencyEntity[];
+
 }

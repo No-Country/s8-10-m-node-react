@@ -4,16 +4,18 @@ import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
 @Entity()
 export class AccountCardEntity extends BaseEntityApp {
+  
   @Column()
   numberCard: string;
 
   @Column()
-  vc: string;
+  expiration: Date;
 
   @Column("timestamp", { nullable: true })
   emission: Date;
 
-
+  
   @ManyToOne(() => AccountUserEntity, accountUser => accountUser.accountCard)
   accountUser: AccountUserEntity;
+
 }
