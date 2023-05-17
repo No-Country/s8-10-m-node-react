@@ -3,7 +3,7 @@ import { BaseEntityApp } from "../../shared/entity/baseEntity";
 
 @Entity()
 
-export class recoveryPassword extends BaseEntityApp {
+export class RecoveryPasswordEntity extends BaseEntityApp {
 
     @Column()
     email: string;
