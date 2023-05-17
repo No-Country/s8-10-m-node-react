@@ -9,10 +9,12 @@ import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
 @Entity()
 export class AccountUserEntity extends BaseEntityApp {
 
-  @Column()
+  /*
+  @Column("uuid")
   @Generated("uuid")
   userId: string;
-  
+  */
+ 
   @Column({ default: false })
   isVerify: boolean;
   

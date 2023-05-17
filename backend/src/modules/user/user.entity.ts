@@ -4,11 +4,11 @@ import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
 @Entity()
 export class UserEntity extends BaseEntityApp {
-
+/*
   @Column()
   @Generated("uuid")
   userId: string;
-
+*/
   @Column({
     type: "varchar",
     length: 150,
