@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { AccountCardServices } from "./accountCard.services";
 import { cardUtils } from "./utils/accountCard.utils";
+import { AccountCardEntity } from "./accountCard.entity";
 
 export class AccountCardController extends AccountCardServices {
   constructor() {
@@ -33,15 +34,12 @@ export class AccountCardController extends AccountCardServices {
   }
 
   async postController(req: Request, res: Response) {
-    const numberCard = cardUtils.generateCardNumber();
-    const code = cardUtils.generateCardCvv();
-    const expiration = cardUtils.generateCardExpiration();
-    
-    const body = {
-      numberCard,
-      code,
-      expiration,
-    }
+    const body: AccountCardEntity = new AccountCardEntity();
+    body.cardNumber = cardUtils.generateCardNumber();
+    body.emission = new Date();
+    body.expiration = cardUtils.generateCardExpiration();
+    body.cvv = cardUtils.generateCardCvv();
+    body.accountUser = req.body.accountUser; // ??
 
     try {
       const result = await this.postService(body);
