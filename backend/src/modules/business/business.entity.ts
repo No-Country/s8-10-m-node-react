@@ -31,8 +31,6 @@ export class BusinessEntity extends BaseEntityApp {
   @Column()
   typeTransId: string;
 
-  @Column()
-  date: Date;
 
   @Column({ type: "money" })
   amount: number;
@@ -50,6 +48,8 @@ export class BusinessEntity extends BaseEntityApp {
   })
   transaction: Transaction;
 
+  @Column("text")
+  subject:string
 
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.business)
   accountUser: AccountUserEntity;
