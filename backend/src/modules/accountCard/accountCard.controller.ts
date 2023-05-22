@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AccountCardServices } from "./accountCard.services";
+import { cardUtils } from "./utils/accountCard.utils";
 
 export class AccountCardController extends AccountCardServices {
   constructor() {
@@ -32,7 +33,16 @@ export class AccountCardController extends AccountCardServices {
   }
 
   async postController(req: Request, res: Response) {
-    const body = req.body;
+    const numberCard = cardUtils.generateCardNumber();
+    const code = cardUtils.generateCardCvv();
+    const expiration = cardUtils.generateCardExpiration();
+    
+    const body = {
+      numberCard,
+      code,
+      expiration,
+    }
+
     try {
       const result = await this.postService(body);
       res.json({
