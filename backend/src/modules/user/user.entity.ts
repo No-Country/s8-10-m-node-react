@@ -4,15 +4,15 @@ import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
 @Entity()
 export class UserEntity extends BaseEntityApp {
-/*
+  
   @Column()
   @Generated("uuid")
   userId: string;
-*/
+
   @Column({
     type: "varchar",
     length: 150,
-    unique: true
+    unique: true,
   })
   email: string;
 
@@ -37,8 +37,6 @@ export class UserEntity extends BaseEntityApp {
   @Column()
   postalCode: string;
 
-
-  @OneToMany(() => AccountUserEntity, account => account.user)
+  @OneToMany(() => AccountUserEntity, (account) => account.user)
   account: AccountUserEntity[];
-
 }

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "typeorm": "typeorm-ts-node-esm -d ./src/db/postgreSql.ts",
-    "m:gen":"npm run typeorm migration:generate",
-    "m:run":"npm run typeorm migration:run",
+    "m:gen": "npm run typeorm migration:generate",
+    "m:run": "npm run typeorm migration:run",
     "dev": "nodemon ./src/app.ts",
     "lint": "eslint --ext .ts src/ --fix"
   },
