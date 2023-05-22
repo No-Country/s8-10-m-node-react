@@ -6,10 +6,7 @@ import { AccountUserEntity } from "../accountUser/accountUser.entity";
 export class AccountCardEntity extends BaseEntityApp {
   
   @Column({unique:true})
-  numberCard: string;
-
-  @Column()
-  code:string;
+  cardNumber: string;
 
   @Column()
   expiration: Date;
