@@ -1,6 +1,6 @@
 import { BaseRouter } from "../../shared/router/router";
 import { RecoveryPasswordController } from "./recoveryPassword.controller";
-import { RecoveryPasswordMiddlewares } from "./recoveryPassword.middleware"
+import { RecoveryPasswordMiddlewares } from "./recoveryPassword.middleware";
 
 export class RecoveryPasswordRouter extends BaseRouter<RecoveryPasswordController, RecoveryPasswordMiddlewares>{
     constructor() {

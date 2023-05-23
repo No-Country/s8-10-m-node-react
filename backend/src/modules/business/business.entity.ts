@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, Column, ManyToOne, OneToMany, JoinTable } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 import { CurrencyEntity } from "../currency/currency.entity";
@@ -31,7 +31,6 @@ export class BusinessEntity extends BaseEntityApp {
   @Column()
   typeTransId: string;
 
-
   @Column({ type: "money" })
   amount: number;
 
@@ -49,9 +48,10 @@ export class BusinessEntity extends BaseEntityApp {
   transaction: Transaction;
 
   @Column("text")
-  subject:string
+  subject:string;
 
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.business)
+  @JoinTable()
   accountUser: AccountUserEntity;
 
   @OneToMany(() => CurrencyEntity, (currency) => currency.business)

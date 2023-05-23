@@ -1,4 +1,4 @@
-import { OneToMany, Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 import { CurrencyEntity } from "../currency/currency.entity";
@@ -9,17 +9,17 @@ export class AccountAmountEntity extends BaseEntityApp {
   @Column({ type: "money", default: 0 })
   amount: number;
 
-  @Column()
-  currencyId: string;
+  // @Column()
+  // currencyId: string;
 
-  @Column()
-  accountId: string;
+  // @Column()
+  // accountId: string;
 
   
-  @OneToMany(() => AccountUserEntity, (accountUser) => accountUser.accountAmount)
-  accountUser: AccountUserEntity[];
+  @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.accountAmount)
+  accountUser: AccountUserEntity;
 
-  @OneToMany(() => CurrencyEntity, (currency) => currency.accountAmount)
-  currency: CurrencyEntity[];
+  @ManyToOne(() => CurrencyEntity, (currency) => currency.accountAmount)
+  currency: CurrencyEntity;
 
 }

@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { UserService } from "./user.services";
 import { accountUserController } from "../accountUser/accountUser.controller";
+import { accountUserServices } from "../accountUser/accountUser.services";
+import { accountUserHandler } from "../accountUser/accountUser.handler";
 
 export class UserController extends UserService {
   constructor() {
@@ -35,8 +37,28 @@ export class UserController extends UserService {
   async postController(req: Request, res: Response) {
     const body = req.body;
     try {
-      // const accountUser = accountUserController.postController();
-      const result = await this.postService(body);
+      // Create user
+      const user = await this.postService(body);
+
+      // Create accountUser
+      if(!user) throw new Error("User not created");
+      const accountUser = await accountUserHandler.createAccountUser(user);
+      
+      // Create accountAmount
+      if(!accountUser) throw new Error("Error: accountUser is null");
+      const accountAmout = await accountUserHandler.createAccountAmount(accountUser);
+      // Create accountCard
+      const accountCard = await accountUserHandler.createAccountCard(accountUser);
+
+      if(!accountCard) throw new Error("Error: accountCard is null");
+      if(!accountAmout) throw new Error("Error: accountAmout is null");
+
+      const result = {
+        accountUser,
+        accountAmout,
+        accountCard
+      }
+
       res.json({
         status: "success",
         response: result,

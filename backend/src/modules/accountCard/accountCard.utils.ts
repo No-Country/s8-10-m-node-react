@@ -5,15 +5,15 @@ class CardUtils {
   }
 
   generateCardNumber(): string {
-    let min: number = 1000000000000000;
-    let max: number = 9999999999999999;
+    const min = 1000000000000000;
+    const max = 9999999999999999;
     const cardNumber = (Math.floor((Math.random() * (max - min + 1)) + min)).toString();
     return cardNumber;
   }
 
   generateCardCvv(): string {
-    let min: number = 100;
-    let max: number = 999;
+    const min = 100;
+    const max = 999;
     const cvv = (Math.floor((Math.random() * (max - min + 1)) + min)).toString();
     return cvv;
   }
@@ -26,4 +26,3 @@ class CardUtils {
 }
 
 export const cardUtils = new CardUtils();
-

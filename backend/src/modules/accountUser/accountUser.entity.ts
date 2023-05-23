@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  ManyToMany,
   ManyToOne,
   OneToMany
 } from "typeorm";
@@ -34,9 +33,9 @@ export class AccountUserEntity extends BaseEntityApp {
   @OneToMany(() => AccountCardEntity, (accountCard) => accountCard.accountUser)
   accountCard: AccountCardEntity[];
 
-  @ManyToOne(() => AccountAmountEntity, (accountAmount) => accountAmount.accountUser)
-  accountAmount: AccountAmountEntity;
+  @OneToMany(() => AccountAmountEntity, (accountAmount) => accountAmount.accountUser)
+  accountAmount: AccountAmountEntity[];
 
-  @ManyToMany(() => AssociateCardsEntity, (associateCards) => associateCards.accountUser)
+  @OneToMany(() => AssociateCardsEntity, (associateCards) => associateCards.accountUser)
   associateCards: AccountAmountEntity[];
 }

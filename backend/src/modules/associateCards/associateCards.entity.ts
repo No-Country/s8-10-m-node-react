@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
@@ -22,6 +22,7 @@ export class AssociateCardsEntity extends BaseEntityApp {
   @Column()
   bank: string;
 
-  @ManyToMany(() => AccountUserEntity, (accountUser) => accountUser.associateCards)
-  accountUser: AccountUserEntity[];
+  @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.associateCards)
+  accountUser: AccountUserEntity;
+  
 }

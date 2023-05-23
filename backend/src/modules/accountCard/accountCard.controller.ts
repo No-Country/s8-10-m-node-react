@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AccountCardServices } from "./accountCard.services";
-import { cardUtils } from "./utils/accountCard.utils";
+import { cardUtils } from "./accountCard.utils";
 import { AccountCardEntity } from "./accountCard.entity";
 
 export class AccountCardController extends AccountCardServices {

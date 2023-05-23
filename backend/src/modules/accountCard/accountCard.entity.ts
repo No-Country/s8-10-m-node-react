@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
@@ -19,4 +19,5 @@ export class AccountCardEntity extends BaseEntityApp {
 
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.accountCard)
   accountUser: AccountUserEntity;
+  
 }
