@@ -1,37 +1,26 @@
 import {
   Column,
   Entity,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
-  Generated,
   ManyToMany,
-  JoinTable,
+  ManyToOne,
+  OneToMany
 } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
-import { AccountTypeEntity } from "../accountType/accountType.entity";
+import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
+import { AccountCardEntity } from "../accountCard/accountCard.entity";
+import { AssociateCardsEntity } from "../associateCards/associateCards.entity";
 import { BusinessEntity } from "../business/business.entity";
 import { UserEntity } from "../user/user.entity";
-import { AccountCardEntity } from "../accountCard/accountCard.entity";
-import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
-import { AssociateCardsEntity } from "../associateCards/associateCards.entity";
 
 @Entity()
 export class AccountUserEntity extends BaseEntityApp {
-  /*
-  @Column("uuid")
-  @Generated("uuid")
-  userId: string;
-  */
 
-  @Column({ default: false })
-  isVerify: boolean;
 
   @Column({ length: 100, unique: true })
   alias: string;
 
   @Column({default: "CA"})
-  typeCountId: string;
+  typeCount: string;
 
   @Column()
   accountNumber: string;
@@ -42,9 +31,6 @@ export class AccountUserEntity extends BaseEntityApp {
   @OneToMany(() => BusinessEntity, (business) => business.accountUser)
   business: BusinessEntity[];
 
-  @OneToOne(() => AccountTypeEntity, (accountType) => accountType.accountUser)
-  accountType: AccountTypeEntity;
-
   @OneToMany(() => AccountCardEntity, (accountCard) => accountCard.accountUser)
   accountCard: AccountCardEntity[];
 
@@ -52,6 +38,5 @@ export class AccountUserEntity extends BaseEntityApp {
   accountAmount: AccountAmountEntity;
 
   @ManyToMany(() => AssociateCardsEntity, (associateCards) => associateCards.accountUser)
-  @JoinTable()
   associateCards: AccountAmountEntity[];
 }

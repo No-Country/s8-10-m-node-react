@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { AccountUserServices } from "./accountUser.services";
+import { accountUserUtils } from "./accountUser.utils";
+import { UserEntity } from "../user/user.entity";
 
 export class AccountUserController extends AccountUserServices {
   constructor() {
@@ -31,19 +33,27 @@ export class AccountUserController extends AccountUserServices {
     }
   }
 
-  async postController(req: Request, res: Response) {
-    const body = req.body;
-    try {
-      // Implement utils alias generator and count number generator
+  async postController(user: UserEntity) {
     
-      const result = await this.postService(body);
-      res.json({
-        status: "success",
-        response: result,
-      });
-    } catch (error) {
-      res.status(500).json({ error });
-    }
+    // try {
+
+    //   // Generated card
+    //   // Implement utils alias generator and count number generator
+    //   // const accountUser = {
+    //   //   alias: "alias",
+    //   //   typeCount: "CA",
+    //   //   accountNumber: accountUserUtils.generateAccountNumber(),
+    //   //   user,
+
+    //   // };
+    //   // const result = await this.postService(body);
+    //   res.json({
+    //     status: "success",
+    //     // response: result,
+    //   });
+    // } catch (error) {
+    //   res.status(500).json({ error });
+    // }
   }
 
   async putController(req: Request, res: Response) {
@@ -73,3 +83,5 @@ export class AccountUserController extends AccountUserServices {
     }
   }
 }
+
+export const accountUserController = new AccountUserController();

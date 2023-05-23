@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "./user.services";
+import { accountUserController } from "../accountUser/accountUser.controller";
 
 export class UserController extends UserService {
   constructor() {
@@ -34,6 +35,7 @@ export class UserController extends UserService {
   async postController(req: Request, res: Response) {
     const body = req.body;
     try {
+      // const accountUser = accountUserController.postController();
       const result = await this.postService(body);
       res.json({
         status: "success",

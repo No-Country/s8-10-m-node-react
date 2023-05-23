@@ -38,6 +38,5 @@ export class UserEntity extends BaseEntityApp {
   postalCode: string;
 
   @OneToMany(() => AccountUserEntity, (account) => account.user)
-  @JoinColumn()
   account: AccountUserEntity[];
 }

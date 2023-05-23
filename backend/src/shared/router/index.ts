@@ -1,7 +1,6 @@
 import express, { Router } from "express";
 import { AccountAmountRouter } from "../../modules/accountAmount/accountAmount.routes";
 import { AccountCardRouter } from "../../modules/accountCard/accountCard.routes";
-import { AccountTypeRouter } from "../../modules/accountType/accountType.routes";
 import { AccountUserRouter } from "../../modules/accountUser/accountUser.routes";
 import { AssociateCardsRouter } from "../../modules/associateCards/associateCards.routes";
 import { BusinessRouter } from "../../modules/business/business.routes";
@@ -19,7 +18,6 @@ export class RoutesApp {
     return [
       new AccountAmountRouter().router,
       new AccountCardRouter().router,
-      new AccountTypeRouter().router,
       new AccountUserRouter().router,
       new AssociateCardsRouter().router,
       new BusinessRouter().router,
