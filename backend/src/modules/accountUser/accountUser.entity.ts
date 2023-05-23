@@ -30,7 +30,7 @@ export class AccountUserEntity extends BaseEntityApp {
   @Column({ length: 100, unique: true })
   alias: string;
 
-  @Column()
+  @Column({default: "CA"})
   typeCountId: string;
 
   @Column()

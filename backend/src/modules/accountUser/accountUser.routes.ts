@@ -2,7 +2,7 @@ import { BaseRouter } from "../../shared/router/router";
 import { AccountUserController } from "./accountUser.controller";
 import { AccountUserMiddlewares } from "./accountUser.middlew";
 
-export class UserRouter extends BaseRouter<AccountUserController, AccountUserMiddlewares> {
+export class AccountUserRouter extends BaseRouter<AccountUserController, AccountUserMiddlewares> {
   constructor() {
     super(AccountUserController, AccountUserMiddlewares, "accountUser");
   }

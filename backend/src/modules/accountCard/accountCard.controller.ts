@@ -40,6 +40,7 @@ export class AccountCardController extends AccountCardServices {
     body.expiration = cardUtils.generateCardExpiration();
     body.cvv = cardUtils.generateCardCvv();
     body.accountUser = req.body.accountUser; // ??
+    
 
     try {
       const result = await this.postService(body);
@@ -79,3 +80,5 @@ export class AccountCardController extends AccountCardServices {
     }
   }
 }
+
+export const accountCardController = new AccountCardController(); 

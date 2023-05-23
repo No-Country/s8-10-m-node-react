@@ -34,6 +34,8 @@ export class AccountUserController extends AccountUserServices {
   async postController(req: Request, res: Response) {
     const body = req.body;
     try {
+      // Implement utils alias generator and count number generator
+    
       const result = await this.postService(body);
       res.json({
         status: "success",
