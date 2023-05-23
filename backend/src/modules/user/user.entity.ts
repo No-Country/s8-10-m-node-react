@@ -1,4 +1,4 @@
-import { Column, Entity, Generated, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, Generated, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 

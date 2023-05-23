@@ -32,7 +32,7 @@ export class AccountUserController extends AccountUserServices {
   }
 
   async postController(req: Request, res: Response) {
-    const body = req.body;
+    const body = req.body
     try {
       const result = await this.postService(body);
       res.json({
@@ -42,6 +42,7 @@ export class AccountUserController extends AccountUserServices {
     } catch (error) {
       res.status(500).json({ error });
     }
+    
   }
 
   async putController(req: Request, res: Response) {
@@ -71,3 +72,5 @@ export class AccountUserController extends AccountUserServices {
     }
   }
 }
+
+export const accountUserController = new AccountUserController();
