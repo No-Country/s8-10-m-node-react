@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { UserService } from "./user.services";
+import { UserEntity } from "./user.entity";
+import { hashPassword } from "./utils/hashPassword.utils";
 
 export class UserController extends UserService {
   constructor() {
@@ -33,6 +35,10 @@ export class UserController extends UserService {
 
   async postController(req: Request, res: Response) {
     const body = req.body;
+    const user = new UserEntity();
+    user.password = await hashPassword.hashPassword(body.password);
+    user.email = body.email
+
     try {
       const result = await this.postService(body);
       res.json({
@@ -71,3 +77,6 @@ export class UserController extends UserService {
     }
   }
 }
+
+
+
