@@ -1,14 +1,5 @@
 import { Request, Response } from "express";
 import { AccountUserServices } from "./accountUser.services";
-import { accountUserUtils } from "./accountUser.utils";
-import { UserEntity } from "../user/user.entity";
-import { AccountAmountController } from "../accountAmount/accountAmount.controller";
-import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
-import { AccountUserEntity } from "./accountUser.entity";
-import { accountCardController } from "../accountCard/accountCard.controller";
-import { AccountAmountService } from "../accountAmount/accountAmount.services";
-import { AccountCardServices } from "../accountCard/accountCard.services";
-import { accountUserHandler } from "./accountUser.handler";
 
 export class AccountUserController extends AccountUserServices {
   constructor() {

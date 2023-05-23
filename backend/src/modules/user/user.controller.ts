@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
+import { accountUserHandler } from "./user.handler";
 import { UserService } from "./user.services";
-import { accountUserController } from "../accountUser/accountUser.controller";
-import { accountUserServices } from "../accountUser/accountUser.services";
-import { accountUserHandler } from "../accountUser/accountUser.handler";
 
 export class UserController extends UserService {
   constructor() {
@@ -35,23 +33,22 @@ export class UserController extends UserService {
   }
 
   async postController(req: Request, res: Response) {
-    const body = req.body;
+
     try {
-      // Create user
-      const user = await this.postService(body);
+      const user = await accountUserHandler.createUser(req.body);
 
       // Create accountUser
-      if(!user) throw new Error("User not created");
+      if(!user) return res.status(400).json({ error: "Error: user is null"});
       const accountUser = await accountUserHandler.createAccountUser(user);
       
       // Create accountAmount
-      if(!accountUser) throw new Error("Error: accountUser is null");
+      if(!accountUser) return res.status(400).json({ error: "Error: accountUser is null"});
       const accountAmout = await accountUserHandler.createAccountAmount(accountUser);
       // Create accountCard
       const accountCard = await accountUserHandler.createAccountCard(accountUser);
 
-      if(!accountCard) throw new Error("Error: accountCard is null");
-      if(!accountAmout) throw new Error("Error: accountAmout is null");
+      if(!accountCard) return res.status(400).json({ error: "Error: accountCard is null"});
+      if(!accountAmout) return res.status(400).json({ error: "Error: accountAmount is null"});
 
       const result = {
         accountUser,
@@ -95,3 +92,6 @@ export class UserController extends UserService {
     }
   }
 }
+
+
+
