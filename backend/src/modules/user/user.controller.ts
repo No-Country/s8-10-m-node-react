@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { accountUserHandler } from "./user.handler";
 import { UserService } from "./user.services";
+import { AppDataSource } from "../../db/postgreSql";
+import { EntityManager } from "typeorm";
 
 export class UserController extends UserService {
   constructor() {
@@ -35,8 +37,12 @@ export class UserController extends UserService {
 
   async postController(req: Request, res: Response) {
     try {
+      await AppDataSource.manager.transaction(async(transactionalEntityManager)=>{
+        
+      })
       const user = await accountUserHandler.createUser(req.body);
-
+      
+      
       // Create accountUser
       if (!user) return res.status(400).json({ error: "Error: user is null" });
       const accountUser = await accountUserHandler.createAccountUser(user);
