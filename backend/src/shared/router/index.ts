@@ -7,6 +7,7 @@ import { BusinessRouter } from "../../modules/business/business.routes";
 import { CurrencyRouter } from "../../modules/currency/currency.routes";
 import { RecoveryPasswordRouter } from "../../modules/recoveryPassword/recoveryPassword.routes";
 import { UserRouter } from "../../modules/user/user.routes";
+import { AuthRouter } from "../../modules/auth/auth.routes";
 
 
 
@@ -23,7 +24,8 @@ export class RoutesApp {
       new BusinessRouter().router,
       new CurrencyRouter().router,
       new RecoveryPasswordRouter().router,
-      new UserRouter().router
+      new UserRouter().router,
+      new AuthRouter().router
     ];
   }
 }

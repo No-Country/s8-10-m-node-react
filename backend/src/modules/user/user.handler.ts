@@ -3,14 +3,13 @@ import { accountAmountServices } from "../accountAmount/accountAmount.services";
 import { AccountCardEntity } from "../accountCard/accountCard.entity";
 import { accountCardServices } from "../accountCard/accountCard.services";
 import { cardUtils } from "../accountCard/accountCard.utils";
-import { CurrencyEntity } from "../currency/currency.entity";
-import { currencyServices } from "../currency/currency.services";
-import { UserEntity } from "../user/user.entity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 import { accountUserServices } from "../accountUser/accountUser.services";
 import { accountUserUtils } from "../accountUser/accountUser.utils";
-import { hashPassword } from "./utils/hashPassword.utils";
+import { currencyServices } from "../currency/currency.services";
+import { UserEntity } from "../user/user.entity";
 import { userServices } from "./user.services";
+import { hashPassword } from "./utils/hashPassword.utils";
 
 class AccountUserHandler {
   constructor(){
