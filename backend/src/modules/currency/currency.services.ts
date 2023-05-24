@@ -6,3 +6,5 @@ export class CurrencyService extends BaseServices<CurrencyEntity> {
     super(CurrencyEntity);
   }
 }
+
+export const currencyServices = new CurrencyService();

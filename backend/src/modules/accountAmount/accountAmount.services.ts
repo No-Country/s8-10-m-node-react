@@ -7,3 +7,5 @@ export class AccountAmountService extends BaseServices<AccountAmountEntity> {
     super(AccountAmountEntity);
   }
 }
+
+export const accountAmountServices = new AccountAmountService();

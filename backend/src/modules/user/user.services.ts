@@ -6,3 +6,5 @@ export class UserService extends BaseServices<UserEntity> {
     super(UserEntity);
   }
 }
+
+export const userServices = new UserService();

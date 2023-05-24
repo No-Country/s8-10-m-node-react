@@ -3,9 +3,8 @@ import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
 @Entity()
-export class AccountCardEntity extends BaseEntityApp {
-  
-  @Column({unique:true})
+export class AssociateCardsEntity extends BaseEntityApp {
+  @Column({ unique: true })
   cardNumber: string;
 
   @Column()
@@ -14,10 +13,16 @@ export class AccountCardEntity extends BaseEntityApp {
   @Column("timestamp", { nullable: true })
   emission: Date;
 
-  @Column({length: 3})
+  @Column({ length: 3 })
   cvv: string;
 
-  @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.accountCard)
+  @Column()
+  emisor: string;
+
+  @Column()
+  bank: string;
+
+  @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.associateCards)
   accountUser: AccountUserEntity;
   
 }

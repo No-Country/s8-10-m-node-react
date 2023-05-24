@@ -1,23 +1,27 @@
 import "dotenv/config";
-import express from 'express';
+import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import { AppDataSource } from "./db/postgreSql";
+import { RoutesApp } from "./shared/router";
 
 class AppServer {
   private app = express();
-  private PORT = process.env.PORT || 3000
- 
+  private PORT = process.env.PORT || 3000;
+  private routes = new RoutesApp();
+
   constructor() {
     this.middlewares();
     this.listen();
-    this.db()
+    this.db();
   }
 
-  private db(){
+  private db() {
     AppDataSource.initialize()
-    .then(()=>{console.log("Database connected")})
-    .catch((error) => console.log(error));
+      .then(() => {
+        console.log("Database connected");
+      })
+      .catch((error) => console.log(error));
   }
 
   middlewares() {
@@ -25,7 +29,8 @@ class AppServer {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cors());
     this.app.use(morgan("dev"));
-
+    this.app.use("/api", this.routes.routes());
+    
   }
 
   listen() {
