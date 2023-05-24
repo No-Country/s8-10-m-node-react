@@ -2,6 +2,7 @@ import { BaseEntity, EntityTarget, FindOptionsWhere, Repository } from "typeorm"
 import { NextFunction, Request, Response } from "express";
 // import { GetPublicKeyOrSecret, Secret, JwtPayload } from "jsonwebtoken";
 import { AppDataSource } from "../../db/postgreSql";
+import { authUtils } from "../../modules/auth/auth.utils";
 
 // import { verifyToken } from "../../modules/auth/utils/jwtHandle.utils";
 // import { AuthResponses } from "../../modules/auth/utils/auth.constants";
@@ -30,19 +31,17 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
     }
   }
 
-  // async checkToken(req: Request, res: Response, next: NextFunction) {
-  //   const token = req.header("set-token");
+  async checkToken(req: Request, res: Response, next: NextFunction) {
+    const token = req.header("set-token");
 
-  //   try {
-  //     if (!token) return res.status(403).json(AuthResponses.errors.noToken);
+    try {
+      if (!token) return res.status(403).json({error: "A token is expected"});
 
-  //     const jwtPayload = verifyToken(token);
-  //     console.log("--------------------\n");
-  //     console.log(jwtPayload);
-
-  //     next();
-  //   } catch (error) {
-  //     return res.status(403).json(AuthResponses.errors.invalidToken);
-  //   }
-  // }
+      const jwtPayload = authUtils.verifyToken(token);
+      if (!jwtPayload) return res.status(403).json({error: "Invalid token"});
+      next();
+    } catch (error) {
+      return res.status(403).json(error);
+    }
+  }
 }
