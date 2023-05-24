@@ -9,6 +9,7 @@ export class UserController extends UserService {
 
   async getAllController(req: Request, res: Response) {
     try {
+      console.log("get");
       const result = await this.getServices();
       res.json({
         status: "success",
@@ -33,28 +34,27 @@ export class UserController extends UserService {
   }
 
   async postController(req: Request, res: Response) {
-
     try {
       const user = await accountUserHandler.createUser(req.body);
 
       // Create accountUser
-      if(!user) return res.status(400).json({ error: "Error: user is null"});
+      if (!user) return res.status(400).json({ error: "Error: user is null" });
       const accountUser = await accountUserHandler.createAccountUser(user);
-      
+
       // Create accountAmount
-      if(!accountUser) return res.status(400).json({ error: "Error: accountUser is null"});
+      if (!accountUser) return res.status(400).json({ error: "Error: accountUser is null" });
       const accountAmout = await accountUserHandler.createAccountAmount(accountUser);
       // Create accountCard
       const accountCard = await accountUserHandler.createAccountCard(accountUser);
 
-      if(!accountCard) return res.status(400).json({ error: "Error: accountCard is null"});
-      if(!accountAmout) return res.status(400).json({ error: "Error: accountAmount is null"});
+      if (!accountCard) return res.status(400).json({ error: "Error: accountCard is null" });
+      if (!accountAmout) return res.status(400).json({ error: "Error: accountAmount is null" });
 
       const result = {
         accountUser,
         accountAmout,
-        accountCard
-      }
+        accountCard,
+      };
 
       res.json({
         status: "success",
@@ -92,6 +92,3 @@ export class UserController extends UserService {
     }
   }
 }
-
-
-

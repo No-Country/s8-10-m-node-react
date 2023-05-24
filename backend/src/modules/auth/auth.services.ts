@@ -4,8 +4,10 @@ export class AuthServices {
   
 
   async postService(email: string) {
-    const user = await UserEntity.findOneBy({ email });
+   
+    const user = await UserEntity.findOneBy({ email }) as UserEntity;
     const token = authUtils.generateToken(user?.userId as string);
+    
     return {
       user,
       token

@@ -1,18 +1,22 @@
-import { SignOptions, sign, verify, JwtPayload } from "jsonwebtoken";
+import { JwtPayload, SignOptions, sign, verify } from "jsonwebtoken";
 
+interface CustomJwtPayload extends JwtPayload {
+  payload: string | object | Buffer;
+}
 export class AuthUtils {
-
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  private secretKey = process.env.SECRET_KEY!;
+  private secretKey = process.env.SECRET_KEY1!;
 
-  generateToken(userId: string): string {
-    const options: SignOptions = {
-      expiresIn: "1h", 
-    };
-    return sign(userId, this.secretKey, options);
+  generateToken(payload: string | object | Buffer) {
+    const jwtPayload = { payload };
+    const jwt = sign(jwtPayload, this.secretKey, {
+      algorithm: "HS256",
+      expiresIn: "2h",
+    });
+    return jwt;
   }
 
-  verifyToken (token: string) {
+  verifyToken(token: string) {
     try {
       const decoded = verify(token, this.secretKey);
       return decoded;
