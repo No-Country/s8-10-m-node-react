@@ -35,6 +35,9 @@ class AppServer {
         secret: process.env.SECRET_KEY as string,
         resave: false,
         saveUninitialized: false,
+        cookie: {
+          maxAge: 300000, 
+        },
       })
     );
     this.app.use("/api", this.routes.routes());
