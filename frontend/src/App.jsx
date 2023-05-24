@@ -3,7 +3,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
-import { Valentin } from './pages/Valentin'
+import { MyCards } from './pages/MyCards'
+import { MyCreditCard } from './pages/MyCreditCard'
 
 function App () {
   const router = createBrowserRouter([
@@ -20,8 +21,12 @@ function App () {
       element: <Login />
     },
     {
-      path: '/valentin',
-      element: <Valentin />
+      path: '/mycards',
+      element: <MyCards />
+    },
+    {
+      path: '/mycards/:creditCardId',
+      element: <MyCreditCard />
     }
   ])
 
