@@ -5,7 +5,7 @@ interface CustomJwtPayload extends JwtPayload {
 }
 export class AuthUtils {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  private secretKey = process.env.SECRET_KEY1!;
+  private secretKey = process.env.SECRET_KEY!;
 
   generateToken(payload: string | object | Buffer) {
     const jwtPayload = { payload };
