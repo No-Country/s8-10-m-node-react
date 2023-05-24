@@ -17,10 +17,10 @@ export class UserEntity extends BaseEntityApp {
   email: string;
 
   @Column()
-  fullName:string
+  fullName:string;
 
   @Column()
-  lastName:string
+  lastName:string;
 
   @Column()
   password: string;

@@ -5,8 +5,8 @@ class CardUtils {
   }
 
   generateCardNumber(): string {
-    const min = 1000000000000000;
-    const max = 9999999999999999;
+    const min = 100000000000000;
+    const max = 999999999999999;
     const cardNumber = (Math.floor((Math.random() * (max - min + 1)) + min)).toString();
     return cardNumber;
   }

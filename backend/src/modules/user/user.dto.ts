@@ -1,7 +1,7 @@
 export class UserDto {
   userId: string;
   fullName:string;
-  lastName:string
+  lastName:string;
   email: string;
   phone: string;
   address: string;
@@ -10,8 +10,8 @@ export class UserDto {
   constructor(userId: string, email: string, phone: string,
     address: string, country: string, postalCode: string,fullName:string,lastName:string) {
     this.userId = userId;
-    this.fullName=fullName
-    this.lastName=lastName
+    this.fullName=fullName;
+    this.lastName=lastName;
     this.email = email;
     this.phone = phone;
     this.address = address;
