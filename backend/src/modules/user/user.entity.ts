@@ -17,6 +17,12 @@ export class UserEntity extends BaseEntityApp {
   email: string;
 
   @Column()
+  fullName:string
+
+  @Column()
+  lastName:string
+
+  @Column()
   password: string;
 
   @Column({ default: false })

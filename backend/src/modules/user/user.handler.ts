@@ -17,8 +17,10 @@ class AccountUserHandler {
   }
 
   async createUser(body: UserEntity){
-    const { password, email, phone, address, dni, country, postalCode } = body;
+    const { fullName,lastName,password, email, phone, address, dni, country, postalCode } = body;
     const newUser = new UserEntity();
+    newUser.fullName=fullName;
+    newUser.lastName=lastName;
     newUser.address = address;
     newUser.country = country;
     newUser.dni = dni;
@@ -34,7 +36,7 @@ class AccountUserHandler {
   async createAccountUser(user: UserEntity) {
     const accountUser = new AccountUserEntity();
     accountUser.user = user;
-    accountUser.alias = accountUserUtils.generateAlias(user.email,user.phone,user.dni)
+    accountUser.alias = accountUserUtils.generateAlias(user.fullName,user.lastName,user.dni)
     accountUser.typeCount = "CA";
     accountUser.accountNumber = accountUserUtils.generateAccountNumber();
     const result = await accountUserServices.postService(accountUser);
