@@ -24,6 +24,7 @@
     "typeorm": "^0.3.16"
   },
   "devDependencies": {
+    "@types/express-session": "^1.17.7",
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/dotenv": "^8.2.0",
