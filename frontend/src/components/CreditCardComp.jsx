@@ -3,6 +3,7 @@ import { detectCardType } from '../utils/detectCardType'
 import { formatCreditCardNumber } from '../utils/formatCreditCardNumber'
 import { bgGradient } from '../utils/creditCardStyles'
 import { AmexSVG, DoubleArrowSVG, MasterCardSVG } from '../utils/icons'
+import { Link } from 'react-router-dom'
 
 export const CreditCardComp = ({ height, cardNumber }) => {
   const variant = detectCardType(cardNumber)
@@ -46,7 +47,9 @@ export const CreditCardComp = ({ height, cardNumber }) => {
             <p className='truncate my-0 tracking-widest'>{numberToShow}</p>
           </span>
           <span className='cursor-pointer z-10'>
-            <DoubleArrowSVG />
+            <Link to={`/mycards/${cardNumber}`}>
+              <DoubleArrowSVG />
+            </Link>
           </span>
         </div>
       </div>
