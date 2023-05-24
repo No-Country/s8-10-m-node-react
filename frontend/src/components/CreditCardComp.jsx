@@ -1,39 +1,20 @@
 import React from 'react'
+import { detectCardType } from '../utils/detectCardType'
+import { formatCreditCardNumber } from '../utils/formatCreditCardNumber'
+import { bgGradient } from '../utils/creditCardStyles'
+import { AmexSVG, DoubleArrowSVG, MasterCardSVG } from '../utils/icons'
 
-export const Card = ({ height, cardNumber }) => {
-  function detectCardType (cardNumber) {
-    const cleanedNumber = cardNumber.replace(/\D/g, '')
-
-    const cardPatterns = {
-      visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
-      masterCard: /^5[1-5][0-9]{14}$/,
-      amex: /^3[47][0-9]{13}$/
-    }
-
-    for (const cardType in cardPatterns) {
-      if (cardPatterns[cardType].test(cleanedNumber)) {
-        return cardType
-      }
-    }
-    return 'nocard'
-  }
-
-  function formatCreditCardNumber (number) {
-    const parts = number.match(/[\s\S]{1,4}/g)
-    return parts.join(' ● ')
-  }
-
+export const CreditCardComp = ({ height, cardNumber }) => {
   const variant = detectCardType(cardNumber)
 
   const cardHeight = height < 120 ? 120 : height
 
   const width = '340px'
 
-  const bgGradient = {
-    nocard: 'bg-gradient-to-r from-red-700 to-red-500',
-    visa: 'bg-gradient-to-r from-[#012340] to-[#4148C4]',
-    masterCard: 'bg-gradient-to-r from-emerald-500 to-[#0AA46B]',
-    amex: 'bg-gradient-to-r from-gray-900 to-slate-800'
+  const iconSVG = {
+    visa: <p>VISA</p>,
+    amex: <p>AMEX</p>,
+    masterCard: <MasterCardSVG />
   }
 
   const detail1 = {
@@ -54,15 +35,20 @@ export const Card = ({ height, cardNumber }) => {
 
   return (
     <article className={`w-[340px]  rounded-xl ${bgGradient[variant]} text-xl relative overflow-hidden font-inter`} style={heightStyle}>
-      <div className='h-full w-full flex flex-col justify-between p-[20px]'>
+      <div className='h-full w-full flex flex-col justify-between p-[20px] relative'>
         <span className='text-white text-[8px] uppercase flex justify-between px-2'>
           <h3>Credit</h3>
-          <p>{variant}</p>
+          {iconSVG[variant]}
         </span>
-        <span className='text-white uppercase  font-roboto flex flex-col justify-center gap-0 text-xs'>
-          <p className='w-full my-0 truncate'>VALENTIN GONZALEZ TRAPAGA</p>
-          <p className='truncate my-0 tracking-widest'>{numberToShow}</p>
-        </span>
+        <div className='flex justify-between'>
+          <span className='text-white uppercase  font-roboto flex flex-col justify-center gap-0 text-xs'>
+            <p className='w-full my-0 truncate'>VALENTIN GONZALEZ TRAPAGA</p>
+            <p className='truncate my-0 tracking-widest'>{numberToShow}</p>
+          </span>
+          <span className='cursor-pointer z-10'>
+            <DoubleArrowSVG />
+          </span>
+        </div>
       </div>
       <div className='inline-block absolute w-full bg-white opacity-30' style={detail1[variant]} />
       <div className='inline-block absolute w-full bg-white opacity-10' style={detail2[variant]} />
