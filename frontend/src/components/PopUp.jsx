@@ -17,7 +17,7 @@ const PopUp = ({ message, setError }) => {
         clearTimeout(timer)
       }
     }
-  }, [message])
+  }, [message, setError])
 
   return (
     <div
