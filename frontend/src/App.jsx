@@ -7,20 +7,30 @@ import Transfers from './pages/Transfers'
 import Contacts from './components/Contacts'
 import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
+import { MyCards } from './pages/MyCards'
+import { MyCreditCard } from './pages/MyCreditCard'
 
-function App() {
+function App () {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Home />,
+      element: <Home />
     },
     {
       path: '/register',
-      element: <Register />,
+      element: <Register />
     },
     {
       path: '/login',
-      element: <Login />,
+      element: <Login />
+    },
+    {
+      path: '/mycards',
+      element: <MyCards />
+    },
+    {
+      path: '/mycards/:creditCardId',
+      element: <MyCreditCard />
     },
     {
       path: '/transfers',
@@ -32,9 +42,9 @@ function App() {
           children: [
             {
               path: '/transfers/contacts/sendAmount',
-              element: <ToTransfer />,
-            },
-          ],
+              element: <ToTransfer />
+            }
+          ]
         },
         {
           path: '/transfers/newContact',
@@ -42,12 +52,12 @@ function App() {
           children: [
             {
               path: '/transfers/newContact/sendAmount',
-              element: <ToTransfer />,
-            },
-          ],
-        },
-      ],
-    },
+              element: <ToTransfer />
+            }
+          ]
+        }
+      ]
+    }
   ])
 
   return <RouterProvider router={router} />
