@@ -34,7 +34,7 @@ export class UserEntity extends BaseEntityApp {
   @Column()
   address: string;
 
-  @Column()
+  @Column({unique:true})
   dni: string;
 
   @Column()
@@ -43,6 +43,9 @@ export class UserEntity extends BaseEntityApp {
   @Column()
   postalCode: string;
 
-  @OneToMany(() => AccountUserEntity, (account) => account.user)
+  @OneToMany(() => AccountUserEntity, (account) => account.user,{
+    cascade:true,
+    eager:true
+  })
   account: AccountUserEntity[];
 }

@@ -1,6 +1,8 @@
 import {
   Column,
   Entity,
+  JoinColumn,
+  JoinTable,
   ManyToOne,
   OneToMany
 } from "typeorm";
@@ -27,7 +29,10 @@ export class AccountUserEntity extends BaseEntityApp {
   @ManyToOne(() => UserEntity, (user) => user.account)
   user: UserEntity;
 
-  @OneToMany(() => BusinessEntity, (business) => business.accountUser)
+  @OneToMany(() => BusinessEntity, (business) => business.accountUser,{
+    cascade: true,
+    eager: true,
+  })
   business: BusinessEntity[];
 
   @OneToMany(() => AccountCardEntity, (accountCard) => accountCard.accountUser)
