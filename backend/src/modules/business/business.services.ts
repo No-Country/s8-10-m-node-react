@@ -2,6 +2,7 @@ import { BaseServices } from "../../shared/services/baseServices";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 import { BusinessEntity, Status, Transaction } from "./business.entity";
 import {BusinessDto} from "./business.dto"
+import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
 
 export class BusinessService extends BaseServices<BusinessEntity> {
   constructor() {
@@ -51,4 +52,26 @@ export class BusinessService extends BaseServices<BusinessEntity> {
     }
   }
 
+//
+  async postServiceDeposit(data:any,address:string):Promise<AccountAmountEntity|null>{
+    try {
+      const AccountUserRepository=await this.getRepository(AccountUserEntity)
+      const AccountAmountRepository=await this.getRepository(AccountAmountEntity)
+      const regexNumber=/^\d$/
+      //nota esto da error, lo coloque para que solo acepte numeros el regex pero me estaba fallando si lo pueden arreglar ustedes fino :3 if(!regexNumber.test(address)) throw new Error("this is a not accountNumber")
+      const AccountReceptor=await AccountUserRepository.findOne({where:{accountNumber:address}})
+      if(!AccountReceptor) throw new Error("this accountUser not exist")
+      const AccountAmount=await AccountAmountRepository.findOne({where:{accountUser:{id:AccountReceptor.id}}})
+      if(!AccountAmount)throw new Error ("this amount not exist")
+      const finishDeposit=await AccountAmountRepository.preload({
+        id:AccountAmount.id,
+        ...data
+      })
+      if(!finishDeposit)throw new Error("deposit failed try later")
+      await AccountAmountRepository.save(finishDeposit)
+      return finishDeposit
+    } catch (error) {
+      throw new Error("bad request")
+    }
+  }
 }

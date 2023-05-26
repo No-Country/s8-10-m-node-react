@@ -38,7 +38,7 @@ export class BusinessController extends BusinessService {
     }
   }
 
-  async postController(req: Request, res: Response) {
+  async postControllerTransfer(req: Request, res: Response) {
     const {address}=req.params
     const body = req.body;
     try {
@@ -53,11 +53,11 @@ export class BusinessController extends BusinessService {
     }
   }
 
-  async putController(req: Request, res: Response) {
-    const { id } = req.params;
+  async postControllerDeposit(req: Request, res: Response) {
+    const {address}=req.params
     const body = req.body;
     try {
-      const result = await this.putService(parseInt(id), body);
+      const result = await this.postServiceDeposit(body,address);
       res.json({
         status: "success",
         response: result,
