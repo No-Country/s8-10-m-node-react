@@ -1,11 +1,11 @@
 import React from 'react'
 import { PageTitle } from './../components/PageTitle'
 
-export const Register = () => {
+export const Services = () => {
   return (
     <>
       <PageTitle>
-        Register
+        Services
       </PageTitle>
     </>
   )

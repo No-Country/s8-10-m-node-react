@@ -1,7 +1,12 @@
 import React from 'react'
+import { PageTitle } from './../components/PageTitle'
 
 export const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <PageTitle>
+        Home
+      </PageTitle>
+    </>
   )
 }

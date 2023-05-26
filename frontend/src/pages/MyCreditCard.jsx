@@ -4,6 +4,7 @@ import { Button } from '../components/Button'
 import { TogglePill } from '../components/TogglePill'
 import { ArrowRightSVG, DeleteSVG } from '../utils/icons'
 import { useParams } from 'react-router-dom'
+import { PageTitle } from './../components/PageTitle'
 
 export const MyCreditCard = () => {
   const { creditCardId } = useParams()
@@ -25,10 +26,12 @@ export const MyCreditCard = () => {
   // }, [])
 
   return (
-    <main className='mx-auto bg-slate-100 w-96 flex flex-col items-center min-h-screen p-4 gap-4 text-[#2E4355] font-roboto'>
-      <p className='w-full'>Home / Tarjetas / Mi tarjeta</p>
+    <>
+      <PageTitle>
+        Tarjetas
+      </PageTitle>
       <CreditCardComp height={180} cardNumber={creditCardId} />
-      <div className='flex flex-col w-full gap-2 font-medium font-roboto px-4'>
+      <div className='flex flex-col w-full gap-2 font-medium font-roboto px-2'>
         <div className='flex w-full items-center justify-between'>
           <p>Pausar tarjeta</p>
           <TogglePill />
@@ -45,12 +48,12 @@ export const MyCreditCard = () => {
             <ArrowRightSVG />
           </span>
         </div>
+        <Button className='bg-[#42ADD5] text-white'>
+          <DeleteSVG />
+          <p className='font-medium text-center text-lg w-[70%]'>Eliminar tarjeta</p>
+        </Button>
       </div>
-      <Button className='bg-[#42ADD5] text-white'>
-        <DeleteSVG />
-        <p className='font-medium text-center text-lg w-[70%]'>Eliminar tarjeta</p>
-      </Button>
       {/* {windowWidth > 480 ? <p>Estamos en desktop o tablet</p> : <p>Estamos en mobile</p>} */}
-    </main>
+    </>
   )
 }
