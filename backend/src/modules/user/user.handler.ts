@@ -45,6 +45,7 @@ class AccountUserHandler {
       });
       return result;
   } catch (error) {
+    
     console.log(error);
   }
   }

@@ -26,12 +26,9 @@ export class BusinessEntity extends BaseEntityApp {
   receiverId: string;
 
   @Column()
-  currencyId: string;
+  currencyId: number;
 
-  @Column()
-  typeTransId: string;
-
-  @Column({ type: "money" })
+  @Column({ type: "money"})
   amount: number;
 
   @Column({
@@ -51,7 +48,6 @@ export class BusinessEntity extends BaseEntityApp {
   subject:string;
 
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.business)
-  @JoinTable()
   accountUser: AccountUserEntity;
 
   @OneToMany(() => CurrencyEntity, (currency) => currency.business)
