@@ -2,7 +2,7 @@ import React from 'react'
 import { detectCardType } from '../utils/detectCardType'
 import { formatCreditCardNumber } from '../utils/formatCreditCardNumber'
 import { bgGradient } from '../utils/creditCardStyles'
-import { AmexSVG, DoubleArrowSVG, MasterCardSVG } from '../utils/icons'
+import { CardDetailSVG, DoubleArrowSVG, MasterCardSVG } from '../utils/icons'
 import { Link } from 'react-router-dom'
 
 export const CreditCardComp = ({ height, cardNumber }) => {
@@ -35,26 +35,32 @@ export const CreditCardComp = ({ height, cardNumber }) => {
   const numberToShow = formatCreditCardNumber(cardNumber)
 
   return (
-    <article className={`w-[340px]  rounded-xl ${bgGradient[variant]} text-xl relative overflow-hidden font-inter`} style={heightStyle}>
+    <article className={`rounded-xl ${bgGradient[variant]} min-w-[240px] max-w-sm text-xl relative overflow-hidden font-inter shadow-lg w-full`} style={heightStyle}>
       <div className='h-full w-full flex flex-col justify-between p-[20px] relative'>
         <span className='text-white text-[8px] uppercase flex justify-between px-2'>
           <h3>Credit</h3>
           {iconSVG[variant]}
         </span>
-        <div className='flex justify-between'>
-          <span className='text-white uppercase  font-roboto flex flex-col justify-center gap-0 text-xs'>
-            <p className='w-full my-0 truncate'>VALENTIN GONZALEZ TRAPAGA</p>
-            <p className='truncate my-0 tracking-widest'>{numberToShow}</p>
+        <div className='flex justify-between [&>*>p]:z-[1]'>
+          <span className='text-white uppercase font-roboto flex flex-col justify-center gap-0 text-xs'>
+            <p className='w-full my-0 truncate font-bold'>VALENTIN GONZALEZ TRAPAGA</p>
+            <p className='truncate my-0 tracking-widest font-bold'>{numberToShow}</p>
           </span>
-          <span className='cursor-pointer z-10'>
+          <span className='cursor-pointer z-[1]'>
             <Link to={`/mycards/${cardNumber}`}>
               <DoubleArrowSVG />
             </Link>
           </span>
         </div>
       </div>
-      <div className='inline-block absolute w-full bg-white opacity-30' style={detail1[variant]} />
-      <div className='inline-block absolute w-full bg-white opacity-10' style={detail2[variant]} />
+      {variant !== 'nocard'
+        ? (
+          <>
+            <div className='inline-block absolute w-full bg-white opacity-30' style={detail1[variant]} />
+            <div className='inline-block absolute w-full bg-white opacity-10' style={detail2[variant]} />
+          </>
+          )
+        : (<span className='absolute -bottom-4 w-full'><CardDetailSVG /></span>)}
     </article>
   )
 }
