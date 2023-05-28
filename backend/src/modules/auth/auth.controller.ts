@@ -5,36 +5,37 @@ import { Session, SessionData } from "express-session";
 import { UserDto } from "../user/user.dto";
 
 export class AuthController extends AuthServices {
-
   constructor() {
     super();
   }
 
   async postController(req: Request, res: Response) {
-    const {email} = req.body;
+    const { email } = req.body;
     try {
-      
       const resp = await this.postService(email);
-      const {token, user } = resp;
-      /*
-      const userSession = req.session.user;
-      const userToken = req.session.token;
+      const { token, user } = resp;
 
-      req.session.user = user as UserEntity;
+      req.session.user = user;
       req.session.token = token;
-      */
-      // console.log(req.session.token);
 
-      const result = new UserDto(user.userId, user.email, user.phone, user.address, user.country, user.postalCode,user.fullName,user.lastName);
-      
+      const result = new UserDto(
+        user.userId,
+        user.email,
+        user.phone,
+        user.address,
+        user.country,
+        user.postalCode,
+        user.fullName,
+        user.lastName
+      );
+
       res.json({
         status: "success",
         response: result,
-        token
+        token,
       });
     } catch (error) {
       res.status(500).json({ error });
     }
   }
-
 }
