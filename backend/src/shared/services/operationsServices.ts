@@ -7,25 +7,28 @@ import { Transaction } from "../../modules/business/business.entity";
 class OperationsServices {
   async addMoney(amountQuantity: number, addressee: string) {
     const accountUser = await this.getAccount(addressee);
-    const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOneBy(
-      accountUser as unknown as FindOptionsWhere<AccountAmountEntity>
-    );
+    const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOne({
+      where: {
+        accountUser: accountUser,
+      } as unknown as FindOptionsWhere<AccountAmountEntity>
+    });
 
     await AppDataSource.getRepository(AccountAmountEntity).update(
-      accountUser as unknown as FindOptionsWhere<AccountAmountEntity>,
+      {accountUser: accountUser} as unknown as FindOptionsWhere<AccountAmountEntity>,
       { amount: (accountAmount?.amount as number) + amountQuantity }
     );
   }
 
   async removeMoney(amountQuantity: number, addressee: string) {
-    const accountUser = await AppDataSource.getRepository(AccountUserEntity).findOneBy({
-      accountNumber: addressee,
+    const accountUser = await this.getAccount(addressee);
+    const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOne({
+      where: {
+        accountUser: accountUser,
+      } as unknown as FindOptionsWhere<AccountAmountEntity>
     });
-    const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOneBy(
-      accountUser as unknown as FindOptionsWhere<AccountAmountEntity>
-    );
+
     await AppDataSource.getRepository(AccountAmountEntity).update(
-      accountUser as unknown as FindOptionsWhere<AccountAmountEntity>,
+      {accountUser: accountUser} as unknown as FindOptionsWhere<AccountAmountEntity>,
       { amount: (accountAmount?.amount as number) - amountQuantity }
     );
   }
@@ -52,21 +55,21 @@ class OperationsServices {
   async operationExtraction(addressee: string, amountQuantity: number) {
     this.removeMoney(amountQuantity, addressee);
   }
-  
+
   async operationPayment(addressee: string, amountQuantity: number) {
     this.removeMoney(amountQuantity, addressee);
   }
 
-  async operationManager(typeTransaction: Transaction, emitter: string, addressee: string, amountQuantity: number ) {
+  async operationManager(typeTransaction: Transaction, emitter: string, addressee: string, amountQuantity: number) {
     switch (typeTransaction) {
       case Transaction.TRANSFER:
         this.operationTransfer(emitter, addressee, amountQuantity);
         break;
       case Transaction.EXTRACTION:
-        this.operationExtraction(addressee, amountQuantity);
+        this.operationExtraction(emitter, amountQuantity);
         break;
       case Transaction.PAY:
-        this.operationPayment(addressee, amountQuantity);
+        this.operationPayment(emitter, amountQuantity);
         break;
       case Transaction.DEPOSIT:
         this.operationDeposit(addressee, amountQuantity);
