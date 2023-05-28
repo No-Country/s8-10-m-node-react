@@ -1,9 +1,7 @@
 import { BaseEntity, EntityTarget, FindOptionsWhere, Repository, UpdateResult } from "typeorm";
 import { AppDataSource } from "../../db/postgreSql";
 
-
 export abstract class BaseServices<T extends BaseEntity> {
-  
   public repository: Repository<T>;
 
   constructor(entity: EntityTarget<T>) {
@@ -26,7 +24,9 @@ export abstract class BaseServices<T extends BaseEntity> {
     return this.repository.update({ id } as unknown as FindOptionsWhere<T>, data as any);
   }
   async deleteService(id: number): Promise<T | null> {
-    const entityToDelete = await this.repository.findOneBy({ id } as unknown as FindOptionsWhere<T>);
+    const entityToDelete = await this.repository.findOneBy({
+      id,
+    } as unknown as FindOptionsWhere<T>);
     if (!entityToDelete) {
       return null;
     }
