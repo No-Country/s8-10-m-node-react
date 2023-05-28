@@ -8,7 +8,9 @@
     "m:gen": "npm run typeorm migration:generate",
     "m:run": "npm run typeorm migration:run",
     "dev": "nodemon ./src/app.ts",
-    "lint": "eslint --ext .ts src/ --fix"
+    "lint": "eslint --ext .ts src/ --fix",
+    "start": "node ./dist/app.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
