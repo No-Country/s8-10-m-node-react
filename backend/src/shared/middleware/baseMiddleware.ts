@@ -1,11 +1,16 @@
 import { BaseEntity, EntityTarget, FindOptionsWhere, Repository } from "typeorm";
 import { NextFunction, Request, Response } from "express";
-// import { GetPublicKeyOrSecret, Secret, JwtPayload } from "jsonwebtoken";
 import { AppDataSource } from "../../db/postgreSql";
 import { authUtils } from "../../modules/auth/auth.utils";
+import session from "express-session";
+import { UserEntity } from "../../modules/user/user.entity";
 
-// import { verifyToken } from "../../modules/auth/utils/jwtHandle.utils";
-// import { AuthResponses } from "../../modules/auth/utils/auth.constants";
+declare module "express-session" {
+  export interface SessionData {
+    token: string;
+    user: UserEntity;
+  }
+}
 
 export abstract class BaseMiddlewares<T extends BaseEntity> {
   // public secretKey = process.env.JWT_SECRET as Secret | GetPublicKeyOrSecret;
@@ -32,16 +37,21 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
   }
 
   async checkToken(req: Request, res: Response, next: NextFunction) {
-    const token = req.header("set-token");
+    const token = req.session.token;
 
     try {
-      if (!token) return res.status(403).json({error: "A token is expected"});
+      if (!token) return res.status(403).json({ error: "A token is expected" });
 
       const jwtPayload = authUtils.verifyToken(token);
-      if (!jwtPayload) return res.status(403).json({error: "Invalid token"});
+      if (!jwtPayload) return res.status(403).json({ error: "Invalid token" });
+      
       next();
     } catch (error) {
       return res.status(403).json(error);
     }
+  }
+
+  async getRepository<U extends BaseEntity>(entity: EntityTarget<U>) {
+    return AppDataSource.getRepository(entity);
   }
 }
