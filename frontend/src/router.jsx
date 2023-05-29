@@ -7,6 +7,8 @@ import { MyCreditCard } from './pages/MyCreditCard'
 import { Layout } from './pages/Layout'
 import { Services } from './pages/Services'
 import { Movements } from './pages/Movements'
+import {Profile}  from './pages/Profile'
+
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +45,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <Movements />
+        element: <Profile/>
       }
     ]
   }
