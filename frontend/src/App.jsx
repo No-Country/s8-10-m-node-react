@@ -1,4 +1,3 @@
-import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
@@ -9,11 +8,16 @@ import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
 import { MyCards } from './pages/MyCards'
 import { MyCreditCard } from './pages/MyCreditCard'
+import OnBoarding from './pages/OnBoarding'
 
 function App () {
   const router = createBrowserRouter([
     {
       path: '/',
+      element: <OnBoarding />
+    },
+    {
+      path: '/home',
       element: <Home />
     },
     {

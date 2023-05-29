@@ -24,7 +24,7 @@ const ToTransfer = ({ setConfirm, close }) => {
   return (
     <section>
       {showSuccess ? (
-        <Success amount={amount} name="Marcos Leiva" />
+        <Success amount={parseInt(amount)} name="Marcos Leiva" />
       ) : (
         <>
           <img

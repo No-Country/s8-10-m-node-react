@@ -1,15 +1,15 @@
 import { PropTypes } from 'prop-types'
-import check from '../assets/images/checkmark.svg'
 import { useNavigate } from 'react-router-dom'
+import { FaCheck } from 'react-icons/fa'
 
 const Success = ({ amount, name }) => {
   const navigate = useNavigate()
 
   return (
     <section className="w-full h-[50vh] flex justify-evenly items-center flex-col gap-[6rem]">
-      <div className="flex flex-col gap-4 justify-center items-center mt-24">
-        <span className="rounded-full bg-green-500 w-16 h-16 flex items-center justify-center">
-          <img src={check} alt="marca de verificación " />
+      <div className="flex flex-col gap-5 justify-center items-center mt-24">
+        <span className="rounded-full bg-green-500 w-20 h-20 flex items-center justify-center">
+          <FaCheck className='text-white'/>
         </span>
         <h2 className="text-xl font-bold font-mono">
           Envio realizado con éxito
@@ -20,7 +20,7 @@ const Success = ({ amount, name }) => {
       </div>
       <button
         onClick={() => navigate('/transfers')}
-        className="w-2/3 h-12 bg-sky-800 rounded-md text-white font-bold"
+        className="w-2/3 py-3 bg-sky-800 rounded-md text-white font-bold"
       >
         Volver al inicio
       </button>

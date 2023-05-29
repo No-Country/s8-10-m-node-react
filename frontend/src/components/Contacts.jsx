@@ -1,8 +1,8 @@
-import options from '../assets/images/options.svg'
 import trash from '../assets/images/trash.svg'
 import { PropTypes } from 'prop-types'
 import Modal from './Modal'
 import { useModal } from '../hooks/useModal'
+import { FaEllipsisV, FaTrash } from 'react-icons/fa'
 
 const Contacts = ({ listContacts }) => {
   const [deleteContact, openDeleteContact, closeDeleteContact] = useModal()
@@ -20,10 +20,9 @@ const Contacts = ({ listContacts }) => {
               {contacto.bank}
             </span>
           </div>
-          <img
-            className="cursor-pointer"
-            src={options}
-            alt="options"
+          <FaEllipsisV
+            size={20}
+            className="cursor-pointer text-gray-400"
             onClick={openDeleteContact}
           />
         </div>
@@ -39,12 +38,11 @@ const Contacts = ({ listContacts }) => {
           >
             <button
               type="button"
-              className="flex items-center gap-8 border border-sky-500 py-4 px-8 rounded-lg cursor-pointer"
+              className="flex items-center gap-4 border border-sky-500 py-4 px-8 rounded-lg cursor-pointer"
             >
-              <img
-                className="h-[20px] w-[20px] object-contain"
-                src={trash}
-                alt="ícono de basura para identificar un contacto que se va a eliminar"
+              <FaTrash
+                size={20}
+                className="text-red-500"
               />
               Eliminar contacto
             </button>

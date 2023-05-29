@@ -42,7 +42,7 @@ const Transfers = () => {
 
   return (
     <main className=" w-full min-h-screen bg-gray-100 relative">
-      <h2 className="pl-4 pt-4">Inicio / Transferencias</h2>
+      <h2 className="pl-4 pt-4"><Link to='/home' className='cursor-pointer'>Inicio</Link> / Transferencias</h2>
       <section className="mt-6 mb-24 w-full flex justify-center gap-[5.25rem] relative pl-4">
         <Link className="" to="/transfers">
           Contactos
