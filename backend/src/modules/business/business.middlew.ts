@@ -8,20 +8,20 @@ export class BusinessMiddlewares extends BaseMiddlewares<BusinessEntity> {
     super(BusinessEntity);
   }
 
-  async checkTransactionType(req: Request, res: Response, nex: NextFunction) {
+  async checkTransactionType(req: Request, res: Response, next: NextFunction) {
     const { typeTransaction } = req.body;
 
     try {
       const type = Object.values(Transaction).includes(typeTransaction);
       if (!type) return res.status(400).json({ msg: "Type transaction not found" });
 
-      nex();
+      next();
     } catch (error) {
       res.status(500).json({ error });
     }
   }
 
-  async checkAccountUser(req: Request, res: Response, nex: NextFunction) {
+  async checkAccountUser(req: Request, res: Response, next: NextFunction) {
     const { emitter, addressee } = req.body;
 
     try {
@@ -31,7 +31,7 @@ export class BusinessMiddlewares extends BaseMiddlewares<BusinessEntity> {
       if (!userEmitter) return res.status(400).json({ msg: "User emitter not found" });
       if (!userAddressee) return res.status(400).json({ msg: "User addressee not found" });
       
-      nex();
+      next();
     } catch (error) {
       res.status(500).json({ error });
     }

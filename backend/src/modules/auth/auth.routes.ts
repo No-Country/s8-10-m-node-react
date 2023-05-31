@@ -10,7 +10,7 @@ export class AuthRouter extends BaseRouter<AuthController, AuthMiddlewares> {
   routes(path: string): void {
   
     this.router.post(`/${path}`,
-      (req, res, nex) => this.middleware.checkDataUserMiddleware(req, res, nex),
+      (req, res, next) => this.middleware.checkDataUserMiddleware(req, res, next),
       (req, res) => this.controller.postController(req, res)
     );
     
