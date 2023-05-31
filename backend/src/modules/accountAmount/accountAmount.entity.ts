@@ -8,13 +8,6 @@ export class AccountAmountEntity extends BaseEntityApp {
 
   @Column({ default: 0 })
   amount: number;
-
-  // @Column()
-  // currencyId: string;
-
-  // @Column()
-  // accountId: string;
-
   
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.accountAmount)
   accountUser: AccountUserEntity;
