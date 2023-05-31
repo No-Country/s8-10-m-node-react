@@ -10,7 +10,6 @@ export class AuthController extends AuthServices {
   async postController(req: Request, res: Response) {
     const { email } = req.body;
     try {
-      if(!email) throw new Error("Email is required");
       const resp = await this.postService(email);
       const { token, user } = resp;
 

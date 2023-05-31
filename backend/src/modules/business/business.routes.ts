@@ -12,9 +12,9 @@ export class BusinessRouter extends BaseRouter<BusinessController, BusinessMiddl
     this.router.get(`/${path}/:id`, (req, res) => this.controller.getByIdController(req, res));
     //! Corregir endpoint
     this.router.post(`/${path}`,
-      (req, res, nex) => this.middleware.checkToken(req, res, nex),
-      (req, res, nex) => this.middleware.checkTransactionType(req, res, nex),
-      (req, res, nex) => this.middleware.checkAccountUser(req, res, nex),
+      (req, res, next) => this.middleware.checkToken(req, res, next),
+      (req, res, next) => this.middleware.checkTransactionType(req, res, next),
+      (req, res, next) => this.middleware.checkAccountUser(req, res, next),
       (req, res) => this.controller.postController(req, res));
     this.router.delete(`/${path}/:id`, (req, res) => this.controller.deleteController(req, res));
   }
