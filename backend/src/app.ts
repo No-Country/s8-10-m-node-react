@@ -36,7 +36,7 @@ class AppServer {
         resave: false,
         saveUninitialized: false,
         cookie: {
-          maxAge: 300000, 
+          maxAge: 30000000, 
         },
       })
     );

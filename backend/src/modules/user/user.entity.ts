@@ -1,6 +1,7 @@
 import { Column, Entity, Generated, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
+import { FavoriteContactsEntity } from "../favoriteContacts/favoriteContacts.entity";
 
 @Entity()
 export class UserEntity extends BaseEntityApp {
@@ -42,6 +43,9 @@ export class UserEntity extends BaseEntityApp {
 
   @Column()
   postalCode: string;
+
+  @OneToMany(()=> FavoriteContactsEntity,favoriteContacts=>favoriteContacts.user)
+  favoriteContacts:FavoriteContactsEntity[]
 
   @OneToMany(() => AccountUserEntity, (account) => account.user,{
     cascade:true,

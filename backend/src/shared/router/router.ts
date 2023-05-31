@@ -5,7 +5,7 @@ export abstract class BaseRouter<T, U> {
   public controller: T;
   public middleware: U;
 
-  constructor(Controller: { new (): T }, Middlewares: { new (): U }, path: string) {
+  constructor(Controller: { new (): T },Middlewares: { new (): U }, path: string) {
     this.routes(path);
     this.controller = new Controller();
     this.middleware = new Middlewares();
