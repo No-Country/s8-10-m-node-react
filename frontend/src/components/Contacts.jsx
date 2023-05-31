@@ -1,4 +1,3 @@
-import trash from '../assets/images/trash.svg'
 import { PropTypes } from 'prop-types'
 import Modal from './Modal'
 import { useModal } from '../hooks/useModal'

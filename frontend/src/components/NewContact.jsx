@@ -5,6 +5,7 @@ import { useModal } from '../hooks/useModal'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ToTransfer from './ToTransfer'
+import { FaTimes } from 'react-icons/fa'
 
 const NewContact = () => {
   const [searchOpen, openSearchModal, closeSearchModal] = useModal()
@@ -62,10 +63,9 @@ const NewContact = () => {
                 <div className="w-full text-center relative pt-3">
                   <h3 className="text-2xl font-semibold">Marcos Leiva</h3>
                   <p className="text-gray-400 text-md">12-345676332</p>
-                  <img
-                    className="absolute -top-3 right-[25px]  cursor-pointer"
-                    src={cross}
-                    alt="cruz para cerrar el modal"
+                  <FaTimes
+                    className="absolute -top-1 right-[30px] cursor-pointer"
+                    size={20}
                     onClick={closeSearchModal}
                   />
                 </div>
