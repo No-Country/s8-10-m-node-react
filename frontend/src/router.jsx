@@ -8,6 +8,10 @@ import { Layout } from './pages/Layout'
 import { Services } from './pages/Services'
 import { Movements } from './pages/Movements'
 import {Profile}  from './pages/Profile'
+import Transfers from './pages/Transfers'
+import Contacts from './components/Contacts'
+import NewContact from './components/NewContact'
+import ToTransfer from './components/ToTransfer'
 
 
 export const router = createBrowserRouter([
@@ -34,6 +38,32 @@ export const router = createBrowserRouter([
       {
         path: 'mycards/:creditCardId',
         element: <MyCreditCard />
+      },
+      {
+        path: '/transfers',
+        element: <Transfers />,
+        children: [
+          {
+            path: '/transfers/contacts',
+            element: <Contacts />,
+            children: [
+              {
+                path: '/transfers/contacts/sendAmount',
+                element: <ToTransfer />
+              }
+            ]
+          },
+          {
+            path: '/transfers/newContact',
+            element: <NewContact />,
+            children: [
+              {
+                path: '/transfers/newContact/sendAmount',
+                element: <ToTransfer />
+              }
+            ]
+          }
+        ]
       },
       {
         path: 'services',
