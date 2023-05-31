@@ -16,7 +16,7 @@ export class CurrencyController extends CurrencyService {
     } catch (error) {
       res.status(500).json({ error });
     }
-  }
+  } 
 
   async getByIdController(req: Request, res: Response) {
     const { id } = req.params;
