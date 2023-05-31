@@ -46,13 +46,13 @@ export class BusinessController extends BusinessService {
     const { typeTransaction, emitter, addressee, amountQuantity } = req.body;
     try {
       const result = await operationsServices.operationManager(typeTransaction, emitter, addressee, amountQuantity);
-
       res.json({
         status: "success",
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      const e = error as Error;
+      res.status(500).json({ error: e.message });
     }
   }
 

@@ -5,8 +5,8 @@ import { AccountUserEntity } from "../../modules/accountUser/accountUser.entity"
 import { Transaction } from "../../modules/business/business.entity";
 
 class OperationsServices {
-  async addMoney(amountQuantity: number, addressee: string) {
-    const accountUser = await this.getAccount(addressee);
+  async addMoney(amountQuantity: number, account: string) {
+    const accountUser = await this.getAccount(account);
     const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOne({
       where: {
         accountUser: accountUser,
@@ -19,13 +19,15 @@ class OperationsServices {
     );
   }
 
-  async removeMoney(amountQuantity: number, addressee: string) {
-    const accountUser = await this.getAccount(addressee);
+  async removeMoney(amountQuantity: number, account: string) {
+    const accountUser = await this.getAccount(account);
     const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOne({
       where: {
         accountUser: accountUser,
       } as unknown as FindOptionsWhere<AccountAmountEntity>
     });
+
+    if(accountAmount?.amount as number < amountQuantity) throw new Error("Insufficient funds"); 
 
     await AppDataSource.getRepository(AccountAmountEntity).update(
       {accountUser: accountUser} as unknown as FindOptionsWhere<AccountAmountEntity>,
@@ -33,49 +35,51 @@ class OperationsServices {
     );
   }
 
-  async getAccount(addressee: string) {
+  async getAccount(account: string) {
     const accountUser = await AppDataSource.getRepository(AccountUserEntity).findOneBy({
-      accountNumber: addressee,
+      accountNumber: account,
     });
     if (!accountUser) {
-      return await AppDataSource.getRepository(AccountUserEntity).findOneBy({ alias: addressee });
+      return await AppDataSource.getRepository(AccountUserEntity).findOneBy({ alias: account });
     }
     return accountUser;
   }
 
+
   async operationTransfer(emitter: string, addressee: string, amountQuantity: number) {
-    this.addMoney(amountQuantity, addressee);
-    this.removeMoney(amountQuantity, emitter);
+    await this.removeMoney(amountQuantity, emitter);
+    await this.addMoney(amountQuantity, addressee);
+  }
+  
+  async operationExtraction(emitter: string, amountQuantity: number) {
+    await this.removeMoney(amountQuantity, emitter);
+  }
+
+  async operationPayment(emitter: string, amountQuantity: number) {
+    await this.removeMoney(amountQuantity, emitter);
   }
 
   async operationDeposit(addressee: string, amountQuantity: number) {
-    this.addMoney(amountQuantity, addressee);
-  }
-
-  async operationExtraction(addressee: string, amountQuantity: number) {
-    this.removeMoney(amountQuantity, addressee);
-  }
-
-  async operationPayment(addressee: string, amountQuantity: number) {
-    this.removeMoney(amountQuantity, addressee);
+    await this.addMoney(amountQuantity, addressee);
   }
 
   async operationManager(typeTransaction: Transaction, emitter: string, addressee: string, amountQuantity: number) {
+ 
     switch (typeTransaction) {
       case Transaction.TRANSFER:
-        this.operationTransfer(emitter, addressee, amountQuantity);
+        await this.operationTransfer(emitter, addressee, amountQuantity);
         break;
       case Transaction.EXTRACTION:
-        this.operationExtraction(emitter, amountQuantity);
+        await this.operationExtraction(emitter, amountQuantity);
         break;
       case Transaction.PAY:
-        this.operationPayment(emitter, amountQuantity);
+        await this.operationPayment(emitter, amountQuantity);
         break;
       case Transaction.DEPOSIT:
-        this.operationDeposit(addressee, amountQuantity);
+        await this.operationDeposit(addressee, amountQuantity);
         break;
       default:
-        break;
+        throw new Error("Transaction type not found");
     }
   }
 }

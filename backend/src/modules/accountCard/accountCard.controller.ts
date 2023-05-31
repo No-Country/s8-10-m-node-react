@@ -39,7 +39,7 @@ export class AccountCardController extends AccountCardServices {
     body.emission = new Date();
     body.expiration = cardUtils.generateCardExpiration();
     body.cvv = cardUtils.generateCardCvv();
-    body.accountUser = req.body.accountUser; // ??
+    body.accountUser = req.body.accountUser;
     
 
     try {

@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import { AuthServices } from "./auth.services";
-import { UserEntity } from "../user/user.entity";
-import { Session, SessionData } from "express-session";
 import { UserDto } from "../user/user.dto";
+import { AuthServices } from "./auth.services";
 
 export class AuthController extends AuthServices {
   constructor() {
