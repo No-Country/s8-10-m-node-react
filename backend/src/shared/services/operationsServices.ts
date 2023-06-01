@@ -68,9 +68,8 @@ class OperationsServices {
   }
 
   async operationPayCard(emitter: string, amountQuantity: number) {
-
     const accountNumber = await this.getAccountByCard(emitter)
-    await this.removeMoney(amountQuantity, accountNumber)
+    await this.removeMoney(amountQuantity,accountNumber)
   }
 
   async operationDeposit(addressee: string, amountQuantity: number) {

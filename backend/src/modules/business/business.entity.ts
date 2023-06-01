@@ -20,10 +20,10 @@ export enum Transaction {
 @Entity()
 export class BusinessEntity extends BaseEntityApp {
 
-  @Column()
+  @Column({nullable:true})
   senderId: string;
 
-  @Column()
+  @Column({nullable:true})
   receiverId: string;
 
   @Column()
@@ -45,7 +45,7 @@ export class BusinessEntity extends BaseEntityApp {
   })
   transaction: Transaction;
 
-  @Column("text")
+  @Column("text",{nullable:true})
   subject: string;
 
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.business)

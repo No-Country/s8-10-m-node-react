@@ -27,10 +27,11 @@ export class BusinessMiddlewares extends BaseMiddlewares<BusinessEntity> {
     try {
       const userEmitter = await (await this.getRepository(AccountUserEntity)).findOne({ where: { accountNumber: emitter } });
       const userAddressee = await (await this.getRepository(AccountUserEntity)).findOne({ where: { accountNumber: addressee } });
-
-      if (!userEmitter) return res.status(400).json({ msg: "User emitter not found" });
-      if (!userAddressee) return res.status(400).json({ msg: "User addressee not found" });
-      
+      if (!userEmitter){
+        const userEmitterCard = await (await this.getRepository(AccountUserEntity)).findOne( {where: { accountCard: { cardNumber: emitter } }});
+        if(!userEmitterCard) return res.status(400).json({ msg: "User emitter not found" });
+      }
+      if (!userAddressee)return res.status(400).json({ msg: "User addressee not found" });
       next();
     } catch (error) {
       res.status(500).json({ error });
