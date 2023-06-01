@@ -12,12 +12,13 @@ export class BusinessController extends BusinessService {
     try {
       const { status, transaction } = req.query;
       const typeStatus = ["PEDING", "APPROVED", "REJECTED"];
-      const typeTransaction = ["PAY", "DEPOSIT", "EXTRACTION", "TRANSFER"];
+      const typeTransaction = ["PAY", "DEPOSIT", "EXTRACTION", "TRANSFER", "CARD"];
       const TransactionEnum = transaction as
         | Transaction.PAY
         | Transaction.DEPOSIT
         | Transaction.EXTRACTION
-        | Transaction.TRANSFER;
+        | Transaction.TRANSFER
+        | Transaction.CARD;
       const StatusEnum = status as Status.PENDING | Status.APPROVED | Status.REJECTED;
       const result = await this.getBusinessType(StatusEnum, TransactionEnum);
       res.json({

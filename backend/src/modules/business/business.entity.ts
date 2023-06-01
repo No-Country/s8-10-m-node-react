@@ -14,6 +14,7 @@ export enum Transaction {
   DEPOSIT = "DEPOSIT",
   EXTRACTION = "EXTRACTION",
   TRANSFER = "TRANSFER",
+  CARD = "CARD"
 }
 
 @Entity()
@@ -28,7 +29,7 @@ export class BusinessEntity extends BaseEntityApp {
   @Column()
   currencyId: number;
 
-  @Column({ type: "money"})
+  @Column({ type: "money" })
   amount: number;
 
   @Column({
@@ -45,7 +46,7 @@ export class BusinessEntity extends BaseEntityApp {
   transaction: Transaction;
 
   @Column("text")
-  subject:string;
+  subject: string;
 
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.business)
   accountUser: AccountUserEntity;
