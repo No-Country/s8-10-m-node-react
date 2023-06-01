@@ -18,4 +18,5 @@ export class FavoriteContactsEntity extends BaseEntityApp{
     })
     @JoinTable()
     accountUser: AccountUserEntity
+
 }

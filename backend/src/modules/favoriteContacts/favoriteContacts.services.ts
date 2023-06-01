@@ -3,6 +3,7 @@ import { AccountUserEntity } from "../accountUser/accountUser.entity";
 import { FavoriteContactsEntity } from "./favoriteContacts.entity";
 import {UserEntity} from "../user/user.entity"
 import { favoriteContactDto } from "./favoriteContactCreate.dto";
+import { JwtPayload } from "jsonwebtoken";
 
 export class FavoriteContactServices extends BaseServices<FavoriteContactsEntity>{
     constructor(){
@@ -14,8 +15,8 @@ export class FavoriteContactServices extends BaseServices<FavoriteContactsEntity
         return result
     }
 
-    async postServiceContact(data:favoriteContactDto,alias:string): Promise<FavoriteContactsEntity | null> {
-        const{nickname,userId}=data
+    async postServiceContact(data:favoriteContactDto,userId:string): Promise<FavoriteContactsEntity | null> {
+        const{nickname,alias}=data
        const accountUserRepo=await this.getRepository(AccountUserEntity)
        const userRepo=await this.getRepository(UserEntity)
        const userOwner=await userRepo.findOne({where:{userId}})
