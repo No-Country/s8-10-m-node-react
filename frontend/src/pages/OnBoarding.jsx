@@ -1,7 +1,23 @@
-import { Button } from '../components/Button';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
+let requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
 const OnBoarding = () => {
+
+  
+
+  useEffect(() => {
+    fetch('https://pagaya.onrender.com/api/business', requestOptions)
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(error => console.log('error', error))
+
+
+  }, []);
   
   const linkClass = `w-4/5 mx-auto py-2 text-center rounded-full font-semibold tracking-wide`  
 

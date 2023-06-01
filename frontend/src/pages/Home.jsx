@@ -1,11 +1,15 @@
+import { useNavigate } from 'react-router'
 import { Button } from '../components/Button'
 import { CreditCardComp } from '../components/CreditCardComp'
 import { FaBars, FaBell, FaRegEye } from 'react-icons/fa'
 import { IoTrendingUp, IoTrendingDownOutline } from 'react-icons/io5'
+import { useUserContext } from '../context/UserContext'
 
 export const Home = () => {
 
-
+  const navigate = useNavigate()
+  const { logOut, user } = useUserContext()
+  console.log(user);
   return (
     <main className='w-full min-h-screen flex flex-col items-center bg-gray-100 px-2 py-4'>
       <section className='w-[90%] h-[300px] py-3 px-5 mx-auto flex flex-col items-center gap-10 bg-[#42ADD5] rounded-[30px] mb-7'>
@@ -32,7 +36,14 @@ export const Home = () => {
         </div>
       </section>
       <CreditCardComp height='160' cardNumber='4111111111111111'/>
-      <section></section>
+      <section>
+        <Button func={() =>{
+          logOut()
+          navigate('/')
+        }} >
+          Cerrar sesion
+        </Button>
+      </section>
     </main>
   )
 }
