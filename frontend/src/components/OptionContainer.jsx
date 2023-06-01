@@ -29,8 +29,20 @@ const OptionContainer = () => {
     },
     {
         id: 4,
-        name: 'Configuración ',
+        name: 'Activar Modo Oscuro ',
         icon: <img src={config} alt="Data" />,
+        color: 'text-black-500'
+    },
+    {
+        id: 5,
+        name: 'Terminos y condiciones ',
+        icon: "X",
+        color: "text-black-500"
+    },
+    {
+        id: 6,
+        name: 'Politica de privacidad ',
+        icon: "X",
         color: 'text-black-500'
     },
     {
