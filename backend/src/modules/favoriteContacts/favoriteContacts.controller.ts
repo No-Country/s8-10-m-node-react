@@ -1,12 +1,19 @@
 import { Request, Response } from "express";
 import { FavoriteContactServices } from "./favoriteContacts.services";
+import { authUtils } from "../auth/auth.utils";
+import { JwtPayload } from "jsonwebtoken";
+import { baseUtils } from "../../shared/utils/baseUtils";
 
 export class FavoriteContactController extends FavoriteContactServices {
-    constructor() {
+
+  constructor() {
       super();
     }
+
     async getAllController(req: Request, res: Response) {
-        const{userId}=req.params
+        const{token}=req.session
+        if(!token)return res.status(404).json({message:"this user not have token"})
+        const userId=await baseUtils.checkPayload(token)
         try {
           const result = await this.getAllbyUser(userId);
           res.json({
@@ -31,11 +38,12 @@ export class FavoriteContactController extends FavoriteContactServices {
       }
     
       async postController(req: Request, res: Response) {
-        const{alias}=req.params
+        const{token}=req.session
+        if(!token)return res.status(404).json({message:"this user not have token"})
+        const userId=await baseUtils.checkPayload(token)
         const body = req.body;
-        console.log(alias)
         try {
-          const result = await this.postServiceContact(body,alias);
+          const result = await this.postServiceContact(body,userId);
           res.json({
             status: "success",
             response: result,
