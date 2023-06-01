@@ -10,6 +10,7 @@ import { AccountCardEntity } from "../accountCard/accountCard.entity";
 import { AssociateCardsEntity } from "../associateCards/associateCards.entity";
 import { BusinessEntity } from "../business/business.entity";
 import { UserEntity } from "../user/user.entity";
+import { FavoriteContactsEntity } from "../favoriteContacts/favoriteContacts.entity";
 
 @Entity()
 export class AccountUserEntity extends BaseEntityApp {
@@ -28,10 +29,12 @@ export class AccountUserEntity extends BaseEntityApp {
   user: UserEntity;
 
   @OneToMany(() => BusinessEntity, (business) => business.accountUser,{
-    cascade: true,
-    eager: true,
+  cascade:true
   })
   business: BusinessEntity[];
+
+  @OneToMany(()=> FavoriteContactsEntity,favoriteContacts=>favoriteContacts.accountUser)
+  favoriteContacts:FavoriteContactsEntity[]
 
   @OneToMany(() => AccountCardEntity, (accountCard) => accountCard.accountUser)
   accountCard: AccountCardEntity[];

@@ -9,7 +9,6 @@ export class UserController extends UserService {
 
   async getAllController(req: Request, res: Response) {
     try {
-      console.log("get");
       const result = await this.getServices();
       res.json({
         status: "success",
@@ -35,7 +34,6 @@ export class UserController extends UserService {
 
   async postController(req: Request, res: Response) {
     try {
-
       const result = await accountUserHandler.createUserTransaction(req.body);
       if(!result) throw new Error("Error al crear usuario");
       res.json({

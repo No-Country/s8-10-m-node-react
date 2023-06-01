@@ -20,7 +20,7 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
     this.repository = AppDataSource.getRepository(entity);
   }
 
-  async checkId(req: Request, res: Response, nex: NextFunction) {
+  async checkId(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     try {
       const idCheck = await this.repository.findOneBy({ id: Number(id) } as unknown as FindOptionsWhere<T>);
@@ -30,7 +30,7 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
           msg: "ID not found",
         });
 
-      return nex();
+      return next();
     } catch (error) {
       res.status(500).json({ msg: error });
     }

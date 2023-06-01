@@ -1,10 +1,10 @@
-import { JwtPayload, SignOptions, sign, verify } from "jsonwebtoken";
+import { JwtPayload, sign, verify } from "jsonwebtoken";
 
 interface CustomJwtPayload extends JwtPayload {
   payload: string | object | Buffer;
 }
 export class AuthUtils {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+ 
   private secretKey = process.env.SECRET_KEY!;
 
   generateToken(payload: string | object | Buffer) {

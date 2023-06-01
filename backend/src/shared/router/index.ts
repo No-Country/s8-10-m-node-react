@@ -8,6 +8,7 @@ import { CurrencyRouter } from "../../modules/currency/currency.routes";
 import { RecoveryPasswordRouter } from "../../modules/recoveryPassword/recoveryPassword.routes";
 import { UserRouter } from "../../modules/user/user.routes";
 import { AuthRouter } from "../../modules/auth/auth.routes";
+import { FavoriteContactRouter } from "../../modules/favoriteContacts/favoriteContacts.routes";
 
 
 
@@ -17,6 +18,7 @@ export class RoutesApp {
 
   public routes(): Router[] {
     return [
+      new FavoriteContactRouter().router,
       new AccountAmountRouter().router,
       new AccountCardRouter().router,
       new AccountUserRouter().router,
