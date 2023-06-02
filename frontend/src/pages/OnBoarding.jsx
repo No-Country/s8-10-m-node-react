@@ -1,21 +1,18 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
-let requestOptions = {
+const requestOptions = {
   method: 'GET',
   redirect: 'follow'
 };
 
 const OnBoarding = () => {
 
-  
-
   useEffect(() => {
     fetch('https://pagaya.onrender.com/api/business', requestOptions)
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(error => console.log('error', error))
-
 
   }, []);
   

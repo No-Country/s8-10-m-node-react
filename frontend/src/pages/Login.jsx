@@ -22,23 +22,31 @@ export const Login = () => {
     )
   }
 
-  const validateUser = async (e) =>{
+  const validateUser = (e) =>{
     e.preventDefault()
+
     const requestOptions = {
       method: 'POST',
-      body: { 
+      body: JSON.stringify({ 
         email: validateForm.email,
         password: validateForm.password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
       },
       redirect: 'follow'
     };
     
-    const res = await fetch('https://pagaya.onrender.com/api/auth', requestOptions)
-    const data = await res.json()
-    console.log(data)
-  }  
-  
- console.log(validateForm);
+    fetch('https://pagaya.onrender.com/api/auth', requestOptions)
+    .then(res => res.json())
+    .then(data => {
+      if(data.status === 'success'){
+        login(data)
+        navigate('/home')
+      }
+    })
+    .catch(err => console.log('error', err))
+  }
 
   return (
     <main className='w-full min-h-screen flex flex-col items-center gap-20'>
@@ -48,13 +56,13 @@ export const Login = () => {
       </section>
       
       <section className='w-full px-8'>
-        <form className='w-full flex flex-col gap-6'>
+        <form className='w-full flex flex-col gap-6' onSubmit={validateUser}>
           <InputField id='email' type='email' name='email' placeholder='example@gmail.com' labelFor='email' content='Correo' func={handleChange}/>
 
           <InputField id='password' type={showPassword ? 'text' : 'password'} name='password' placeholder='********' labelFor='password' content='Contraseña' func={handleChange} setValue={setShowPassword} condition={showPassword} icon={showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}/> 
           
           <div className='flex flex-col gap-6'>
-           <Button type='button' func={validateUser} nameClass='bg-[#012340] mt-10 py-3 rounded-full text-white font-semibold tracking-wide'>Ingresar</Button>
+           <Button type='submit' nameClass='bg-[#012340] mt-10 py-3 rounded-full text-white font-semibold tracking-wide'>Ingresar</Button>
             <p className='text-sm text-center text-[#012340] underline underline-offset-2'>
               ¿Olvidaste tu contraseña?
             </p>
