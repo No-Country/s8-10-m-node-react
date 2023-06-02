@@ -5,11 +5,21 @@ enum cardType {
   DEBIT = "DEBIT",
   CREDIT = "CREDIT",
 }
+
+enum entityCard {
+  MASTERCARD = "MASTERCARD",
+  VISA = "VISA",
+  AMEX = "AMEX"
+}
 @Entity()
 export class AssociateCardsEntity extends BaseEntityApp {
   
   @Column({ type: "enum", enum: cardType, default: cardType.DEBIT })
   type: cardType;
+  
+  @Column({ type: "enum", enum: entityCard, default: entityCard.VISA })
+  issuingEntity: entityCard;
+
 
   @Column({ unique: true })
   cardNumber: string;

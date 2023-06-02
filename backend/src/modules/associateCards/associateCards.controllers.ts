@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import { AssociateCardsServices } from "./associateCards.services";
+import { AssociateCardsEntity } from "./associateCards.entity";
+import { AccountUserEntity } from "../accountUser/accountUser.entity";
+import { SaveOptions, RemoveOptions } from "typeorm";
 
 export class AssociateCardsController extends AssociateCardsServices {
   constructor() {
@@ -32,9 +35,38 @@ export class AssociateCardsController extends AssociateCardsServices {
   }
 
   async postController(req: Request, res: Response) {
-    const body = req.body;
+    const { cardNumber, cvv, issuingEntity, type, cardholder, accountNumber } = req.body ;
+    
     try {
-      const result = await this.postService(body);
+      const userAccount = await (await this.getRepository(AccountUserEntity)).findOne({ where: { accountNumber } });
+      if (!userAccount) return res.status(400).json({ status: "error", error: "Account user not found" });
+      const newCard: AssociateCardsEntity = {
+        cardNumber,
+        cvv,
+        cardholder,
+        issuingEntity,
+        type,
+        accountUser: userAccount,
+        hasId: function (): boolean {
+          throw new Error("Function not implemented.");
+        },
+        save: function (options?: SaveOptions | undefined): Promise<AssociateCardsEntity> {
+          throw new Error("Function not implemented.");
+        },
+        remove: function (options?: RemoveOptions | undefined): Promise<AssociateCardsEntity> {
+          throw new Error("Function not implemented.");
+        },
+        softRemove: function (options?: SaveOptions | undefined): Promise<AssociateCardsEntity> {
+          throw new Error("Function not implemented.");
+        },
+        recover: function (options?: SaveOptions | undefined): Promise<AssociateCardsEntity> {
+          throw new Error("Function not implemented.");
+        },
+        reload: function (): Promise<void> {
+          throw new Error("Function not implemented.");
+        },
+      };
+      const result = await this.postService(newCard);
       res.json({
         status: "success",
         response: result,

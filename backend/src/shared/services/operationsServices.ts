@@ -10,7 +10,7 @@ class OperationsServices {
     const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOne({
       where: {
         accountUser: accountUser,
-      } as unknown as FindOptionsWhere<AccountAmountEntity>
+      } as unknown as FindOptionsWhere<AccountAmountEntity>,
     });
 
     await AppDataSource.getRepository(AccountAmountEntity).update(
@@ -24,10 +24,10 @@ class OperationsServices {
     const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOne({
       where: {
         accountUser: accountUser,
-      } as unknown as FindOptionsWhere<AccountAmountEntity>
+      } as unknown as FindOptionsWhere<AccountAmountEntity>,
     });
 
-    if (accountAmount?.amount as number < amountQuantity) throw new Error("Insufficient funds");
+    if ((accountAmount?.amount as number) < amountQuantity) throw new Error("Insufficient funds");
 
     await AppDataSource.getRepository(AccountAmountEntity).update(
       { accountUser: accountUser } as unknown as FindOptionsWhere<AccountAmountEntity>,
@@ -48,10 +48,10 @@ class OperationsServices {
 
   async getAccountByCard(card: string) {
     const accountUser = await AppDataSource.getRepository(AccountUserEntity).findOne({
-      where: { accountCard: { cardNumber: card } }
-    })
-    if (!accountUser) throw new Error("Account not found");
-    return accountUser.accountNumber
+      where: { accountCard: { cardNumber: card } },
+    });
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return accountUser!.accountNumber;
   }
 
   async operationTransfer(emitter: string, addressee: string, amountQuantity: number) {
@@ -68,8 +68,8 @@ class OperationsServices {
   }
 
   async operationPayCard(emitter: string, amountQuantity: number) {
-    const accountNumber = await this.getAccountByCard(emitter)
-    await this.removeMoney(amountQuantity,accountNumber)
+    const accountNumber = await this.getAccountByCard(emitter);
+    await this.removeMoney(amountQuantity, accountNumber);
   }
 
   async operationDeposit(addressee: string, amountQuantity: number) {
@@ -77,7 +77,6 @@ class OperationsServices {
   }
 
   async operationManager(typeTransaction: Transaction, emitter: string, addressee: string, amountQuantity: number) {
-
     switch (typeTransaction) {
       case Transaction.TRANSFER:
         await this.operationTransfer(emitter, addressee, amountQuantity);
@@ -89,7 +88,7 @@ class OperationsServices {
         await this.operationPayment(emitter, amountQuantity);
         break;
       case Transaction.CARD:
-        await this.operationPayCard(emitter, amountQuantity)
+        await this.operationPayCard(emitter, amountQuantity);
         break;
       case Transaction.DEPOSIT:
         await this.operationDeposit(addressee, amountQuantity);
@@ -98,8 +97,6 @@ class OperationsServices {
         throw new Error("Transaction type not found");
     }
   }
-
-
 }
 
 export const operationsServices = new OperationsServices();
