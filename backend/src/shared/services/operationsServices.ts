@@ -2,7 +2,9 @@ import { FindOptionsWhere } from "typeorm";
 import { AppDataSource } from "../../config/postgreSql";
 import { AccountAmountEntity } from "../../modules/accountAmount/accountAmount.entity";
 import { AccountUserEntity } from "../../modules/accountUser/accountUser.entity";
-import { Transaction } from "../../modules/business/business.entity";
+import { PayServices, Status, Transaction } from "../../modules/business/business.entity";
+import { BusinessDto } from "../../modules/business/business.dto";
+import { UserEntity } from "../../modules/user/user.entity";
 
 class OperationsServices {
   async addMoney(amountQuantity: number, account: string) {
@@ -76,27 +78,52 @@ class OperationsServices {
     await this.addMoney(amountQuantity, addressee);
   }
 
-  async operationManager(typeTransaction: Transaction, emitter: string, addressee: string, amountQuantity: number) {
+  async operationManager(typeTransaction: Transaction, emitter: string, addressee: string, amountQuantity: number, subject: string) {
     switch (typeTransaction) {
       case Transaction.TRANSFER:
         await this.operationTransfer(emitter, addressee, amountQuantity);
-        break;
+        return this.transferResponse(amountQuantity, emitter, addressee, subject);
+
       case Transaction.EXTRACTION:
         await this.operationExtraction(emitter, amountQuantity);
-        break;
+        return this.extractionResponse(amountQuantity, emitter, subject);
+
       case Transaction.PAY:
         await this.operationPayment(emitter, amountQuantity);
-        break;
+        return this.paymentResponse(amountQuantity, emitter, PayServices.NETFLIX, subject);
+
       case Transaction.CARD:
         await this.operationPayCard(emitter, amountQuantity);
-        break;
+        return this.paymentResponse(amountQuantity, emitter, PayServices.NETFLIX, subject);
+
       case Transaction.DEPOSIT:
         await this.operationDeposit(addressee, amountQuantity);
-        break;
+        return this.despositResponse(amountQuantity, addressee, subject);
       default:
         throw new Error("Transaction type not found");
     }
   }
+
+  transferResponse(amount: number, emitter: string, addressee: string, subject: string) {
+    const response = new BusinessDto(emitter, addressee, 1, amount, Status.APPROVED, Transaction.TRANSFER, subject);
+    return response;
+  }
+
+  extractionResponse(amount: number, emitter: string, subject: string) {
+    const response = new BusinessDto(emitter, "ATM" , 1, amount, Status.APPROVED, Transaction.EXTRACTION, subject);
+    return response;
+  }
+
+  paymentResponse(amount: number, emitter: string, payService: PayServices, subject: string) {
+    const response = new BusinessDto(emitter, payService, 1, amount, Status.APPROVED, Transaction.PAY, subject);
+    return response;
+  }
+
+  despositResponse(amount: number, addressee: string, subject: string) {
+    const response = new BusinessDto("Domino", addressee, 1, amount, Status.APPROVED, Transaction.DEPOSIT, subject);
+    return response;
+  }
 }
+
 
 export const operationsServices = new OperationsServices();

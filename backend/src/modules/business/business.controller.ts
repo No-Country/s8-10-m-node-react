@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { operationsServices } from "../../shared/services/operationsServices";
-import { Status, Transaction } from "./business.entity";
+import { BusinessEntity, Status, Transaction } from "./business.entity";
 import { BusinessService } from "./business.services";
+import { UserEntity } from "../user/user.entity";
 
 export class BusinessController extends BusinessService {
   constructor() {
@@ -37,12 +38,16 @@ export class BusinessController extends BusinessService {
   }
 
   async postController(req: Request, res: Response) {
-    const { typeTransaction, emitter, addressee, amountQuantity } = req.body;
+    const { typeTransaction, emitter, addressee, amountQuantity, subject } = req.body;
+
     try {
-      const result = await operationsServices.operationManager(typeTransaction, emitter, addressee, amountQuantity);
+      const result = await operationsServices.operationManager(typeTransaction, emitter, addressee, amountQuantity, subject) as BusinessEntity;
+
+      const response = await this.postService(result);
+      
       res.json({
         status: "success",
-        response: result,
+        response: response,
       });
     } catch (error) {
       const e = error as Error;
