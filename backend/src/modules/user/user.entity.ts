@@ -37,10 +37,10 @@ export class UserEntity extends BaseEntityApp {
   @Column({ unique: true })
   dni: string;
 
-  @Column()
+  @Column({nullable: true})
   country: string;
 
-  @Column()
+  @Column({nullable: true})
   postalCode: string;
 
   @OneToMany(() => FavoriteContactsEntity, (favoriteContacts) => favoriteContacts.user)
