@@ -1,8 +1,7 @@
-import React from 'react'
 
-export const Button = ({ children, className }) => {
+export const Button = ({ children, nameClass, func, disabled }) => {
   return (
-    <button className={` rounded-md w-full sm:w-96 py-3 px-12 flex items-center shadow-md gap-8 ${className}`}>
+    <button type='text' className={`${nameClass}`} onClick={func} disabled={disabled}>
       {children}
     </button>
   )
