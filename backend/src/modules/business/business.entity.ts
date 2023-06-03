@@ -17,6 +17,12 @@ export enum Transaction {
   CARD = "CARD"
 }
 
+export enum PayServices {
+  NETFLIX = "NETFLIX",
+  SPOTIFY = "SPOTIFY",
+  AMAZON = "AMAZON",
+}
+
 @Entity()
 export class BusinessEntity extends BaseEntityApp {
 
