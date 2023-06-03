@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AuthServices } from "./auth.services";
+import { AuthDto } from "./atuh.dto";
 
 export class AuthController extends AuthServices {
   constructor() {
@@ -13,13 +14,17 @@ export class AuthController extends AuthServices {
       const { token, user } = resp;
       req.session.token = token;
       req.session.user = user;
-      //TODO Armar el DTO para devolver al cliente
+      const userInfo = new AuthDto();
+      const payload = userInfo.infoReturn(user);
+
       res.json({
         status: "success",
-        response: "Successful entry",
+        payload,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      console.log(error);
+      const e = error as Error;
+      res.status(500).json({ error: e.message });
     }
   }
 }

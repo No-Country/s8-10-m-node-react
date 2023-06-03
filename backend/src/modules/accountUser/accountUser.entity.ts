@@ -45,5 +45,5 @@ export class AccountUserEntity extends BaseEntityApp {
     cascade: true,
     eager: true,
   })
-  associateCards: AccountAmountEntity[];
+  associateCards: AssociateCardsEntity[];
 }
