@@ -38,6 +38,11 @@ export const Movements = () => {
 
   const formatCurrency = (amount) => new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(amount)
 
+  function handleSubmit (e) {
+    e.preventDefault()
+    console.log(event.target.value)
+  }
+
   return (
     <>
       <PageTitle>
@@ -45,6 +50,11 @@ export const Movements = () => {
       </PageTitle>
       <h3 className='w-full font-semibold text-lg'>Ultimos movimientos</h3>
       <div className='w-full flex flex-col gap-2 '>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor='ultimos movimientos'>
+            <input className='w-full px-1 py-2' placeholder='Buscar' />
+          </label>
+        </form>
         {movements.map((movement) => {
           return (
             <div className='flex gap-2 items-center justify-between w-full text-sm text-left' key={movement.id}>
