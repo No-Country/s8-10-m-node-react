@@ -1,5 +1,5 @@
 import { EntityManager } from "typeorm";
-import { AppDataSource } from "../../db/postgreSql";
+import { AppDataSource } from "../../config/postgreSql";
 import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
 import { accountAmountServices } from "../accountAmount/accountAmount.services";
 import { AccountCardEntity } from "../accountCard/accountCard.entity";

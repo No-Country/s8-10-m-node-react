@@ -1,9 +1,4 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany
-} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
 import { AccountCardEntity } from "../accountCard/accountCard.entity";
@@ -14,12 +9,10 @@ import { FavoriteContactsEntity } from "../favoriteContacts/favoriteContacts.ent
 
 @Entity()
 export class AccountUserEntity extends BaseEntityApp {
-
-
   @Column({ length: 100, unique: true })
   alias: string;
 
-  @Column({default: "CA"})
+  @Column({ default: "CA" })
   typeCount: string;
 
   @Column()
@@ -28,20 +21,29 @@ export class AccountUserEntity extends BaseEntityApp {
   @ManyToOne(() => UserEntity, (user) => user.account)
   user: UserEntity;
 
-  @OneToMany(() => BusinessEntity, (business) => business.accountUser,{
-  cascade:true
+  @OneToMany(() => BusinessEntity, (business) => business.accountUser, {
+    cascade: true,
   })
   business: BusinessEntity[];
 
-  @OneToMany(()=> FavoriteContactsEntity,favoriteContacts=>favoriteContacts.accountUser)
-  favoriteContacts:FavoriteContactsEntity[]
+  @OneToMany(() => FavoriteContactsEntity, (favoriteContacts) => favoriteContacts.accountUser)
+  favoriteContacts: FavoriteContactsEntity[];
 
-  @OneToMany(() => AccountCardEntity, (accountCard) => accountCard.accountUser)
+  @OneToMany(() => AccountCardEntity, (accountCard) => accountCard.accountUser, {
+    cascade: true,
+    eager: true,
+  })
   accountCard: AccountCardEntity[];
 
-  @OneToMany(() => AccountAmountEntity, (accountAmount) => accountAmount.accountUser)
+  @OneToMany(() => AccountAmountEntity, (accountAmount) => accountAmount.accountUser, {
+    cascade: true,
+    eager: true,
+  })
   accountAmount: AccountAmountEntity[];
 
-  @OneToMany(() => AssociateCardsEntity, (associateCards) => associateCards.accountUser)
-  associateCards: AccountAmountEntity[];
+  @OneToMany(() => AssociateCardsEntity, (associateCards) => associateCards.accountUser, {
+    cascade: true,
+    eager: true,
+  })
+  associateCards: AssociateCardsEntity[];
 }

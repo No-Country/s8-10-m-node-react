@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import { AssociateCardsServices } from "./associateCards.services";
+import { AssociateCardsEntity } from "./associateCards.entity";
+import { AccountUserEntity } from "../accountUser/accountUser.entity";
+import { SaveOptions, RemoveOptions } from "typeorm";
 
 export class AssociateCardsController extends AssociateCardsServices {
   constructor() {
@@ -32,9 +35,23 @@ export class AssociateCardsController extends AssociateCardsServices {
   }
 
   async postController(req: Request, res: Response) {
-    const body = req.body;
+    const { cardNumber, cvv, issuingEntity, type, cardholder } = req.body;
+    const user = req.session.user;
     try {
-      const result = await this.postService(body);
+      const accountUser = await (
+        await this.getRepository(AccountUserEntity)
+      ).findOne({ where: { accountNumber: user?.account[0].accountNumber } });
+      if (!accountUser) return res.status(400).json({ msg: "No encuentro la cuenta" });
+      const newCard = {
+        cardNumber,
+        cvv,
+        cardholder,
+        issuingEntity,
+        type,
+        accountUser,
+      } as unknown as AssociateCardsEntity;
+      console.log(newCard);
+      const result = await this.postService(newCard);
       res.json({
         status: "success",
         response: result,

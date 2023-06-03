@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { BusinessService } from "./business.services";
-import { Status, Transaction } from "./business.entity";
 import { operationsServices } from "../../shared/services/operationsServices";
+import { Status, Transaction } from "./business.entity";
+import { BusinessService } from "./business.services";
 
 export class BusinessController extends BusinessService {
   constructor() {
@@ -11,16 +11,9 @@ export class BusinessController extends BusinessService {
   async getAllControllerTerms(req: Request, res: Response) {
     try {
       const { status, transaction } = req.query;
-      const typeStatus = ["PEDING", "APPROVED", "REJECTED"];
-      const typeTransaction = ["PAY", "DEPOSIT", "EXTRACTION", "TRANSFER", "CARD"];
-      const TransactionEnum = transaction as
-        | Transaction.PAY
-        | Transaction.DEPOSIT
-        | Transaction.EXTRACTION
-        | Transaction.TRANSFER
-        | Transaction.CARD;
+      // Hacer un middleware para verificar el estado
       const StatusEnum = status as Status.PENDING | Status.APPROVED | Status.REJECTED;
-      const result = await this.getBusinessType(StatusEnum, TransactionEnum);
+      const result = await this.getBusinessType(StatusEnum, transaction as Transaction);
       res.json({
         status: "success",
         response: result,

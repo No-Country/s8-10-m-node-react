@@ -1,6 +1,6 @@
 import { BaseEntity, EntityTarget, FindOptionsWhere, Repository } from "typeorm";
 import { NextFunction, Request, Response } from "express";
-import { AppDataSource } from "../../db/postgreSql";
+import { AppDataSource } from "../../config/postgreSql";
 import { authUtils } from "../../modules/auth/auth.utils";
 import session from "express-session";
 import { UserEntity } from "../../modules/user/user.entity";
@@ -44,7 +44,7 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
 
       const jwtPayload = authUtils.verifyToken(token);
       if (!jwtPayload) return res.status(403).json({ error: "Invalid token" });
-      
+
       next();
     } catch (error) {
       return res.status(403).json(error);

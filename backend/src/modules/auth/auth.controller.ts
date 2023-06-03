@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { UserDto } from "../user/user.dto";
 import { AuthServices } from "./auth.services";
+import { AuthDto } from "./atuh.dto";
 
 export class AuthController extends AuthServices {
   constructor() {
@@ -12,28 +12,19 @@ export class AuthController extends AuthServices {
     try {
       const resp = await this.postService(email);
       const { token, user } = resp;
-
-      req.session.user = user;
       req.session.token = token;
-
-      const result = new UserDto(
-        user.userId,
-        user.email,
-        user.phone,
-        user.address,
-        user.country,
-        user.postalCode,
-        user.fullName,
-        user.lastName
-      );
+      req.session.user = user;
+      const userInfo = new AuthDto();
+      const payload = userInfo.infoReturn(user);
 
       res.json({
         status: "success",
-        response: result,
-        token,
+        payload,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      console.log(error);
+      const e = error as Error;
+      res.status(500).json({ error: e.message });
     }
   }
 }

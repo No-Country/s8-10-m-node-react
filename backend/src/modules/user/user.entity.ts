@@ -1,11 +1,10 @@
-import { Column, Entity, Generated, JoinColumn, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, Generated, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 import { FavoriteContactsEntity } from "../favoriteContacts/favoriteContacts.entity";
 
 @Entity()
 export class UserEntity extends BaseEntityApp {
-  
   @Column()
   @Generated("uuid")
   userId: string;
@@ -18,10 +17,10 @@ export class UserEntity extends BaseEntityApp {
   email: string;
 
   @Column()
-  fullName:string;
+  fullName: string;
 
   @Column()
-  lastName:string;
+  lastName: string;
 
   @Column()
   password: string;
@@ -35,7 +34,7 @@ export class UserEntity extends BaseEntityApp {
   @Column()
   address: string;
 
-  @Column({unique:true})
+  @Column({ unique: true })
   dni: string;
 
   @Column()
@@ -44,12 +43,12 @@ export class UserEntity extends BaseEntityApp {
   @Column()
   postalCode: string;
 
-  @OneToMany(()=> FavoriteContactsEntity,favoriteContacts=>favoriteContacts.user)
-  favoriteContacts:FavoriteContactsEntity[]
+  @OneToMany(() => FavoriteContactsEntity, (favoriteContacts) => favoriteContacts.user)
+  favoriteContacts: FavoriteContactsEntity[];
 
-  @OneToMany(() => AccountUserEntity, (account) => account.user,{
-    cascade:true,
-    eager:true
+  @OneToMany(() => AccountUserEntity, (account) => account.user, {
+    cascade: true,
+    eager: true,
   })
   account: AccountUserEntity[];
 }
