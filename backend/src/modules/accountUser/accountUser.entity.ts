@@ -29,13 +29,21 @@ export class AccountUserEntity extends BaseEntityApp {
   @OneToMany(() => FavoriteContactsEntity, (favoriteContacts) => favoriteContacts.accountUser)
   favoriteContacts: FavoriteContactsEntity[];
 
-  @OneToMany(() => AccountCardEntity, (accountCard) => accountCard.accountUser)
+  @OneToMany(() => AccountCardEntity, (accountCard) => accountCard.accountUser, {
+    cascade: true,
+    eager: true,
+  })
   accountCard: AccountCardEntity[];
 
-  @OneToMany(() => AccountAmountEntity, (accountAmount) => accountAmount.accountUser)
+  @OneToMany(() => AccountAmountEntity, (accountAmount) => accountAmount.accountUser, {
+    cascade: true,
+    eager: true,
+  })
   accountAmount: AccountAmountEntity[];
 
-  @OneToMany(() => AssociateCardsEntity, (associateCards) => associateCards.accountUser)
-  @JoinColumn()
+  @OneToMany(() => AssociateCardsEntity, (associateCards) => associateCards.accountUser, {
+    cascade: true,
+    eager: true,
+  })
   associateCards: AccountAmountEntity[];
 }

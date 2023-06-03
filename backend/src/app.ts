@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import session from "express-session";
-import { AppDataSource } from "./db/postgreSql";
+import { AppDataSource } from "./config/postgreSql";
 import { RoutesApp } from "./shared/router";
 
 class AppServer {
@@ -37,6 +37,7 @@ class AppServer {
         saveUninitialized: false,
         cookie: {
           maxAge: 30000000000000, 
+          httpOnly: true
         },
       })
     );

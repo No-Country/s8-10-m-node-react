@@ -1,5 +1,5 @@
 import { FindOptionsWhere } from "typeorm";
-import { AppDataSource } from "../../db/postgreSql";
+import { AppDataSource } from "../../config/postgreSql";
 import { AccountAmountEntity } from "../../modules/accountAmount/accountAmount.entity";
 import { AccountUserEntity } from "../../modules/accountUser/accountUser.entity";
 import { Transaction } from "../../modules/business/business.entity";

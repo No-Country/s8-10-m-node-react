@@ -8,6 +8,7 @@ export class AssociateCardsRouter extends BaseRouter<AssociateCardsController, A
   }
 
   routes(path: string): void {
+    
     this.router.get(
       `/${path}`,
       (req, res, nex) => this.middleware.checkToken(req, res, nex),
