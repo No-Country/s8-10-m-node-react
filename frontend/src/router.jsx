@@ -7,11 +7,11 @@ import { MyCards } from './pages/MyCards'
 import { MyCreditCard } from './pages/MyCreditCard'
 import { Services } from './pages/Services'
 import { Movements } from './pages/Movements'
-import { Profile } from './pages/Profile'
 import Transfers from './pages/Transfers'
 import Contacts from './components/Contacts'
 import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
+import { ProfileOptions } from './pages/ProfileOptions'
 import { UserLayout, loader as userLoader } from './pages/Layout'
 
 export const router = createBrowserRouter([
@@ -80,8 +80,8 @@ export const router = createBrowserRouter([
         element: <Movements />,
       },
       {
-        path: 'profile',
-        element: <Profile />,
+        path: 'options',
+        element: <ProfileOptions/>,
       },
     ],
   },

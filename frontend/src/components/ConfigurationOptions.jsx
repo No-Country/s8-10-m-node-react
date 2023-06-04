@@ -15,7 +15,7 @@ const ConfigurationOptions = ({ option }) => {
   };
   
   return (
-    <div className='flex flex-col justify-between w-full pb-5 mb-3'>
+    <div className='flex flex-col justify-between w-full pb-5 mb-3 ml-2 pr-3'>
       <div className='flex w-full justify-between'>
         <div className=  'flex gap-4'>
           <div className={option.color}>{option.icon}</div>

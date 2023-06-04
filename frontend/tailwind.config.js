@@ -9,7 +9,10 @@ export default {
       fontFamily: {
         roboto: ['Roboto', 'Consolas', 'ui-monospace', 'Menlo'],
         inter: ['Inter', 'Consolas', 'ui-monospace', 'Menlo']
-      }
+      },
+      colors: {
+        customColor: '#482e8a'
+    }
     }
   },
   plugins: []
