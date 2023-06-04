@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import slider from '../assets/images/login-slider.svg'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { Button } from '../components/Button'

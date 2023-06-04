@@ -6,9 +6,7 @@ import { useUserContext } from '../context/UserContext'
 import Loader from '../components/Loader'
 
 export const Home = () => {
-  const { logOut, loading } = useUserContext()
-
-  if (loading) return <Loader />
+  const { logOut } = useUserContext()
 
   return (
     <>

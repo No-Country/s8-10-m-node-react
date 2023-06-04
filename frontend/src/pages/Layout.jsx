@@ -1,7 +1,5 @@
-import Loader from '../components/Loader'
 import { NavBar } from '../components/NavBar'
 import { Outlet, useRouteLoaderData, redirect } from 'react-router-dom'
-import { useUserContext } from '../context/UserContext'
 
 export function loader() {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
@@ -14,7 +12,6 @@ export function loader() {
 
 export const UserLayout = () => {
   const isUserLoggedIn = useRouteLoaderData('userLoggedIn')
-  console.log(isUserLoggedIn)
 
   //pl-24 es el minimo para el navBar
   return (
