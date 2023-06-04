@@ -17,7 +17,7 @@ export const UserLayout = () => {
   //pl-24 es el minimo para el navBar
 
   return (
-    <main className='flex flex-col relative pl-32 p-8'>
+    <main className="flex flex-col relative pl-32 p-8">
       <NavBar />
       <Outlet />
     </main>
