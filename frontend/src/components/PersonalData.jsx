@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import ConfigurationOptions from './ConfigurationOptions'
+import { ProfileImage } from './ProfileImage'
 
 
-const OptionContainer = () => {
+const PersonalData = () => {
     const [optionData, setOptionData] = useState([{
         id: 1,
         name: 'MI CBU',
@@ -46,6 +47,10 @@ const OptionContainer = () => {
 
   return (
     <div className='w-full '>
+        <div className='mb-20 pb-20 mt-10'>
+
+        <ProfileImage name={"name"}/>
+        </div>
         {
             optionData.map((option) => {
                return <ConfigurationOptions key={option.id} option={option} />
@@ -56,4 +61,4 @@ const OptionContainer = () => {
   )
 }
 
-export default OptionContainer
+export default PersonalData

@@ -8,6 +8,11 @@ import { useUserContext } from '../context/UserContext'
 export const Home = () => {
 
   const navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/transfers')
+    console.log('click')
+   
+  }
   const { logOut } = useUserContext()
 
 
@@ -26,8 +31,10 @@ export const Home = () => {
           <FaRegEye className='absolute right-2 top-[52px] text-black' size={24} />
         </div>
         <div className='w-full flex gap-3'>
-          <Button nameClass='w-1/2 py-2 flex items-center justify-center gap-2 rounded-lg text-white font-inter bg-[#012340]'>
-            <IoTrendingUp size={20}/>
+       
+          <Button    nameClass='w-1/2 py-2 flex items-center justify-center gap-2 rounded-lg text-white font-inter bg-[#012340]'  >
+
+            <IoTrendingUp  onClick={handleClick}  size={20}/>
             Transferir
           </Button>
           <Button nameClass='w-1/2 py-2 flex items-center justify-center gap-2 rounded-lg text-white font-inter bg-[#012340]'>
