@@ -64,7 +64,7 @@ export const Register = () => {
       .then((data) => {
         if (data.status === 'success') {
           login(data.response)
-          navigate('/home')
+          navigate('/login')
         }
       })
       .catch((error) => console.log('error', error))

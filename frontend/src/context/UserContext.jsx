@@ -7,8 +7,10 @@ export const useUserContext = () => useContext(UserContext)
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState({})
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    setLoading(true)
     const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -16,9 +18,12 @@ const UserProvider = ({ children }) => {
     } else {
       setUser({})
     }
+
+    setLoading(false)
   }, [])
 
   const login = async (credentials) => {
+    setLoading(true)
     try {
       const user = await loginUser(credentials)
       if (user.status === 'success') {
@@ -28,6 +33,8 @@ const UserProvider = ({ children }) => {
       }
     } catch (error) {
       console.error(error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -39,7 +46,7 @@ const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, login, logOut }}>
+    <UserContext.Provider value={{ user, login, logOut, loading }}>
       {children}
     </UserContext.Provider>
   )
