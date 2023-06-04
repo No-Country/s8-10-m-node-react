@@ -1,5 +1,7 @@
 export const ArrowRightSVG = () => (
-  <svg viewBox='0 0 24 24' height='24px' width='24px' fill='#000000'><g id='SVGRepo_bgCarrier' strokeWidth='0' /><g id='SVGRepo_tracerCarrier' strokeLinecap='round' strokeLinejoin='round' /><g id='SVGRepo_iconCarrier'> <title /> <g id='Complete'> <g id='arrow-right'> <g> <polyline data-name='Right' fill='none' id='Right-2' points='16.4 7 21.5 12 16.4 17' stroke='#000000' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' /> <line fill='none' stroke='#000000' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' x1='2.5' x2='19.2' y1='12' y2='12' /> </g> </g> </g> </g></svg>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 0L9.885 2.115L18.255 10.5H0V13.5H18.255L9.885 21.885L12 24L24 12L12 0Z" fill="#10283D" />
+  </svg>
 )
 
 export const PlusSVG = () => (
@@ -23,7 +25,9 @@ export const MasterCardSVG = () => (
 )
 
 export const ArrowUpSVG = () => (
-  <svg viewBox='0 0 24 24' fill='none' height='24px' width='24px' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' strokeWidth='0' /><g id='SVGRepo_tracerCarrier' strokeLinecap='round' strokeLinejoin='round' /><g id='SVGRepo_iconCarrier'> <g id='Arrow / Arrow_Up_LG'> <path id='Vector' d='M12 3L7 8M12 3L17 8M12 3V21' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' /> </g> </g></svg>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 12L2.115 14.115L10.5 5.745V24H13.5V5.745L21.87 14.13L24 12L12 0L0 12Z" fill="#10283D" />
+  </svg>
 )
 
 export const QrCodeSVG = () => (
@@ -35,11 +39,16 @@ export const PedirSVG = () => (
 )
 
 export const HomeSVG = () => (
-  <svg viewBox='0 0 24 24' fill='none' height='24px' width='24px' xmlns='http://www.w3.org/2000/svg'><path id='Vector' d='M2 20.0001H4M4 20.0001H10M4 20.0001V11.4522C4 10.9179 4 10.6506 4.06497 10.4019C4.12255 10.1816 4.21779 9.97307 4.3457 9.78464C4.49004 9.57201 4.69064 9.39569 5.09277 9.04383L9.89436 4.84244C10.6398 4.19014 11.0126 3.86397 11.4324 3.73982C11.8026 3.63035 12.1972 3.63035 12.5674 3.73982C12.9875 3.86406 13.3608 4.19054 14.1074 4.84383L18.9074 9.04383C19.3095 9.39568 19.5102 9.57202 19.6546 9.78464C19.7825 9.97307 19.877 10.1816 19.9346 10.4019C19.9995 10.6506 20 10.9179 20 11.4522V20.0001M10 20.0001H14M10 20.0001V16.0001C10 14.8955 10.8954 14.0001 12 14.0001C13.1046 14.0001 14 14.8955 14 16.0001V20.0001M14 20.0001H20M20 20.0001H22' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' /></svg>
+  <svg width="24" height="24" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M29.2146 13.7804L15.7394 0.917943C15.6424 0.825081 15.5271 0.751408 15.4003 0.701141C15.2734 0.650874 15.1374 0.625 15 0.625C14.8627 0.625 14.7267 0.650874 14.5998 0.701141C14.473 0.751408 14.3577 0.825081 14.2607 0.917943L0.785449 13.7804C0.392871 14.1554 0.17041 14.6648 0.17041 15.1961C0.17041 16.2992 1.10933 17.1961 2.26416 17.1961H3.68398V26.3742C3.68398 26.9273 4.15181 27.3742 4.73086 27.3742H12.9063V20.3742H16.5704V27.3742H25.2692C25.8483 27.3742 26.3161 26.9273 26.3161 26.3742V17.1961H27.7359C28.2921 17.1961 28.8253 16.9867 29.2179 16.6086C30.0325 15.8273 30.0325 14.5617 29.2146 13.7804Z" fill="#10283D" />
+  </svg>
 )
 
 export const ServicesSVG = () => (
-  <svg viewBox='0 0 24 24' fill='none' height='24px' width='24px' xmlns='http://www.w3.org/2000/svg'><path id='Vector' d='M9 17H19M9 12H19M9 7H19M5.00195 17V17.002L5 17.002V17H5.00195ZM5.00195 12V12.002L5 12.002V12H5.00195ZM5.00195 7V7.002L5 7.00195V7H5.00195Z' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' /></svg>
+  <svg width="24" height="24" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M23.0607 8.84461C23.1663 8.60091 23.194 8.33275 23.14 8.07405C23.0861 7.81535 22.9531 7.57774 22.7578 7.39128L15.7786 0.724609L13.8049 2.60994L18.4014 7.00061H0.833414V9.66728H21.7709C22.047 9.66734 22.3168 9.58922 22.5464 9.44279C22.776 9.29636 22.9549 9.08819 23.0607 8.84461ZM0.939497 13.1566C0.833826 13.4003 0.806201 13.6685 0.860118 13.9272C0.914034 14.1859 1.04707 14.4235 1.24239 14.6099L8.22156 21.2766L10.1953 19.3913L5.59879 15.0006H23.1667V12.3339H2.22925C1.95316 12.3337 1.68321 12.4117 1.4536 12.5582C1.22399 12.7047 1.04507 12.9129 0.939497 13.1566Z" fill="#10283D" />
+  </svg>
+
 )
 
 export const BothArrowsSVG = () => (
@@ -53,6 +62,7 @@ export const CardSVG = () => (
 export const CardDetailSVG = () => (
   <svg width='100%' height='100%' id='svg' viewBox='0 0 1440 590' xmlns='http://www.w3.org/2000/svg' className='transition duration-300 ease-in-out delay-150'><path d='M 0,600 C 0,600 0,200 0,200 C 90.59330143540669,186.14354066985646 181.18660287081337,172.2870813397129 270,192 C 358.8133971291866,211.7129186602871 445.8468899521531,264.99521531100476 543,260 C 640.1531100478469,255.00478468899524 747.4258373205743,191.73205741626796 858,182 C 968.5741626794257,172.26794258373204 1082.44976076555,216.07655502392345 1180,228 C 1277.55023923445,239.92344497607655 1358.7751196172248,219.96172248803828 1440,200 C 1440,200 1440,600 1440,600 Z' stroke='none' strokeWidth='0' fill='#9900ef' fillOpacity='0.53' className='transition-all duration-300 ease-in-out delay-150 path-0' /><path d='M 0,600 C 0,600 0,400 0,400 C 75.25358851674642,427.9425837320574 150.50717703349284,455.8851674641149 235,448 C 319.49282296650716,440.1148325358851 413.22488038277515,396.4019138755981 531,394 C 648.7751196172248,391.5980861244019 790.5933014354066,430.5071770334928 907,418 C 1023.4066985645934,405.4928229665072 1114.4019138755982,341.56937799043067 1199,330 C 1283.5980861244018,318.43062200956933 1361.7990430622008,359.21531100478467 1440,400 C 1440,400 1440,600 1440,600 Z' stroke='none' strokeWidth='0' fill='#9900ef' fillOpacity='1' className='transition-all duration-300 ease-in-out delay-150 path-1' /></svg>
 )
+
 //assets snow
 export const ArrowRightOptionSVG = () => (
   <svg viewBox='0 0 24 24' fill='none' height='24px' width='24px' xmlns='../assets/images/ArrowR.svg'><path id='Vector' d='M5 12H19M19 12L15 16M19 12L15 8' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' /></svg>
