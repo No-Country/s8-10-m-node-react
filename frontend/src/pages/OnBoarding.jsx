@@ -22,7 +22,7 @@ const OnBoarding = () => {
         <h1 className="text-xl w-full text-center mb-3 font-bold">
           Ofrece pagos a plazos flexibles para compras en línea.
         </h1>
-        <Link to="/login" className={`${linkClass} bg-[#012340] text-white`}>
+        <Link to="login" className={`${linkClass} bg-[#012340] text-white`}>
           Ingresar
         </Link>
         <Link

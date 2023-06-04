@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import OnBoarding from './pages/OnBoarding'
-import { Login } from './pages/Login'
+import { Login, loader as userStoredLoader } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
 import { MyCards } from './pages/MyCards'
@@ -22,11 +22,13 @@ export const router = createBrowserRouter([
   },
   {
     path: 'register',
-    element: <Register />
+    element: <Register />,
+    loader: userStoredLoader
   },
   {
     path: 'login',
-    element: <Login />
+    element: <Login />,
+    loader: userStoredLoader
   },
   {
     path: 'user',
