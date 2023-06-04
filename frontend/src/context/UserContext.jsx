@@ -1,13 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { loginUser } from '../services/login';
+import { loginUser } from '../services/login'
 
 const UserContext = createContext()
 
 export const useUserContext = () => useContext(UserContext)
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({});
-  console.log(user)
+  const [user, setUser] = useState({})
 
   useEffect(() => {
     const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
@@ -27,8 +26,7 @@ const UserProvider = ({ children }) => {
       window.sessionStorage.setItem('dominoUser', JSON.stringify(user))
       setUser(user)
       window.location.replace('/user/home')
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error)
     }
   }
