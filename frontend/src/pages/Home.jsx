@@ -6,10 +6,8 @@ import { IoTrendingUp, IoTrendingDownOutline } from 'react-icons/io5'
 import { useUserContext } from '../context/UserContext'
 
 export const Home = () => {
-
-  const navigate = useNavigate()
   const { logOut } = useUserContext()
-
+  console.log('Home component')
 
   return (
     <>
@@ -38,10 +36,7 @@ export const Home = () => {
       </section>
       <CreditCardComp height='160' cardNumber='4111111111111111' />
       <section>
-        <Button func={() => {
-          logOut()
-          navigate('/')
-        }} >
+        <Button func={logOut} >
           Cerrar sesion
         </Button>
       </section>
