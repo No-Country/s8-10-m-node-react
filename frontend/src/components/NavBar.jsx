@@ -41,7 +41,7 @@ export const NavBar = () => {
   ]
 
   return (
-    <nav className={`flex flex-col fixed bg-[#4C27AE] p-6  top-0 gap-4 left-0 h-screen ${isOpen ? 'w-48' : 'w-24'} items-center transition-[width] z-10`}>
+    <nav className={`flex-col fixed bg-[#4C27AE] p-6  top-0 gap-4 left-0 h-screen ${isOpen ? 'w-48' : 'w-24'} items-center transition-[width] z-10 hidden sm:flex`}>
       <NavAppTitle onClick={toggleOpen}>
         D{isOpen && 'omino'}
       </NavAppTitle>
