@@ -41,6 +41,7 @@ export class FavoriteContactController extends FavoriteContactServices {
     const { user } = req.session;
     const { nickname, data } = req.body;
     try {
+      if (!user) return res.status(400).json({ status: "error", error: "User not found" });
       const accountUser = await favoriteContactsUtils.dataFilter(data); // Filter data is alias or account number
       if (!accountUser) res.status(400).json({ status: "error", error: "User not found" });
       const newFavoriteContact = {
@@ -49,8 +50,8 @@ export class FavoriteContactController extends FavoriteContactServices {
         accountUser,
       } as FavoriteContactsEntity;
       await this.postService(newFavoriteContact);
-      const contacts = await this.getServices();
-      const payload = generalDto.favoriteContactsFilter(contacts);
+      const contacts = await this.getAllByUser(user.userId);
+      const payload = generalDto.favoriteContactsFilter(contacts!);
 
       res.json({
         status: "success",

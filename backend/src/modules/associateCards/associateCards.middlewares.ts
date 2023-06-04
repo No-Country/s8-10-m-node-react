@@ -19,4 +19,15 @@ export class AssociateCardsMiddlewares extends BaseMiddlewares<AssociateCardsEnt
       res.status(500).json(error);
     }
   }
+  async checkCardNumber(req: Request, res: Response, nex: NextFunction) {
+    const { cardNumber } = req.body;
+    try {
+      if (!cardNumber) {
+        return res.status(400).json({ status: "error", error: "cardNumber required" });
+      }
+      nex();
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 }
