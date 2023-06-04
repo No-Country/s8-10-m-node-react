@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { AssociateCardsServices } from "./associateCards.services";
-import { AssociateCardsEntity } from "./associateCards.entity";
+import { generalDto } from "../../shared/dto/generalDto";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
-import { SaveOptions, RemoveOptions } from "typeorm";
+import { AssociateCardsEntity } from "./associateCards.entity";
+import { AssociateCardsServices } from "./associateCards.services";
 
 export class AssociateCardsController extends AssociateCardsServices {
   constructor() {
@@ -50,11 +50,13 @@ export class AssociateCardsController extends AssociateCardsServices {
         type,
         accountUser,
       } as unknown as AssociateCardsEntity;
-      console.log(newCard);
-      const result = await this.postService(newCard);
+      await this.postService(newCard);
+      const cards = await this.getServices();
+      const payload = generalDto.filterCards(cards);
+
       res.json({
         status: "success",
-        response: result,
+        payload,
       });
     } catch (error) {
       res.status(500).json({ error });

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
+
+import { generalDto } from "../../shared/dto/generalDto";
 import { AuthServices } from "./auth.services";
-import { AuthDto } from "./atuh.dto";
 
 export class AuthController extends AuthServices {
   constructor() {
@@ -14,9 +15,7 @@ export class AuthController extends AuthServices {
       const { token, user } = resp;
       req.session.token = token;
       req.session.user = user;
-      const userInfo = new AuthDto();
-      const payload = userInfo.infoReturn(user);
-
+      const payload = generalDto.loginReturn(user);
       res.json({
         status: "success",
         payload,

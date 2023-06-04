@@ -1,7 +1,8 @@
-import { AssociateCardsEntity } from "../associateCards/associateCards.entity";
-import { BusinessEntity, Status, Transaction } from "../business/business.entity";
-import { FavoriteContactsEntity } from "../favoriteContacts/favoriteContacts.entity";
-import { UserEntity } from "../user/user.entity";
+import { AssociateCardsEntity } from "../../modules/associateCards/associateCards.entity";
+import { BusinessEntity, Status, Transaction } from "../../modules/business/business.entity";
+import { FavoriteContactsEntity } from "../../modules/favoriteContacts/favoriteContacts.entity";
+import { UserEntity } from "../../modules/user/user.entity";
+
 
 interface ArrayCards {
   cardNumber: string;
@@ -20,11 +21,12 @@ interface ArrayFavoriteContacts {
   nickName: string;
   accountNumber: string;
   alias: string;
+  name: string;
 }
 
-export class AuthDto {
-  constructor() {}
-  infoReturn(user: UserEntity): object {
+export class GeneralDto {
+  
+  loginReturn(user: UserEntity): object {
     console.log(user);
     const { account, address, country, email, favoriteContacts, fullName, lastName, phone, postalCode } = user;
     const { accountAmount, accountCard, accountNumber, alias, associateCards, business } = account[0];
@@ -92,9 +94,12 @@ export class AuthDto {
         accountNumber: contact.accountUser.accountNumber,
         alias: contact.accountUser.alias,
         nickName: contact.nickname,
+        name: `${contact.user.fullName} ${contact.user.lastName}`
       };
       arrayContacts.push(newContact);
     });
     return arrayContacts;
   }
 }
+
+export const generalDto = new GeneralDto();
