@@ -47,7 +47,7 @@ export const CreditCardComp = ({ height, cardNumber, isDomino, name }) => {
             <p className='truncate my-0 tracking-widest font-bold'>{numberToShow}</p>
           </span>
           <span className='cursor-pointer z-[1]'>
-            <Link to={`user/mycards/${cardNumber}`}>
+            <Link to={`/user/mycards/${cardNumber}`}>
               <DoubleArrowSVG />
             </Link>
           </span>

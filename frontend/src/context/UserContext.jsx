@@ -19,13 +19,13 @@ const UserProvider = ({ children }) => {
   }, [])
 
   const login = async (credentials) => {
-    console.log(credentials)
     try {
       const user = await loginUser(credentials)
-      console.log(user)
-      window.sessionStorage.setItem('dominoUser', JSON.stringify(user))
-      setUser(user)
-      window.location.replace('/user/home')
+      if (user.status === 'success') {
+        window.sessionStorage.setItem('dominoUser', JSON.stringify(user))
+        setUser(user)
+        window.location.replace('/user/home')
+      }
     } catch (error) {
       console.error(error)
     }
