@@ -12,12 +12,12 @@ export const Home = () => {
 
 
   return (
-    <main className='w-full min-h-screen flex flex-col items-center bg-gray-100 px-2 py-4'>
+    <>
       <section className='w-[90%] h-[300px] py-3 px-5 mx-auto flex flex-col items-center gap-10 bg-[#42ADD5] rounded-[30px] mb-7'>
         <div className='w-full flex justify-between items-center'>
           <FaBars size={25} />
           <h2 className=' w-20 text-center font-inter '>Welcome, <span className='text-xl font-bold'>Carlos</span></h2>
-          <img className='w-12 h-12 rounded-full object-cover' src='https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8&w=1000&q=80' alt='photo of user'/>
+          <img className='w-12 h-12 rounded-full object-cover' src='https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8&w=1000&q=80' alt='photo of user' />
           <FaBell size={20} />
         </div>
         <div className='w-full text-center relative text-white font-inter'>
@@ -27,7 +27,7 @@ export const Home = () => {
         </div>
         <div className='w-full flex gap-3'>
           <Button nameClass='w-1/2 py-2 flex items-center justify-center gap-2 rounded-lg text-white font-inter bg-[#012340]'>
-            <IoTrendingUp size={20}/>
+            <IoTrendingUp size={20} />
             Transferir
           </Button>
           <Button nameClass='w-1/2 py-2 flex items-center justify-center gap-2 rounded-lg text-white font-inter bg-[#012340]'>
@@ -36,15 +36,15 @@ export const Home = () => {
           </Button>
         </div>
       </section>
-      <CreditCardComp height='160' cardNumber='4111111111111111'/>
+      <CreditCardComp height='160' cardNumber='4111111111111111' />
       <section>
-        <Button func={() =>{
+        <Button func={() => {
           logOut()
           navigate('/')
         }} >
           Cerrar sesion
         </Button>
       </section>
-    </main>
+    </>
   )
 }

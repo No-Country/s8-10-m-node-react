@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types'
-import Modal from './Modal'
+import { Modal } from './Modal'
 import { useModal } from '../hooks/useModal'
 import { FaEllipsisV, FaTrash } from 'react-icons/fa'
 
@@ -29,11 +29,10 @@ const Contacts = ({ listContacts }) => {
       {deleteContact && (
         <Modal close={closeDeleteContact}>
           <div
-            className={`w-full h-[100px] fixed bottom-0 bg-white  ${
-              deleteContact
+            className={`w-full h-[100px] fixed bottom-0 bg-white  ${deleteContact
                 ? 'translate-y-0 duration-300 ease-in'
                 : 'transition-transform translate-y-full duration-300 ease-out delay-300'
-            } rounded-t-[40px] flex justify-center items-center`}
+              } rounded-t-[40px] flex justify-center items-center`}
           >
             <button
               type="button"
