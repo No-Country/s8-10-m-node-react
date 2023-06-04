@@ -4,14 +4,12 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { Button } from '../components/Button'
 import InputField from '../components/InputField'
 import { useUserContext } from '../context/UserContext'
-import { useNavigate } from 'react-router'
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [validateForm, setValidateForm] = useState({})
 
-  const navigate = useNavigate()
-  const { login } = useUserContext()
+  const { user, login } = useUserContext()
 
   const handleChange = (e) => {
     setValidateForm({
@@ -20,30 +18,15 @@ export const Login = () => {
     })
   }
 
-  const validateUser = (e) => {
-    e.preventDefault()
-
-    const requestOptions = {
-      method: 'POST',
-      body: JSON.stringify({
-        email: validateForm.email,
-        password: validateForm.password,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      redirect: 'follow',
+  useEffect(() => {
+    if (user) {
+      window.location.replace('/user/home')
     }
+  })
 
-    fetch('https://pagaya.onrender.com/api/auth', requestOptions)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 'success') {
-          login(data)
-          navigate('/user/home')
-        }
-      })
-      .catch((err) => console.log('error', err))
+  const validateUser = async (e) => {
+    e.preventDefault()
+    await login(validateForm)
   }
 
   return (

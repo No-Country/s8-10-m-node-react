@@ -12,7 +12,7 @@ import Transfers from './pages/Transfers'
 import Contacts from './components/Contacts'
 import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
-import { UserLayout } from './pages/Layout'
+import { UserLayout, loader as userLoader } from './pages/Layout'
 
 
 export const router = createBrowserRouter([
@@ -31,6 +31,8 @@ export const router = createBrowserRouter([
   {
     path: 'user',
     element: <UserLayout />,
+    loader: userLoader,
+    id: 'userLoggedIn',
     children: [
       {
         path: 'home',

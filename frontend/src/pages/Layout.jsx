@@ -1,18 +1,20 @@
 import React, { useEffect } from 'react'
 import { NavBar } from '../components/NavBar'
-import { Outlet, useNavigate } from 'react-router-dom'
-import { useUserContext } from '../context/UserContext'
+import { Outlet, useRouteLoaderData, redirect } from 'react-router-dom'
+
+export function loader () {
+  const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
+  if (loggedUserJSON) {
+    return JSON.parse(loggedUserJSON)
+  } else {
+    return redirect('login')
+  }
+}
 
 export const UserLayout = () => {
-  const { user } = useUserContext()
-  console.log(user)
-  const navigate = useNavigate()
+  const isUserLoggedIn = useRouteLoaderData('userLoggedIn')
+  console.log(isUserLoggedIn)
 
-  useEffect(() => {
-    if (user === null) {
-      navigate('/login')
-    }
-  }, [])
 
   //pl-24 es el minimo para el navBar
 
