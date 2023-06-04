@@ -1,5 +1,5 @@
 import PopUp from './PopUp'
-import Modal from '../components/Modal'
+import { Modal } from '../components/Modal'
 import cross from '../assets/images/cross.svg'
 import { useModal } from '../hooks/useModal'
 import { useState } from 'react'
@@ -54,11 +54,10 @@ const NewContact = () => {
           {searchOpen && (
             <Modal className="w-full h-full">
               <div
-                className={`w-full h-[400px] fixed bottom-0 bg-white  ${
-                  searchOpen
+                className={`w-full h-[400px] fixed bottom-0 bg-white  ${searchOpen
                     ? 'translate-y-0 duration-300 ease-in'
                     : 'transition-transform translate-y-full duration-300 ease-out delay-300'
-                } rounded-t-[40px] flex flex-col justify-evenly items-center`}
+                  } rounded-t-[40px] flex flex-col justify-evenly items-center`}
               >
                 <div className="w-full text-center relative pt-3">
                   <h3 className="text-2xl font-semibold">Marcos Leiva</h3>

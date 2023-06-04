@@ -1,44 +1,63 @@
-import React from 'react'
-import { BothArrowsSVG, HomeSVG, QrCodeSVG, ServicesSVG } from '../utils/icons'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { ArrowRightSVG, ArrowUpSVG, HomeSVG, QrCodeSVG, ServicesSVG } from '../utils/icons'
+import { NavLink } from 'react-router-dom'
+import { NavAppTitle } from './NavButton'
+import { useUserContext } from '../context/UserContext'
 
 export const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const { logOut } = useUserContext()
+
+  function toggleOpen () {
+    console.log(isOpen)
+    setIsOpen(prevState => !prevState)
+  }
+
   const menuItems = [{
     name: 'Home',
     icon: <HomeSVG />,
-    link: '/home'
+    link: '/user/home'
   },
   {
     name: 'Servicios',
     icon: <ServicesSVG />,
-    link: '/services'
+    link: '/user/services'
   },
   {
     name: 'Movimientos',
-    icon: <BothArrowsSVG />,
-    link: '/movements'
+    icon: <ArrowRightSVG />,
+    link: '/user/movements'
+  },
+  {
+    name: 'Perfil',
+    icon: <ArrowUpSVG />,
+    link: '/user/profile'
   },
   {
     name: 'Perfil',
     icon: <QrCodeSVG />,
-    link: '/profile'
+    link: '/'
   }
   ]
 
   return (
-    <div className='w-[95%] z-10 flex items-center gap-4 fixed mx-auto justify-around bottom-4 p-3 rounded-2xl bg-gray-200 h-16 shadow-md'>
+    <nav className={`flex flex-col fixed bg-[#4C27AE] p-6  top-0 gap-4 left-0 h-screen ${isOpen ? 'w-48' : 'w-24'} items-center transition-[width] z-10`}>
+      <NavAppTitle onClick={toggleOpen}>
+        D{isOpen && 'omino'}
+      </NavAppTitle>
+      <h4 className='text-white'>Menu</h4>
+      <span className='w-full border-white border-t-2 transition-[width]' />
       {menuItems.map(item => (
-        <span className='' key={item.name}>
-          <Link to={item.link}>
-            <span className='flex z-100 flex-col items-center'>
-              {item.icon}
-              <p className='text-sm font-bold'>
-                {item.name}
-              </p>
-            </span>
-          </Link>
-        </span>
+        <NavLink className={`px-2 py-4 bg-white flex rounded-[10px] items-center justify-center w-full gap-2 duration-500`} key={item.link} to={item.link}>
+          {item.icon}
+          <p className={`text-base font-bold ${isOpen ? 'inline-block' : 'hidden'} transition-all`}>
+            {item.name}
+          </p>
+        </NavLink>
       ))}
-    </div>
+      <button className={`px-2 py-4 bg-white flex rounded-[10px] items-center justify-center w-full gap-2 duration-500`} onClick={logOut}>
+        LOut
+      </button>
+    </nav>
   )
 }

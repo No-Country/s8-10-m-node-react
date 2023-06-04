@@ -7,76 +7,82 @@ import { MyCards } from './pages/MyCards'
 import { MyCreditCard } from './pages/MyCreditCard'
 import { Services } from './pages/Services'
 import { Movements } from './pages/Movements'
-import{ ProfileOptions } from './pages/ProfileOptions'
+import { Profile } from './pages/Profile'
 import Transfers from './pages/Transfers'
 import Contacts from './components/Contacts'
 import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
-import PersonalData from './components/PersonalData'
-
+import { UserLayout, loader as userLoader } from './pages/Layout'
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <OnBoarding />
-  },
-  {
-    path: 'home',
-    element: <Home />
+    element: <OnBoarding />,
   },
   {
     path: 'register',
-    element: <Register />
+    element: <Register />,
   },
   {
     path: 'login',
-    element: <Login />
+    element: <Login />,
   },
   {
-    path: 'mycards',
-    element: <MyCards />
-  },
-  {
-    path: 'mycards/:creditCardId',
-    element: <MyCreditCard />
-  },
-  {
-    path: '/transfers',
-    element: <Transfers />,
+    path: 'user',
+    element: <UserLayout />,
+    loader: userLoader,
+    id: 'userLoggedIn',
     children: [
       {
-        path: '/transfers/contacts',
-        element: <Contacts />,
-        children: [
-          {
-            path: '/transfers/contacts/sendAmount',
-            element: <ToTransfer />
-          }
-        ]
+        path: 'home',
+        element: <Home />,
       },
       {
-        path: '/transfers/newContact',
-        element: <NewContact />,
+        path: 'mycards',
+        element: <MyCards />,
+      },
+      {
+        path: 'mycards/:creditCardId',
+        element: <MyCreditCard />,
+      },
+      {
+        path: 'transfers',
+        element: <Transfers />,
         children: [
           {
-            path: '/transfers/newContact/sendAmount',
-            element: <ToTransfer />
-          }
-        ]
-      }
-    ]
+            path: 'contacts',
+            element: <Contacts />,
+            children: [
+              {
+                path: 'sendAmount',
+                element: <ToTransfer />,
+              },
+            ],
+          },
+          {
+            path: 'newContact',
+            element: <NewContact />,
+            children: [
+              {
+                path: 'sendAmount',
+                element: <ToTransfer />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'services',
+        element: <Services />,
+      },
+      {
+        path: 'movements',
+        element: <Movements />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
+      },
+    ],
   },
-  {
-    path: 'services',
-    element: <Services />
-  },
-  {
-    path: 'movements',
-    element: <Movements />
-  },
-  {
-    path: '/profileoptions',
-    element: <ProfileOptions/>,
-  
-  }
 ])
