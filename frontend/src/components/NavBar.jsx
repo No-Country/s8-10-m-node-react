@@ -1,55 +1,12 @@
-import {
-  FaArrowUp,
-  FaArrowRight,
-  FaHome,
-  FaArrowDown,
-  FaExchangeAlt,
-  FaDollarSign,
-} from 'react-icons/fa'
+
 import { NavAppTitle } from './NavButton'
 import { useUserContext } from '../context/UserContext'
 import { IoExitOutline } from 'react-icons/io5'
 import MenuItems from './MenuItems'
-import { useLayoutContext } from '../context/LayoutContext'
 
 export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
   const { logOut } = useUserContext()
-  const { windowWidth } = useLayoutContext()
 
-  const menuItems = [
-    {
-      name: 'Home',
-      icon: <FaHome size={25} />,
-      link: '/user/home',
-    },
-    {
-      name: 'Movimientos',
-      icon: <FaExchangeAlt size={25} />,
-      link: '/user/movements',
-    },
-    {
-      name: 'Servicios',
-      icon: <FaDollarSign size={25} />,
-      link: '/user/services',
-      condition: windowWidth > 768 ? true : false,
-    },
-    {
-      name: 'Retirar',
-      icon: <FaArrowDown size={25} />,
-      link: '',
-      condition: windowWidth > 768 ? true : false,
-    },
-    {
-      name: 'Transferir',
-      icon: <FaArrowRight size={25} />,
-      link: '/user/transfers',
-    },
-    {
-      name: 'Recargar',
-      icon: <FaArrowUp size={25} />,
-      link: null,
-    },
-  ]
 
   return (
     <nav
@@ -67,7 +24,7 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
       >
         Menu
       </h4>
-      <MenuItems items={menuItems} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <MenuItems isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="w-full h-14 flex items-center justify-between bg-transparent border-t pt-5 text-white ">
         <img
           className="w-14 h-14 rounded-lg object-cover"
