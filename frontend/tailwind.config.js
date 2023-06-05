@@ -7,6 +7,9 @@ export default {
         roboto: ['Roboto', 'Consolas', 'ui-monospace', 'Menlo'],
         inter: ['Inter', 'Consolas', 'ui-monospace', 'Menlo'],
       },
+      gridTemplateColumns: {
+        'movementsTable': 'auto 1fr auto auto'
+      },
       keyframes: {
         'slide-in-desktop': {
           '0%': {
@@ -34,6 +37,9 @@ export default {
       },
       colors: {
         customColor: '#482e8a',
+        primary: '#4C27AE',
+        tableHeadColor: 'rgba(76, 39, 174,0.3)',
+        tableRowColor: 'rgba(76, 39, 174,0.15)'
       },
     },
   },
