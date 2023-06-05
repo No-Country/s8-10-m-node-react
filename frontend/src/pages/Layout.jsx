@@ -1,6 +1,6 @@
 import Loader from '../components/Loader'
 import { NavBar } from '../components/NavBar'
-import { Outlet, useRouteLoaderData, redirect, useNavigation } from 'react-router-dom'
+import { Outlet, useRouteLoaderData, redirect } from 'react-router-dom'
 import { useUserContext } from './../context/UserContext';
 
 export function loader () {

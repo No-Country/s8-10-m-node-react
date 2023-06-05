@@ -4,7 +4,7 @@ import { Login, loader as userStoredLoader } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
 import { MyCards } from './pages/MyCards'
-import { MyCreditCard } from './pages/MyCreditCard'
+import { CreditCard, loader as creditCardPageLoader } from './pages/CreditCard'
 import { Services } from './pages/Services'
 import { Movements } from './pages/Movements'
 import { Profile } from './pages/Profile'
@@ -46,7 +46,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'mycards/:creditCardId',
-        element: <MyCreditCard />
+        element: <CreditCard />,
+        loader: creditCardPageLoader
       },
       {
         path: 'transfers',
