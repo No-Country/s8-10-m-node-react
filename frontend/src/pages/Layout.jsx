@@ -1,5 +1,7 @@
 import { NavBar } from '../components/NavBar'
-import { Outlet, useRouteLoaderData, redirect } from 'react-router-dom'
+import { Link, Outlet, redirect } from 'react-router-dom'
+import { useState } from 'react'
+import { FaBars, FaBell } from 'react-icons/fa'
 
 export function loader() {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
@@ -11,12 +13,28 @@ export function loader() {
 }
 
 export const UserLayout = () => {
-  const isUserLoggedIn = useRouteLoaderData('userLoggedIn')
+  const [isOpen, setIsOpen] = useState(false)
+  function toggleOpen() {
+    setIsOpen(!isOpen)
+  }
 
-  //pl-24 es el minimo para el navBar
   return (
     <main className="">
-      {/* <NavBar /> */}
+      <section className="w-full flex justify-evenly gap-8 items-center h-12 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] shadow-lg md:h-36">
+        <FaBars
+          size={20}
+          onClick={toggleOpen}
+          className=" text-black text-xl cursor-pointer md:hidden"
+        />
+        <div className="flex gap-3 items-center font-roboto md:flex-col md:gap-0">
+          <p>Bienvenido</p>
+          <h2 className="md:text-2xl">Carlos</h2>
+        </div>
+        <Link>
+          <FaBell size={20} />
+        </Link>
+      </section>
+      <NavBar toggleOpen={toggleOpen} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Outlet />
     </main>
   )

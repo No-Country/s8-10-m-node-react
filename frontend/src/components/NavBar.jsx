@@ -1,63 +1,93 @@
-import React, { useState } from 'react'
-import { ArrowRightSVG, ArrowUpSVG, HomeSVG, QrCodeSVG, ServicesSVG } from '../utils/icons'
-import { NavLink } from 'react-router-dom'
+import {
+  FaArrowUp,
+  FaArrowRight,
+  FaHome,
+  FaArrowDown,
+  FaExchangeAlt,
+  FaDollarSign,
+} from 'react-icons/fa'
 import { NavAppTitle } from './NavButton'
 import { useUserContext } from '../context/UserContext'
+import { IoExitOutline } from 'react-icons/io5'
+import MenuItems from './MenuItems'
+import { useLayoutContext } from '../context/LayoutContext'
 
-export const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false)
+export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
   const { logOut } = useUserContext()
+  const { windowWidth } = useLayoutContext()
 
-  function toggleOpen () {
-    console.log(isOpen)
-    setIsOpen(prevState => !prevState)
-  }
-
-  const menuItems = [{
-    name: 'Home',
-    icon: <HomeSVG />,
-    link: '/user/home'
-  },
-  {
-    name: 'Servicios',
-    icon: <ServicesSVG />,
-    link: '/user/services'
-  },
-  {
-    name: 'Movimientos',
-    icon: <ArrowRightSVG />,
-    link: '/user/movements'
-  },
-  {
-    name: 'Perfil',
-    icon: <ArrowUpSVG />,
-    link: '/user/profile'
-  },
-  {
-    name: 'Perfil',
-    icon: <QrCodeSVG />,
-    link: '/'
-  }
+  const menuItems = [
+    {
+      name: 'Home',
+      icon: <FaHome size={25} />,
+      link: '/user/home',
+    },
+    {
+      name: 'Movimientos',
+      icon: <FaExchangeAlt size={25} />,
+      link: '/user/movements',
+    },
+    {
+      name: 'Servicios',
+      icon: <FaDollarSign size={25} />,
+      link: '/user/services',
+      condition: windowWidth > 768 ? true : false,
+    },
+    {
+      name: 'Retirar',
+      icon: <FaArrowDown size={25} />,
+      link: '',
+      condition: windowWidth > 768 ? true : false,
+    },
+    {
+      name: 'Transferir',
+      icon: <FaArrowRight size={25} />,
+      link: '/user/transfers',
+    },
+    {
+      name: 'Recargar',
+      icon: <FaArrowUp size={25} />,
+      link: null,
+    },
   ]
 
   return (
-    <nav className={`flex flex-col fixed bg-[#4C27AE] p-6  top-0 gap-4 left-0 h-screen ${isOpen ? 'w-48' : 'w-24'} items-center transition-[width] z-10`}>
-      <NavAppTitle onClick={toggleOpen}>
-        D{isOpen && 'omino'}
+    <nav
+      className={`flex flex-col fixed bg-[#4C27AE] p-6  top-0 gap-4 left-0 h-screen ${
+        isOpen
+          ? 'max-sm:w-full md:w-72 translate-x-0'
+          : 'max-sm:w-0 -translate-x-[150%] md:w-[100px] md:translate-x-0'
+      } items-center transition-all duration-500 z-10`}
+    >
+      <NavAppTitle func={toggleOpen} isOpen={isOpen}>
+        D{isOpen && 'ominó'}
       </NavAppTitle>
-      <h4 className='text-white'>Menu</h4>
-      <span className='w-full border-white border-t-2 transition-[width]' />
-      {menuItems.map(item => (
-        <NavLink className={`px-2 py-4 bg-white flex rounded-[10px] items-center justify-center w-full gap-2 duration-500`} key={item.link} to={item.link}>
-          {item.icon}
-          <p className={`text-base font-bold ${isOpen ? 'inline-block' : 'hidden'} transition-all`}>
-            {item.name}
+      <h4
+        className={`text-center ${
+          isOpen && 'text-start'
+        } font-roboto tracking-wide text-white w-full pb-2 border-b`}
+      >
+        Menu
+      </h4>
+      <MenuItems items={menuItems} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <div className="w-full h-14 flex items-center justify-between bg-transparent border-t pt-5 text-white ">
+        <img
+          className="w-14 h-14 rounded-lg object-cover"
+          src="https://www.huie.org.nz/wp-content/uploads/2022/05/elizeu-dias-2EGNqazbAMk-unsplash-1-e1653620036569-350x233.jpg"
+          alt=""
+        />
+
+        <div
+          className={`max-sm:w-48 flex max-sm:justify-between transition-opacity duration-800  ${
+            isOpen ? 'opacity-1 duration-[1500ms]' : 'opacity-0'
+          } `}
+        >
+          <p className="text-smfont-roboto md:pr-12 tracking-wide">
+            Elizeu Dias
           </p>
-        </NavLink>
-      ))}
-      <button className={`px-2 py-4 bg-white flex rounded-[10px] items-center justify-center w-full gap-2 duration-500`} onClick={logOut}>
-        LOut
-      </button>
+          <IoExitOutline size={25} className="rotate-180" onClick={logOut} />
+        </div>
+      </div>
     </nav>
   )
 }

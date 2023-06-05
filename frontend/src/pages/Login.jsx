@@ -19,7 +19,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [validateForm, setValidateForm] = useState({})
 
-  const { user, login } = useUserContext()
+  const { login } = useUserContext()
 
   const handleChange = (e) => {
     setValidateForm({
