@@ -1,6 +1,5 @@
-import React from 'react'
-import { ArrowRightSVG } from '../utils/icons'
 import { useNavigate } from 'react-router-dom'
+import { IoArrowBack } from 'react-icons/io5'
 
 export const BackButton = () => {
   const navigate = useNavigate()
@@ -10,6 +9,8 @@ export const BackButton = () => {
   }
 
   return (
-    <button onClick={goBackPage} className='top-4  rotate-180'><ArrowRightSVG /> </button>
+    <button onClick={goBackPage} className="top-4  rotate-180">
+      <IoArrowBack />
+    </button>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CreditCardComp } from '../components/CreditCardComp'
 import { TogglePill } from '../components/TogglePill'
-import { ArrowRightSVG, DeleteSVG } from '../utils/icons'
+// import { ArrowRightSVG, DeleteSVG } from '../utils/icons'
 import { useLoaderData, useParams, useSearchParams } from 'react-router-dom'
 import { PageTitle } from '../components/PageTitle'
 import { getCreditCardInfo } from '../services/creditCard'
@@ -27,15 +27,11 @@ export const CreditCard = () => {
         </div>
         <div className="flex w-full items-center justify-between">
           <p>Cambiar PIN cajero</p>
-          <span className="cursor-pointer">
-            <ArrowRightSVG />
-          </span>
+          <span className="cursor-pointer">{/* <ArrowRightSVG /> */}</span>
         </div>
         <div className="flex w-full items-center justify-between">
           <p>Denunciar</p>
-          <span className="cursor-pointer">
-            <ArrowRightSVG />
-          </span>
+          <span className="cursor-pointer">{/* <ArrowRightSVG /> */}</span>
         </div>
         <button className="bg-[#42ADD5] text-white">
           <DeleteSVG />

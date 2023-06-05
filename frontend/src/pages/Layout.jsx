@@ -1,7 +1,7 @@
 import { NavBar } from '../components/NavBar'
-import { Link, Outlet, redirect } from 'react-router-dom'
+import { Outlet, redirect } from 'react-router-dom'
 import { useState } from 'react'
-import { FaBars, FaBell } from 'react-icons/fa'
+import PanelNavMobile from '../components/PanelNavMobile'
 
 export function loader() {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
@@ -20,20 +20,7 @@ export const UserLayout = () => {
 
   return (
     <main className="">
-      <section className="w-full flex justify-evenly gap-8 items-center h-12 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] shadow-lg md:h-36">
-        <FaBars
-          size={20}
-          onClick={toggleOpen}
-          className=" text-black text-xl cursor-pointer md:hidden"
-        />
-        <div className="flex gap-3 items-center font-roboto md:flex-col md:gap-0">
-          <p>Bienvenido</p>
-          <h2 className="md:text-2xl">Carlos</h2>
-        </div>
-        <Link>
-          <FaBell size={20} />
-        </Link>
-      </section>
+      <PanelNavMobile toggleOpen={toggleOpen} />
       <NavBar toggleOpen={toggleOpen} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Outlet />
     </main>

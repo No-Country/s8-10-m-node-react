@@ -1,7 +1,6 @@
-import React from 'react'
 import { detectCardType } from '../utils/detectCardType'
 import { formatCreditCardNumber } from '../utils/formatCreditCardNumber'
-import { DoubleArrowSVG } from '../utils/icons'
+// import { DoubleArrowSVG } from '../utils/icons'
 import { Link } from 'react-router-dom'
 import { creditCardBgImg } from '../utils/creditCardBgImg'
 
@@ -39,7 +38,7 @@ export const CreditCardComp = ({ cardNumber, isDomino, name }) => {
                 isDomino ? '?domino=true' : ''
               }`}
             >
-              <DoubleArrowSVG />
+              {/* <DoubleArrowSVG /> */}
             </Link>
           </span>
         </div>
