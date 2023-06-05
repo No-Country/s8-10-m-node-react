@@ -23,6 +23,7 @@ export class AccountUserEntity extends BaseEntityApp {
 
   @OneToMany(() => BusinessEntity, (business) => business.accountUser, {
     cascade: true,
+    eager: true
   })
   business: BusinessEntity[];
 

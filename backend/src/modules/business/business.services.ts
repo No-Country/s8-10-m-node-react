@@ -7,21 +7,20 @@ export class BusinessService extends BaseServices<BusinessEntity> {
   }
 
   async getBusinessType(termStatus: Status, termTransaction: Transaction): Promise<BusinessEntity[] | null> {
-      
     if (termStatus && termTransaction) {
-        return await this.repository.find({
-          where: { status: termStatus, transaction: termTransaction }
-        });
-      }
-      
-      if (termStatus) {
-        return await this.repository.find({ where: { status: termStatus } });
-      }
-      
-      if (termTransaction) {
-        return await this.repository.find({ where: { transaction: termTransaction } });
-      }
-      
-      return await this.repository.find();
+      return await this.repository.find({
+        where: { status: termStatus, transaction: termTransaction },
+      });
+    }
+
+    if (termStatus) {
+      return await this.repository.find({ where: { status: termStatus } });
+    }
+
+    if (termTransaction) {
+      return await this.repository.find({ where: { transaction: termTransaction } });
+    }
+
+    return await this.repository.find();
   }
 }
