@@ -29,25 +29,28 @@ const Transfers = () => {
   const [isLocation, setIsLocation] = useState('')
 
   const location = useLocation()
+
   useEffect(() => {
-    if (
-      location.pathname === '/transfers' ||
-      location.pathname === '/transfers'
-    ) {
+    if (location.pathname === '/user/transfers') {
       setIsLocation('contacts')
-    } else if (location.pathname === '/transfers/newContact') {
+    } else if (location.pathname === '/user/transfers/newContact') {
       setIsLocation('newContact')
     }
   }, [location.pathname, isLocation])
 
   return (
     <main className=" w-full min-h-screen bg-gray-100 relative">
-      <h2 className="pl-4 pt-4"><Link to='/home' className='cursor-pointer'>Inicio</Link> / Transferencias</h2>
+      <h2 className="pl-4 pt-4">
+        <Link to="/home" className="cursor-pointer">
+          Inicio
+        </Link>{' '}
+        / Transferencias
+      </h2>
       <section className="mt-6 mb-24 w-full flex justify-center gap-[5.25rem] relative pl-4">
-        <Link className="" to="/transfers">
+        <Link className="" replace="user/transfers">
           Contactos
         </Link>
-        <Link className="pr-4" to="/transfers/newContact">
+        <Link className="pr-4" to="newContact">
           Nuevo
         </Link>
         <div

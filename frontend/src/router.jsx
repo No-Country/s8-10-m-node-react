@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import OnBoarding from './pages/OnBoarding'
-import { Login, loader as userStoredLoader } from './pages/Login'
+import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
 import { MyCards } from './pages/MyCards'
@@ -14,21 +14,18 @@ import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
 import { UserLayout, loader as userLoader } from './pages/Layout'
 
-
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <OnBoarding />
+    element: <OnBoarding />,
   },
   {
     path: 'register',
     element: <Register />,
-    loader: userStoredLoader
   },
   {
     path: 'login',
     element: <Login />,
-    loader: userStoredLoader
   },
   {
     path: 'user',
@@ -38,11 +35,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'home',
-        element: <Home />
+        element: <Home />,
       },
       {
         path: 'mycards',
-        element: <MyCards />
+        element: <MyCards />,
       },
       {
         path: 'mycards/:creditCardId',
@@ -54,39 +51,39 @@ export const router = createBrowserRouter([
         element: <Transfers />,
         children: [
           {
-            path: 'transfers/contacts',
+            path: 'contacts',
             element: <Contacts />,
             children: [
               {
-                path: 'transfers/contacts/sendAmount',
-                element: <ToTransfer />
-              }
-            ]
+                path: 'sendAmount',
+                element: <ToTransfer />,
+              },
+            ],
           },
           {
-            path: 'transfers/newContact',
+            path: 'newContact',
             element: <NewContact />,
             children: [
               {
-                path: 'transfers/newContact/sendAmount',
-                element: <ToTransfer />
-              }
-            ]
-          }
-        ]
+                path: 'sendAmount',
+                element: <ToTransfer />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'services',
-        element: <Services />
+        element: <Services />,
       },
       {
         path: 'movements',
-        element: <Movements />
+        element: <Movements />,
       },
       {
         path: 'profile',
-        element: <Profile />
-      }
-    ]
-  }
+        element: <Profile />,
+      },
+    ],
+  },
 ])

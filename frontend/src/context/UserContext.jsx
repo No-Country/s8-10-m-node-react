@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { loginUser } from '../services/login'
+import Loader from '../components/Loader'
 
 const UserContext = createContext()
 
@@ -47,7 +48,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider value={{ user, login, logOut, loading }}>
-      {children}
+      {loading ? <Loader /> : children}
     </UserContext.Provider>
   )
 }
