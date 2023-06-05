@@ -4,9 +4,9 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { Button } from '../components/Button'
 import InputField from '../components/InputField'
 import { useUserContext } from '../context/UserContext'
-import { redirect } from 'react-router-dom'
+import { redirect, useNavigation } from 'react-router-dom'
 
-export function loader() {
+export function loader () {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
   if (loggedUserJSON) {
     return redirect('/user/home')

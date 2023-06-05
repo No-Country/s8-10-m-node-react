@@ -24,8 +24,8 @@ const UserProvider = ({ children }) => {
   }, [])
 
   const login = async (credentials) => {
-    setLoading(true)
     try {
+      setLoading(true)
       const user = await loginUser(credentials)
       if (user.status === 'success') {
         window.sessionStorage.setItem('dominoUser', JSON.stringify(user))
