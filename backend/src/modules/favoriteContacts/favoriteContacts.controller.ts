@@ -46,15 +46,15 @@ export class FavoriteContactController extends FavoriteContactServices {
     try {
       if (!user) return res.status(400).json({ status: "error", error: "User not found" });
       const accountUser = await favoriteContactsUtils.dataFilter(data) as AccountUserEntity; // Filter data is alias or account number
-      const accountAliasUser = await (await this.getRepository(AccountUserEntity)).findOne({ where: { alias: data } } ) as AccountUserEntity;
+      if (!accountUser) return res.status(400).json({ status: "error", error: "AccountUser not found" });
       const newFavoriteContact = {
-        accountUser: accountAliasUser,
+        accountUser,
         nickname,
         user,
       } as FavoriteContactsEntity;
       
-      const prueba = await this.postService(newFavoriteContact);
-      console.log(prueba)
+      await this.postService(newFavoriteContact);
+      
       const contacts = await this.getAllByUser(user.userId);
       
       const payload = generalDto.favoriteContactsFilter(contacts!);
