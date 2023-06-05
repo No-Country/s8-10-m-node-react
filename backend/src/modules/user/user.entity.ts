@@ -43,7 +43,7 @@ export class UserEntity extends BaseEntityApp {
   @Column({nullable: true})
   postalCode: string;
 
-  @OneToMany(() => FavoriteContactsEntity, (favoriteContacts) => favoriteContacts.user)
+  @OneToMany(() => FavoriteContactsEntity, (favoriteContacts) => favoriteContacts.user, { eager: true})
   favoriteContacts: FavoriteContactsEntity[];
 
   @OneToMany(() => AccountUserEntity, (account) => account.user, {

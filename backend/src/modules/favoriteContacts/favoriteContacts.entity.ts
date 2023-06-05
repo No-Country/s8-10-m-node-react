@@ -11,8 +11,6 @@ export class FavoriteContactsEntity extends BaseEntityApp {
   @ManyToOne(() => UserEntity, (user) => user.favoriteContacts)
   user: UserEntity;
 
-  @ManyToOne(() => AccountUserEntity, {
-    eager: true,
-  })
+  @ManyToOne(() => AccountUserEntity, (account) => account.favoriteContacts, { eager: true})
   accountUser: AccountUserEntity;
 }

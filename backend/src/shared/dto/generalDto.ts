@@ -24,8 +24,9 @@ interface ArrayFavoriteContacts {
 
 export class GeneralDto {
   loginReturn(user: UserEntity): object {
-    const { account, address, country, email, fullName, lastName, phone, postalCode } = user;
-    const { accountAmount, accountCard, accountNumber, alias, associateCards, business, favoriteContacts } = account[0];
+    
+    const { account, address, country, email, fullName, lastName, phone, postalCode, favoriteContacts } = user;
+    const { accountAmount, accountCard, accountNumber, alias, associateCards, business } = account[0];
     const { cardNumber, cvv, expiration, emission } = accountCard[0];
 
     return {
