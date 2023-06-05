@@ -3,7 +3,6 @@ import { BusinessEntity, Status, Transaction } from "../../modules/business/busi
 import { FavoriteContactsEntity } from "../../modules/favoriteContacts/favoriteContacts.entity";
 import { UserEntity } from "../../modules/user/user.entity";
 
-
 interface ArrayCards {
   cardNumber: string;
   holder: string;
@@ -21,13 +20,10 @@ interface ArrayFavoriteContacts {
   nickName: string;
   accountNumber: string;
   alias: string;
-  name: string;
 }
 
 export class GeneralDto {
-  
   loginReturn(user: UserEntity): object {
-    console.log(user);
     const { account, address, country, email, favoriteContacts, fullName, lastName, phone, postalCode } = user;
     const { accountAmount, accountCard, accountNumber, alias, associateCards, business } = account[0];
     const { cardNumber, cvv, expiration, emission } = accountCard[0];
@@ -65,7 +61,7 @@ export class GeneralDto {
         cardNumber: card.cardNumber,
         holder: card.cardholder,
         cvv: card.cvv,
-        issuingEntity: card.issuingEntity
+        issuingEntity: card.issuingEntity,
       };
       arrayCards.push(cardFilter);
     });
@@ -94,7 +90,6 @@ export class GeneralDto {
         accountNumber: contact.accountUser.accountNumber,
         alias: contact.accountUser.alias,
         nickName: contact.nickname,
-        name: `${contact.user.fullName} ${contact.user.lastName}`
       };
       arrayContacts.push(newContact);
     });

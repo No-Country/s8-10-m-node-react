@@ -14,7 +14,8 @@ export class AssociateCardsController extends AssociateCardsServices {
     const { user } = req.session;
     try {
       if (!user) return res.status(400).json({ status: "error", error: "User not found" });
-      const payload = await this.getAllByAccount(user?.account[0].id!);
+      const cards = await this.getAllByAccount(user?.account[0].id!);
+      const payload = generalDto.filterCards(cards);
       res.json({
         status: "success",
         payload,
@@ -86,10 +87,10 @@ export class AssociateCardsController extends AssociateCardsServices {
     try {
       const card = await this.repository.findOne({ where: { cardNumber } });
       if (!card) return res.status(400).json({ status: "error", error: "Card not found" });
-      const result = await this.deleteService(card.id!);
+      await this.deleteService(card.id!);
       res.json({
         status: "success",
-        response: result,
+        msg: `Card number ${cardNumber} deleted`,
       });
     } catch (error) {
       res.status(500).json({ error });

@@ -5,6 +5,8 @@ import { generalDto } from "../../shared/dto/generalDto";
 import { FavoriteContactsEntity } from "./favoriteContacts.entity";
 import { FavoriteContactServices } from "./favoriteContacts.services";
 import { favoriteContactsUtils } from "./favoriteContacts.uitls";
+import { accountUserServices } from "../accountUser/accountUser.services";
+import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
 export class FavoriteContactController extends FavoriteContactServices {
   constructor() {
@@ -15,7 +17,8 @@ export class FavoriteContactController extends FavoriteContactServices {
     const { user } = req.session;
     try {
       if (!user) return res.status(400).json({ status: "error", error: "User not found" });
-      const payload = await this.getAllByUser(user.userId);
+      const contacts = await this.getAllByUser(user.userId);
+      const payload = generalDto.favoriteContactsFilter(contacts!);
       res.json({
         status: "success",
         payload,
@@ -42,15 +45,20 @@ export class FavoriteContactController extends FavoriteContactServices {
     const { nickname, data } = req.body;
     try {
       if (!user) return res.status(400).json({ status: "error", error: "User not found" });
-      const accountUser = await favoriteContactsUtils.dataFilter(data); // Filter data is alias or account number
-      if (!accountUser) res.status(400).json({ status: "error", error: "User not found" });
+      const accountUser: AccountUserEntity = await favoriteContactsUtils.dataFilter(data) as AccountUserEntity; // Filter data is alias or account number
+      const accountAliasUser = await (await this.getRepository(AccountUserEntity)).findOne({ where: { alias: data } });
+      console.log(accountAliasUser);
       const newFavoriteContact = {
+        accountUser: accountAliasUser,
         nickname,
         user,
-        accountUser,
       } as FavoriteContactsEntity;
+      
+      // console.log(newFavoriteContact)
       await this.postService(newFavoriteContact);
+      
       const contacts = await this.getAllByUser(user.userId);
+      
       const payload = generalDto.favoriteContactsFilter(contacts!);
 
       res.json({
@@ -58,7 +66,8 @@ export class FavoriteContactController extends FavoriteContactServices {
         payload,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      const e = error as Error;
+      res.status(500).json({ error: e.message });
     }
   }
 

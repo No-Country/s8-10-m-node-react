@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AccountUserServices } from "./accountUser.services";
 
-class AccountUserController extends AccountUserServices {
+export class AccountUserController extends AccountUserServices {
   constructor() {
     super();
   }
