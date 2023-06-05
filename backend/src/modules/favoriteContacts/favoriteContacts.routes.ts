@@ -21,6 +21,7 @@ export class FavoriteContactRouter extends BaseRouter<FavoriteContactController,
     this.router.delete(
       `/${path}`,
       (req, res, next) => this.middleware.checkToken(req, res, next),
+      (req, res, next) => this.middleware.checkNickName(req, res, next),
       (req, res) => this.controller.deleteController(req, res)
     );
   }
