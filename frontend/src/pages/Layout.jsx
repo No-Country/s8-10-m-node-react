@@ -19,7 +19,7 @@ export const UserLayout = () => {
   }
 
   return (
-    <main className="md:pl-24 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] min-h-screen">
+    <main className="md:pl-24 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] min-h-screen font-roboto">
       <section className="w-full flex justify-evenly gap-8 items-center h-12 shadow-lg md:h-36">
         <FaBars
           size={20}
@@ -35,7 +35,7 @@ export const UserLayout = () => {
         </Link>
       </section>
       <NavBar toggleOpen={toggleOpen} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className='p-4 h-full'>
+      <div className='p-4 min-h-full'>
         <Outlet />
       </div>
     </main>

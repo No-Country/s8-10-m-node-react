@@ -1,7 +1,13 @@
 import React from 'react'
 import { PageTitle } from './../components/PageTitle'
+import { FaDollarSign } from 'react-icons/fa'
+import { Link, useRouteLoaderData } from 'react-router-dom'
+import servicesBot from '../assets/images/servicesBotCompressed.png'
 
 export const Movements = () => {
+  const { payload } = useRouteLoaderData('userLoggedIn')
+  console.log(payload)
+
   const fechaHoy = Date.now()
   const movements = [
     {
@@ -44,32 +50,50 @@ export const Movements = () => {
   }
 
   return (
-    <>
+    <div className='flex flex-col gap-4 h-full'>
       <PageTitle>
-        Movements
+        Movimientos
       </PageTitle>
-      <h3 className='w-full font-semibold text-lg'>Ultimos movimientos</h3>
-      <div className='w-full flex flex-col gap-2 '>
-        <form onSubmit={handleSubmit}>
+      <div className='w-full flex flex-col items-center justify-center gap-12'>
+        <form onSubmit={handleSubmit} className='flex justify-center w-full'>
           <label htmlFor='ultimos movimientos'>
-            <input className='w-full px-1 py-2' placeholder='Buscar' />
+            <input className='px-1 py-2 w-80 border-tableHeadColor border-2 rounded-md text-primary text-lg font-medium' placeholder='Buscar' />
           </label>
         </form>
-        {movements.map((movement) => {
-          return (
-            <div className='flex gap-2 items-center justify-between w-full text-sm text-left' key={movement.id}>
-              <span className='rounded-full border border-black w-6 h-6 flex items-center justify-center text-xs'>{movement.done ? 'V' : 'X'}</span>
-              <span className='truncate w-full flex-1 [&>p]:truncate'>
-                <p className='font-bold uppercase'>{movement.description}</p>
-                <p className='text-xs text-[10px]'>{formatDate(movement.date)}</p>
-              </span>
-              <p className='font-bold text-base'>
-                {formatCurrency(movement.amount)}
-              </p>
-            </div>
-          )
-        })}
+        <div className='grid grid-cols-movementsTable w-[80%] items-stretch gap-x-0 gap-y-2 [&>*]:p-2'>
+          <h5 className='bg-tableHeadColor rounded-l-md text-left'>Nombre</h5>
+          <h5 className='bg-tableHeadColor text-center'>Tipo</h5>
+          <h5 className='bg-tableHeadColor text-center'>Fecha</h5>
+          <h5 className='bg-tableHeadColor rounded-r-md text-right'>Monto</h5>
+          {movements.map((movement) => {
+            return (
+              <>
+                <span className='bg-tableRowColor rounded-l-md flex justify-center'>
+                  <span className='rounded-full border-2 border-primary w-6 h-6 flex items-center justify-center text-xs'><FaDollarSign fill='#4C27AE' /></span>
+                </span>
+                <span className='flex justify-center w-full h-full bg-tableRowColor'>
+                  <p className=' '>{movement.description}</p>
+                </span>
+                <span className='flex justify-center w-full h-full bg-tableRowColor'>
+                  <p className=''>{formatDate(movement.date)}</p>
+                </span>
+                <span className='flex justify-end w-full h-full bg-tableRowColor rounded-r-md'>
+                  <p>
+                    {formatCurrency(movement.amount)}
+                  </p >
+                </span>
+              </>
+            )
+          })}
+        </div>
+        <Link to='/user/services' className='justify-self-end h-full w-[80%] bg-primary rounded-md p-4 text-white flex justify-center items-center'>
+          <img src={servicesBot} className='h-32' />
+          <span className='flex flex-col gap-2 text-center lg:text-left'>
+            <p className='text-3xl md:text-4xl lg:text-5xl font-semibold'>PAGAR OTROS SERVICIOS</p>
+            <p className='text-base md:text-[20px] font-semibold'>PAGA AQUI TODO LO QUE QUIERAS</p>
+          </span>
+        </Link>
       </div>
-    </>
+    </div >
   )
 }
