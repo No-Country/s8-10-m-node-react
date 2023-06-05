@@ -3,7 +3,7 @@ import { Link, Outlet, redirect } from 'react-router-dom'
 import { useState } from 'react'
 import { FaBars, FaBell } from 'react-icons/fa'
 
-export function loader() {
+export function loader () {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
   if (loggedUserJSON) {
     return JSON.parse(loggedUserJSON)
@@ -14,13 +14,13 @@ export function loader() {
 
 export const UserLayout = () => {
   const [isOpen, setIsOpen] = useState(false)
-  function toggleOpen() {
+  function toggleOpen () {
     setIsOpen(!isOpen)
   }
 
   return (
-    <main className="">
-      <section className="w-full flex justify-evenly gap-8 items-center h-12 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] shadow-lg md:h-36">
+    <main className="md:pl-24 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] min-h-screen">
+      <section className="w-full flex justify-evenly gap-8 items-center h-12 shadow-lg md:h-36">
         <FaBars
           size={20}
           onClick={toggleOpen}
@@ -35,7 +35,9 @@ export const UserLayout = () => {
         </Link>
       </section>
       <NavBar toggleOpen={toggleOpen} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Outlet />
+      <div className='p-4 h-full'>
+        <Outlet />
+      </div>
     </main>
   )
 }

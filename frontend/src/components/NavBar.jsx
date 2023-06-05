@@ -53,19 +53,17 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
 
   return (
     <nav
-      className={`flex flex-col fixed bg-[#4C27AE] p-6  top-0 gap-4 left-0 h-screen ${
-        isOpen
-          ? 'max-sm:w-full md:w-72 translate-x-0'
-          : 'max-sm:w-0 -translate-x-[150%] md:w-[100px] md:translate-x-0'
-      } items-center transition-all duration-500 z-10`}
+      className={`flex flex-col fixed bg-[#4C27AE] p-6 top-0 gap-4 left-0 h-screen ${isOpen
+        ? 'max-sm:w-full md:w-72 translate-x-0'
+        : 'max-sm:w-0 -translate-x-[150%] md:w-24 md:translate-x-0'
+        } items-center transition-all duration-500 z-10`}
     >
       <NavAppTitle func={toggleOpen} isOpen={isOpen}>
         D{isOpen && 'ominó'}
       </NavAppTitle>
       <h4
-        className={`text-center ${
-          isOpen && 'text-start'
-        } font-roboto tracking-wide text-white w-full pb-2 border-b`}
+        className={`text-center ${isOpen && 'text-start'
+          } font-roboto tracking-wide text-white w-full pb-2 border-b`}
       >
         Menu
       </h4>
@@ -78,9 +76,8 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
         />
 
         <div
-          className={`max-sm:w-48 flex max-sm:justify-between transition-opacity duration-800  ${
-            isOpen ? 'opacity-1 duration-[1500ms]' : 'opacity-0'
-          } `}
+          className={`max-sm:w-48 flex max-sm:justify-between transition-opacity duration-800  ${isOpen ? 'opacity-1 duration-[1500ms]' : 'opacity-0'
+            } `}
         >
           <p className="text-smfont-roboto md:pr-12 tracking-wide">
             Elizeu Dias

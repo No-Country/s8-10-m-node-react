@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowRightSVG } from '../utils/icons'
+import { FaArrowLeft } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
 export const BackButton = () => {
@@ -10,6 +10,6 @@ export const BackButton = () => {
   }
 
   return (
-    <button onClick={goBackPage} className='top-4  rotate-180'><ArrowRightSVG /> </button>
+    <button onClick={goBackPage} className='top-4 rotate-180'><FaArrowLeft /></button>
   )
 }
