@@ -1,7 +1,7 @@
-import { AssociateCardsEntity } from "../associateCards/associateCards.entity";
-import { BusinessEntity, Status, Transaction } from "../business/business.entity";
-import { FavoriteContactsEntity } from "../favoriteContacts/favoriteContacts.entity";
-import { UserEntity } from "../user/user.entity";
+import { AssociateCardsEntity } from "../../modules/associateCards/associateCards.entity";
+import { BusinessEntity, Status, Transaction } from "../../modules/business/business.entity";
+import { FavoriteContactsEntity } from "../../modules/favoriteContacts/favoriteContacts.entity";
+import { UserEntity } from "../../modules/user/user.entity";
 
 interface ArrayCards {
   cardNumber: string;
@@ -22,11 +22,10 @@ interface ArrayFavoriteContacts {
   alias: string;
 }
 
-export class AuthDto {
-  constructor() {}
-  infoReturn(user: UserEntity): object {
-    console.log(user);
-    const { account, address, country, email, favoriteContacts, fullName, lastName, phone, postalCode } = user;
+export class GeneralDto {
+  loginReturn(user: UserEntity): object {
+    
+    const { account, address, country, email, fullName, lastName, phone, postalCode, favoriteContacts } = user;
     const { accountAmount, accountCard, accountNumber, alias, associateCards, business } = account[0];
     const { cardNumber, cvv, expiration, emission } = accountCard[0];
 
@@ -63,7 +62,7 @@ export class AuthDto {
         cardNumber: card.cardNumber,
         holder: card.cardholder,
         cvv: card.cvv,
-        issuingEntity: card.issuingEntity
+        issuingEntity: card.issuingEntity,
       };
       arrayCards.push(cardFilter);
     });
@@ -98,3 +97,5 @@ export class AuthDto {
     return arrayContacts;
   }
 }
+
+export const generalDto = new GeneralDto();

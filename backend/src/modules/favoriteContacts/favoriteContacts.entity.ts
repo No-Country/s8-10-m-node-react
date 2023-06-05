@@ -3,7 +3,7 @@ import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { UserEntity } from "../user/user.entity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
-@Entity({ name: "favoriteContacts" })
+@Entity()
 export class FavoriteContactsEntity extends BaseEntityApp {
   @Column("text")
   nickname: string;
@@ -11,9 +11,6 @@ export class FavoriteContactsEntity extends BaseEntityApp {
   @ManyToOne(() => UserEntity, (user) => user.favoriteContacts)
   user: UserEntity;
 
-  @ManyToMany(() => AccountUserEntity, {
-    eager: true,
-  })
-  @JoinTable()
+  @ManyToOne(() => AccountUserEntity, (account) => account.favoriteContacts, { eager: true})
   accountUser: AccountUserEntity;
 }

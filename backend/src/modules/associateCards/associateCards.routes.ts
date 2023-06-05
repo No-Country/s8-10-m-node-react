@@ -14,7 +14,7 @@ export class AssociateCardsRouter extends BaseRouter<AssociateCardsController, A
       (req, res, nex) => this.middleware.checkToken(req, res, nex),
       (req, res) => this.controller.getAllController(req, res)
     );
-    this.router.get(`/${path}/:id`, (req, res) => this.controller.getByIdController(req, res));
+    
     this.router.post(
       `/${path}`,
       (req, res, nex) => this.middleware.checkToken(req, res, nex),
@@ -22,13 +22,15 @@ export class AssociateCardsRouter extends BaseRouter<AssociateCardsController, A
       (req, res) => this.controller.postController(req, res)
     );
     this.router.put(
-      `/${path}/:id`,
+      `/${path}`,
       (req, res, nex) => this.middleware.checkToken(req, res, nex),
+      (req, res, nex) => this.middleware.checkCardNumber(req, res, nex),
       (req, res) => this.controller.putController(req, res)
     );
     this.router.delete(
-      `/${path}/:id`,
+      `/${path}`,
       (req, res, nex) => this.middleware.checkToken(req, res, nex),
+      (req, res, nex) => this.middleware.checkCardNumber(req, res, nex),
       (req, res) => this.controller.deleteController(req, res)
     );
   }
