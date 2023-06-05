@@ -3,6 +3,8 @@ import { operationsServices } from "../../shared/services/operationsServices";
 import { BusinessEntity, Status, Transaction } from "./business.entity";
 import { BusinessService } from "./business.services";
 import { UserEntity } from "../user/user.entity";
+import { currencyServices } from "../currency/currency.services";
+import { generalDto } from "../../shared/dto/generalDto";
 
 export class BusinessController extends BusinessService {
   constructor() {
@@ -39,15 +41,28 @@ export class BusinessController extends BusinessService {
 
   async postController(req: Request, res: Response) {
     const { typeTransaction, emitter, addressee, amountQuantity, subject } = req.body;
+    const { user } = req.session;
 
     try {
-      const result = await operationsServices.operationManager(typeTransaction, emitter, addressee, amountQuantity, subject) as BusinessEntity;
+      const result = (await operationsServices.operationManager(
+        typeTransaction,
+        emitter,
+        addressee,
+        amountQuantity,
+        subject
+      )) as BusinessEntity;
+      const accountUser = user?.account[0];
+      const newBusiness = {
+        ...result,
+        accountUser,
+      } as BusinessEntity;
+      await this.postService(newBusiness);
+      const business = await this.getServices();
+      const payload = generalDto.businessFilter(business);
 
-      const response = await this.postService(result);
-      
       res.json({
         status: "success",
-        response: response,
+        payload,
       });
     } catch (error) {
       const e = error as Error;

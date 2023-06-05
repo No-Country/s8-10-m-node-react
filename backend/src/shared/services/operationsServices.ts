@@ -78,7 +78,13 @@ class OperationsServices {
     await this.addMoney(amountQuantity, addressee);
   }
 
-  async operationManager(typeTransaction: Transaction, emitter: string, addressee: string, amountQuantity: number, subject: string) {
+  async operationManager(
+    typeTransaction: Transaction,
+    emitter: string,
+    addressee: string,
+    amountQuantity: number,
+    subject: string
+  ) {
     switch (typeTransaction) {
       case Transaction.TRANSFER:
         await this.operationTransfer(emitter, addressee, amountQuantity);
@@ -110,7 +116,7 @@ class OperationsServices {
   }
 
   extractionResponse(amount: number, emitter: string, subject: string) {
-    const response = new BusinessDto(emitter, "ATM" , 1, amount, Status.APPROVED, Transaction.EXTRACTION, subject);
+    const response = new BusinessDto(emitter, "ATM", 1, amount, Status.APPROVED, Transaction.EXTRACTION, subject);
     return response;
   }
 
@@ -124,6 +130,5 @@ class OperationsServices {
     return response;
   }
 }
-
 
 export const operationsServices = new OperationsServices();
