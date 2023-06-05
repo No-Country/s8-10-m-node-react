@@ -2,51 +2,37 @@ import React from 'react'
 import { useState } from 'react'
 import ConfigurationOptions from './ConfigurationOptions'
 import { ProfileImage } from './ProfileImage'
+import { BackButton } from './BackButton'
+import PanelBack from './PanelBack'
 
 
-const PersonalData = () => {
+const Soporte = () => {
     const [optionData, setOptionData] = useState([{
         id: 1,
-        name: 'MI CBU',
-        description: '1234567891234567891234',
-        icon: null,
+        name: 'Preguntas frecuentes',
+        icon:'',
         color: 'text-black-500'
        
 
     },
     {
         id: 2,
-        name: 'ALIAS',
-        description: 'MARTIN LEIVA',
-        icon:null,
+        name: 'Hablar con un soporte',
+        icon:'',
         color: 'text-black-500'
     },
     {
         id: 3,
-        name: 'CUIT',
-        description: '20-12345678-5',
-        icon: null,
+        name: 'Historial de reclamos',
+        icon: '',
         color: 'text-black-500'
     },
-    {
-        id: 4,
-        name: 'NUMERO DE CUENTA',
-        description: '1234567891234567891234',
-        icon: null,
-        color: 'text-black-500'
-    },
-    {
-        id: 5,
-        name: 'TODOS LOS DATOS BANCARIOS',
-        description: 'Datos bancarios',
-        icon: null,
-        color: null
-    },
-
+  
 ])
 
   return (
     <div className='w-full '>
+       <PanelBack name="Soporte" />
         <div className='mb-20 pb-20 mt-10'>
 
         <ProfileImage name={"name"}/>
@@ -61,4 +47,4 @@ const PersonalData = () => {
   )
 }
 
-export default PersonalData
+export default Soporte

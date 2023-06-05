@@ -13,6 +13,7 @@ import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
 import { ProfileOptions } from './pages/ProfileOptions'
 import { UserLayout, loader as userLoader } from './pages/Layout'
+import Soporte from './components/Soporte'
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
         path: 'options',
         element: <ProfileOptions/>,
       },
+      {
+        path: 'soporte',
+        element: <Soporte/>,
+      }
     ],
   },
 ])

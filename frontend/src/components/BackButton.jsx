@@ -10,6 +10,6 @@ export const BackButton = () => {
   }
 
   return (
-    <button onClick={goBackPage} className='absolute top-4 left-4 rotate-180'><ArrowRightSVG /> </button>
+    <button onClick={goBackPage} className='top-4  rotate-180'><ArrowRightSVG /> </button>
   )
 }
