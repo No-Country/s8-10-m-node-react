@@ -35,19 +35,19 @@ const OptionContainer = () => {
     },
     {
         id: 5,
-        name: 'Terminos y condiciones ',
+        name: 'Terminos y condiciones',
         icon: "X",
         color: "text-black-500"
     },
     {
         id: 6,
-        name: 'Politica de privacidad ',
+        name: 'Politica de privacidad',
         icon: "X",
         color: 'text-black-500'
     },
     {
-        id: 5,
-        name: 'Cerrar sesión ',
+        id: 7,
+        name: 'Cerrar sesión',
         icon: "X",
         color: 'text-red-500'
     },

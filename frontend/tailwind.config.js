@@ -32,6 +32,9 @@ export default {
       boxShadow: {
         first: '0px -3px 20px 1px rgba(76, 39, 174, 0.25) inset ',
       },
+      colors: {
+        customColor: '#482e8a',
+      },
     },
   },
   plugins: [],

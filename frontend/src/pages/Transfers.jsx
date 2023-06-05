@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import Contacts from '../components/Contacts'
 
+
 const LISTA_DE_CONTACTOS = [
   {
     name: 'Juan Perez',
@@ -25,7 +26,14 @@ const LISTA_DE_CONTACTOS = [
   },
 ]
 
+//get data from api
+
+
+
 const Transfers = () => {
+
+  
+
   const [isLocation, setIsLocation] = useState('')
 
   const location = useLocation()

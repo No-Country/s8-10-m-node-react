@@ -2,19 +2,43 @@ import PopUp from './PopUp'
 import { Modal } from '../components/Modal'
 import cross from '../assets/images/cross.svg'
 import { useModal } from '../hooks/useModal'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ToTransfer from './ToTransfer'
 import { FaTimes } from 'react-icons/fa'
+const requestOptions = {
+  method: 'GET',
+  redirect: 'follow',
+}
+
 
 const NewContact = () => {
   const [searchOpen, openSearchModal, closeSearchModal] = useModal()
   const [error, setError] = useState(false)
   const [confirm, setConfirm] = useState(false)
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    fetch('https://pagaya.onrender.com/api/user', requestOptions)
+      .then((res) => res.json())
+      .then((data) => setUser(data))
+      
+      .catch((error) => console.log('error', error))
+      
+  }, [])
+  
+  const { response } = user
+  console.log(response[0].fullName)
+  
+
+
+
+
+ 
 
   const validateForm = (e) => {
     e.preventDefault()
-    if (e.target.alias.value.trim() === '') {
+    if (e.target.alias.value.trim() === ''    ) {
+
       setError(true)
     } else {
       openSearchModal()
