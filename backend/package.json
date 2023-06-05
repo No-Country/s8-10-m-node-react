@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "typeorm": "typeorm-ts-node-esm -d ./src/db/postgreSql.ts",
+    "typeorm": "typeorm-ts-node-esm -d ./src/config/postgreSql.ts",
     "m:gen": "npm run typeorm migration:generate",
     "m:run": "npm run typeorm migration:run",
     "dev": "nodemon ./src/app.ts",

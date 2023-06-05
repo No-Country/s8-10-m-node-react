@@ -27,7 +27,7 @@ export class GeneralDto {
     
     const { account, address, country, email, fullName, lastName, phone, postalCode, favoriteContacts } = user;
     const { accountAmount, accountCard, accountNumber, alias, associateCards, business } = account[0];
-    const { cardNumber, cvv, expiration, emission } = accountCard[0];
+    const { cardNumber, cvv, expiration, emission, isActive } = accountCard[0];
 
     return {
       profile: {
@@ -49,6 +49,7 @@ export class GeneralDto {
           cvv,
           expiration,
           emission,
+          isActive
         },
         associateCards: this.filterCards(associateCards),
       },
