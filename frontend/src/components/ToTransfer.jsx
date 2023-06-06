@@ -4,18 +4,25 @@ import { useNavigate } from 'react-router-dom'
 import back from '../assets/images/back.svg'
 import PopUp from './PopUp'
 import Success from './Success'
+import { useUserContext } from '../context/UserContext'
 
 const ToTransfer = ({ setConfirm, close }) => {
   const [amount, setAmount] = useState(0)
   const [error, setError] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const {user}=useUserContext()
+ const {payload}=user
+ 
 
   const validateAmount = (e) => {
     e.preventDefault()
-    if (parseInt(amount) === 0) {
+    if (parseInt(amount) === 0 || parseInt(amount) > parseInt(payload.accountInfo.amount)) {
       setError(true)
     } else {
-      setShowSuccess(true)
+   
+      if (parseInt(amount) <= parseInt(payload.accountInfo.amount)) {
+        setShowSuccess(true)
+      }
     }
   }
 

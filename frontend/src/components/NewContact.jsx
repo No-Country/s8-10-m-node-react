@@ -17,6 +17,10 @@ const NewContact = () => {
   const [error, setError] = useState(false)
   const [confirm, setConfirm] = useState(false)
   const [user, setUser] = useState({})
+  const [contact, setContact] = useState({})
+  const [accountName, setAccountName]= useState({name:'',lasname:''})
+
+  //data from api
   useEffect(() => {
     fetch('https://pagaya.onrender.com/api/user', requestOptions)
       .then((res) => res.json())
@@ -27,24 +31,37 @@ const NewContact = () => {
   }, [])
   
   const { response } = user
-  console.log(response[0].fullName)
-  
+  console.log(response)
 
+ // console.log(response[1].account)
 
+//filter data
+const validateForm = (e) => {
+  e.preventDefault();
+  if (e.target.alias.value.trim() === '') {
+    setError(true);
+  } else {
+    const aliasToFind = e.target.alias.value.trim();
+    const foundAccount = response.find(person => person.account[0].alias === aliasToFind);
 
+    if (foundAccount) {
+      const account = foundAccount.account[0];
+      const fullName = foundAccount.fullName
+      const lastName = foundAccount.lastName
+      setAccountName({name:fullName,lasname:lastName})
+     
+     // console.log(account); // Muestra la cuenta correspondiente al alias encontrado
+      setContact(account);
+      // Aquí puedes realizar la lógica adicional que necesites con la cuenta encontrada
+    
 
- 
-
-  const validateForm = (e) => {
-    e.preventDefault()
-    if (e.target.alias.value.trim() === ''    ) {
-
-      setError(true)
+      openSearchModal();
     } else {
-      openSearchModal()
+      console.log('No se encontró ninguna cuenta con ese alias.');
     }
   }
-
+};
+//console.log(contact)
   const navigate = useNavigate()
 
   return (
@@ -84,8 +101,8 @@ const NewContact = () => {
                   } rounded-t-[40px] flex flex-col justify-evenly items-center`}
               >
                 <div className="w-full text-center relative pt-3">
-                  <h3 className="text-2xl font-semibold">Marcos Leiva</h3>
-                  <p className="text-gray-400 text-md">12-345676332</p>
+                  <h3 className="text-2xl font-semibold">{accountName.name} {accountName.lasname}</h3>
+                  <p className="text-gray-400 text-md">{contact.accountNumber}</p>
                   <FaTimes
                     className="absolute -top-1 right-[30px] cursor-pointer"
                     size={20}
@@ -95,15 +112,15 @@ const NewContact = () => {
                 <div className="w-full flex flex-col gap-4 pl-8">
                   <div>
                     <h4 className="text-2xl font-semibold">Alias</h4>
-                    <p className="text-gray-500">Marcos.Leiva</p>
+                    <p className="text-gray-500">{contact.alias}</p>
                   </div>
                   <div>
                     <h4 className="text-2xl font-semibold">CBU</h4>
-                    <p className="text-gray-500">26358752 - 14572800567892</p>
+                    <p className="text-gray-500">{contact.accountNumber} </p>
                   </div>
                   <div>
                     <h4 className="text-2xl font-semibold">Banco</h4>
-                    <p className="text-gray-500">Mercado Pago</p>
+                    <p className="text-gray-500">Domino</p>
                   </div>
                 </div>
                 <div className="w-full px-4 flex gap-5">
