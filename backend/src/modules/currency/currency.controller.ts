@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CurrencyService } from "./currency.services";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class CurrencyController extends CurrencyService {
   constructor() {
@@ -14,7 +15,7 @@ export class CurrencyController extends CurrencyService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   } 
 
@@ -27,7 +28,7 @@ export class CurrencyController extends CurrencyService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -40,7 +41,7 @@ export class CurrencyController extends CurrencyService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -54,7 +55,7 @@ export class CurrencyController extends CurrencyService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -67,7 +68,7 @@ export class CurrencyController extends CurrencyService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

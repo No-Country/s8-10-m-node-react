@@ -1,7 +1,7 @@
 import { BaseEntity, EntityTarget, FindOptionsWhere, Repository } from "typeorm";
 import { NextFunction, Request, Response } from "express";
 import { AppDataSource } from "../../config/postgreSql";
-import { authUtils } from "../../modules/auth/auth.utils";
+import { authUtils } from "../utils/auth.utils";
 import session from "express-session";
 import { UserEntity } from "../../modules/user/user.entity";
 

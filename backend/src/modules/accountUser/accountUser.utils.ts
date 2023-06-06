@@ -1,9 +1,9 @@
 
 class AccountUserUtils {
-  generateAlias(first:string,second:string,dni:string):string{
-    const FirstNumberDni=dni.slice(0,1);
-    const LastNumberDni=dni.slice(-1);
-    const alias=first+"."+second+FirstNumberDni+LastNumberDni;
+  generateAlias(first: string, second: string, dni: string): string {
+    const FirstNumberDni = dni.slice(0, 1);
+    const LastNumberDni = dni.slice(-1);
+    const alias = first + "." + second + FirstNumberDni + LastNumberDni;
     return alias;
   }
 

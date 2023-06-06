@@ -1,22 +1,22 @@
 import * as nodemailer from "nodemailer";
 
 export const transportOptions = {
-    service: 'gmail',
+    service: "gmail",
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     }
-}
+};
 
 class NodemailerManager {
 
     async sendVerifyEmail(email: string) {
-        const transporter = nodemailer.createTransport(transportOptions)
+        const transporter = nodemailer.createTransport(transportOptions);
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
             to: email,
-            subject: 'Por favor, validar cuenta',
-            text: 'Por favor, validar cuenta',
+            subject: "Por favor, validar cuenta",
+            text: "Por favor, validar cuenta",
             html: `
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="font-family:Montserrat, sans-serif">
@@ -297,16 +297,16 @@ class NodemailerManager {
             </div>
             </body>
             </html> `
-        })
+        });
     }
 
     async recoveryPasswordEmail(email: string, fullName: string,code:string) {
-        const transporter = nodemailer.createTransport(transportOptions)
+        const transporter = nodemailer.createTransport(transportOptions);
         await transporter.sendMail({
-            from: 'Domino App <dominotester4@gmail.com>',
+            from: "Domino App <dominotester4@gmail.com>",
             to: email,
-            subject: 'Reestablece tu contraseña',
-            text: 'Por favor, reestablece tu contraseña',
+            subject: "Reestablece tu contraseña",
+            text: "Por favor, reestablece tu contraseña",
             html: `
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
@@ -607,8 +607,8 @@ class NodemailerManager {
             </html>
             `
 
-        })
+        });
     }
 }
-export const nodeMailerManager = new NodemailerManager()
+export const nodeMailerManager = new NodemailerManager();
 

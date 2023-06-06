@@ -5,8 +5,8 @@ const DBPort = !process.env.PORT_DB ? 5432 : parseInt(process.env.PORT_DB);
 const setSSL = !process.env.SSL_SUPPORT
   ? false
   : process.env.SSL_SUPPORT === "0"
-  ? false
-  : process.env.SSL_SUPPORT === "1" && true;
+    ? false
+    : process.env.SSL_SUPPORT === "1" && true;
 
 export const AppDataSource = new DataSource({
   type: "postgres",

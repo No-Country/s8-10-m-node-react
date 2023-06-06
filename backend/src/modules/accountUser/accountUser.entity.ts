@@ -1,11 +1,11 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
 import { AccountCardEntity } from "../accountCard/accountCard.entity";
 import { AssociateCardsEntity } from "../associateCards/associateCards.entity";
 import { BusinessEntity } from "../business/business.entity";
-import { UserEntity } from "../user/user.entity";
 import { FavoriteContactsEntity } from "../favoriteContacts/favoriteContacts.entity";
+import { UserEntity } from "../user/user.entity";
 
 @Entity()
 export class AccountUserEntity extends BaseEntityApp {

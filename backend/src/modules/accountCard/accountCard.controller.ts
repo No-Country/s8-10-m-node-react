@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AccountCardServices } from "./accountCard.services";
 import { cardUtils } from "./accountCard.utils";
 import { AccountCardEntity } from "./accountCard.entity";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class AccountCardController extends AccountCardServices {
   constructor() {
@@ -16,7 +17,7 @@ export class AccountCardController extends AccountCardServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -29,7 +30,7 @@ export class AccountCardController extends AccountCardServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -40,7 +41,6 @@ export class AccountCardController extends AccountCardServices {
     body.expiration = cardUtils.generateCardExpiration();
     body.cvv = cardUtils.generateCardCvv();
     body.accountUser = req.body.accountUser;
-    
 
     try {
       const result = await this.postService(body);
@@ -49,7 +49,7 @@ export class AccountCardController extends AccountCardServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -63,7 +63,7 @@ export class AccountCardController extends AccountCardServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -76,7 +76,7 @@ export class AccountCardController extends AccountCardServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

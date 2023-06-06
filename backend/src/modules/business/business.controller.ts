@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
+import { generalDto } from "../../shared/dto/generalDto";
 import { operationsServices } from "../../shared/services/operationsServices";
 import { BusinessEntity, Status, Transaction } from "./business.entity";
 import { BusinessService } from "./business.services";
-import { UserEntity } from "../user/user.entity";
-import { currencyServices } from "../currency/currency.services";
-import { generalDto } from "../../shared/dto/generalDto";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class BusinessController extends BusinessService {
   constructor() {
@@ -22,7 +21,7 @@ export class BusinessController extends BusinessService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -35,7 +34,7 @@ export class BusinessController extends BusinessService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -67,7 +66,7 @@ export class BusinessController extends BusinessService {
       });
     } catch (error) {
       const e = error as Error;
-      res.status(500).json({ error: e.message });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -80,7 +79,7 @@ export class BusinessController extends BusinessService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

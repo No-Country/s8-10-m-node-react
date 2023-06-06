@@ -1,9 +1,5 @@
 class CardUtils {
 
-  constructor() {
-    
-  }
-
   generateCardNumber(): string {
     const min = 100000000000000;
     const max = 999999999999999;

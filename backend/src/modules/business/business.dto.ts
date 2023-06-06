@@ -10,5 +10,5 @@ export class BusinessDto {
     public transaction?: Transaction,
     public subject?: string
   ) // public accountNumber?:string,
-  {}
+  { }
 }

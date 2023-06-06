@@ -8,7 +8,7 @@ class FavoriteContactsUtils {
     const accountNumberUser = await AppDataSource.getRepository(AccountUserEntity).findOne({
       where: { accountNumber: data },
     });
-    
+
     if (!accountAliasUser && !accountNumberUser) return;
     if (accountAliasUser) return accountAliasUser;
     if (accountNumberUser) return accountNumberUser;

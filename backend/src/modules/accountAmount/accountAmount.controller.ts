@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AccountAmountService } from "./accountAmount.services";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 
 export class AccountAmountController extends AccountAmountService {
@@ -15,7 +16,7 @@ export class AccountAmountController extends AccountAmountService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -28,7 +29,7 @@ export class AccountAmountController extends AccountAmountService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -41,7 +42,8 @@ export class AccountAmountController extends AccountAmountService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      const e = error as Error;
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -55,7 +57,7 @@ export class AccountAmountController extends AccountAmountService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -68,7 +70,7 @@ export class AccountAmountController extends AccountAmountService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

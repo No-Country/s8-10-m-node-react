@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, OneToMany, JoinTable } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
 import { CurrencyEntity } from "../currency/currency.entity";
@@ -26,10 +26,10 @@ export enum PayServices {
 @Entity()
 export class BusinessEntity extends BaseEntityApp {
 
-  @Column({nullable:true})
+  @Column({ nullable: true })
   senderId: string;
 
-  @Column({nullable:true})
+  @Column({ nullable: true })
   receiverId: string;
 
   @Column()
@@ -51,7 +51,7 @@ export class BusinessEntity extends BaseEntityApp {
   })
   transaction: Transaction;
 
-  @Column("text",{nullable:true})
+  @Column("text", { nullable: true })
   subject: string;
 
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.business)
