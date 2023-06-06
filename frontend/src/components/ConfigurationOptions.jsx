@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Modal } from './Modal';
 import { useUserContext } from '../context/UserContext'
 
+
+
 const ConfigurationOptions = ({ option }) => {
   const { logout } = useUserContext();
   const [showPopup, setShowPopup] = useState(false);
@@ -11,7 +13,7 @@ const ConfigurationOptions = ({ option }) => {
 
   const handleClick = () => {
     if (option.name === 'Datos personales') {
-      console.log('Datos personales');
+     navigate('/user/perfil');
     } else if (option.name == 'Terminos y condiciones') {
       
       setShowPopup(true);

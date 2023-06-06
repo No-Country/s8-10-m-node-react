@@ -14,6 +14,8 @@ import ToTransfer from './components/ToTransfer'
 import { ProfileOptions } from './pages/ProfileOptions'
 import { UserLayout, loader as userLoader } from './pages/Layout'
 import Soporte from './components/Soporte'
+import { Perfil } from './components/Perfil'
+import { Aspectos } from './components/Aspectos'
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +89,14 @@ export const router = createBrowserRouter([
       {
         path: 'soporte',
         element: <Soporte/>,
+      },
+      {
+        path: 'perfil',
+        element: <Perfil/>,
+      },
+      {
+        path: 'aspectos',
+        element: <Aspectos/>,
       }
     ],
   },

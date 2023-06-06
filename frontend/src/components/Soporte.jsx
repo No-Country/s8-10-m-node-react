@@ -4,13 +4,14 @@ import ConfigurationOptions from './ConfigurationOptions'
 import { ProfileImage } from './ProfileImage'
 import { BackButton } from './BackButton'
 import PanelBack from './PanelBack'
+import { Fa500Px} from "react-icons/fa";
 
 
 const Soporte = () => {
     const [optionData, setOptionData] = useState([{
         id: 1,
         name: 'Preguntas frecuentes',
-        icon:'',
+        icon: Fa500Px,
         color: 'text-black-500'
        
 
