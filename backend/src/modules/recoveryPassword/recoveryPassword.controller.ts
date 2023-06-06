@@ -6,9 +6,10 @@ export class RecoveryPasswordController extends RecoveryPasswordService {
         super();
     }
 
-    async getAllController(req: Request, res: Response) {
+    async verifyEmailController(req: Request, res: Response) {
+        const{email}=req.params
         try {
-            const result = await this.getServices();
+            const result = await this.verifyEmail(email);
             res.json({
                 status: "success",
                 response: result
@@ -18,10 +19,10 @@ export class RecoveryPasswordController extends RecoveryPasswordService {
         }
     }
 
-    async getByIdController(req: Request, res: Response) {
-        const { id } = req.params;
+    async recoveryPasswordController(req: Request, res: Response) {
+        const{email}=req.params
         try {
-            const result = await this.getServicesById(parseInt(id));
+            const result = await this.recoveryPasswordServices(email)
             res.json({
                 status: "success",
                 response: result
