@@ -1,8 +1,8 @@
-// import React from 'react'
-// import { CreditCardComp } from '../components/CreditCardComp'
-// import { Button } from '../components/Button'
-// import { PageTitle } from './../components/PageTitle'
-// import { useRouteLoaderData } from 'react-router-dom'
+import React from 'react'
+import { CreditCardComp } from '../components/CreditCardComp'
+import { PageTitle } from './../components/PageTitle'
+import { useRouteLoaderData } from 'react-router-dom'
+import { FaRegPlusSquare } from 'react-icons/fa'
 
 export const MyCards = () => {
   const user = useRouteLoaderData('userLoggedIn')
@@ -13,7 +13,7 @@ export const MyCards = () => {
 
   const { fullName, lastName } = user.payload.profile
 
-  //   const cardName = `${fullName} ${lastName}`
+  const cardName = `${fullName} ${lastName}`
 
   return (
     <>
@@ -30,6 +30,7 @@ export const MyCards = () => {
         </>
       ) : null}
       <button className="bg-[#F9FAFB] border-[#F9FAFB] flex ">
+        <FaRegPlusSquare />
         <p className="font-medium text-center text-lg w-[70%]">
           Asociar tarjeta
         </p>

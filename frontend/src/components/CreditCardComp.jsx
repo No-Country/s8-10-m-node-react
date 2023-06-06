@@ -1,8 +1,8 @@
 import { detectCardType } from '../utils/detectCardType'
 import { formatCreditCardNumber } from '../utils/formatCreditCardNumber'
-// import { DoubleArrowSVG } from '../utils/icons'
 import { Link } from 'react-router-dom'
 import { creditCardBgImg } from '../utils/creditCardBgImg'
+import { FaAngleDoubleRight } from 'react-icons/fa'
 
 export const CreditCardComp = ({ cardNumber, isDomino, name }) => {
   const variant = isDomino ? 'domino' : detectCardType(cardNumber)
@@ -38,7 +38,7 @@ export const CreditCardComp = ({ cardNumber, isDomino, name }) => {
                 isDomino ? '?domino=true' : ''
               }`}
             >
-              {/* <DoubleArrowSVG /> */}
+              <FaAngleDoubleRight />
             </Link>
           </span>
         </div>

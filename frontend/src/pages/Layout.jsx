@@ -22,7 +22,9 @@ export const UserLayout = () => {
     <main className="">
       <PanelNavMobile toggleOpen={toggleOpen} />
       <NavBar toggleOpen={toggleOpen} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Outlet />
+      <div className="p-4 min-h-full">
+        <Outlet />
+      </div>
     </main>
   )
 }
