@@ -5,6 +5,10 @@
 3. **Run the server with npm run dev (development) or npm start (production)**
     **If you want run the server with npm start, you must build it first with npm run build**
 
+### 🔗 <a href="https://documenter.getpostman.com/view/24686438/2s93m7X2Ji">POSTMAN DOCUMENTATION</a>
+
+### 🔗 <a href="https://render.com/">DEPLOYED ON RENDER</a>
+
 ## User
 
 | TYPE    | DETAIL             | ROUTE                           | SEND                                                       |
