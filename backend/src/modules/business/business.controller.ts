@@ -29,7 +29,7 @@ export class BusinessController extends BusinessService {
   async getByIdController(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const result = await this.getServicesById(parseInt(id));
+      const result = await this.getBusinessByUser(id);
       res.json({
         status: "success",
         response: result,
@@ -56,8 +56,9 @@ export class BusinessController extends BusinessService {
         ...result,
         accountUser,
       } as BusinessEntity;
-      await this.postService(newBusiness);
-      const business = await this.getServices();
+      const data = await this.postService(newBusiness) as BusinessEntity;
+      const business: BusinessEntity[] = [];
+      business.push(data);
       const payload = generalDto.businessFilter(business);
 
       res.json({

@@ -9,7 +9,7 @@ interface ArrayCards {
   cvv: string;
 }
 
-interface ArrayBusiness {
+export interface ArrayBusiness {
   transaction: Transaction;
   status: Status;
   amount: number;
