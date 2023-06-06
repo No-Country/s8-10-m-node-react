@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AccountUserServices } from "./accountUser.services";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class AccountUserController extends AccountUserServices {
   constructor() {
@@ -14,7 +15,7 @@ export class AccountUserController extends AccountUserServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -27,7 +28,7 @@ export class AccountUserController extends AccountUserServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -40,9 +41,9 @@ export class AccountUserController extends AccountUserServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
-    
+
   }
 
   async putController(req: Request, res: Response) {
@@ -55,7 +56,7 @@ export class AccountUserController extends AccountUserServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -68,7 +69,7 @@ export class AccountUserController extends AccountUserServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

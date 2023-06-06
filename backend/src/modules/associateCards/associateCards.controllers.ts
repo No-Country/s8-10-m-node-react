@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import { generalDto } from "../../shared/dto/generalDto";
 import { AssociateCardsEntity } from "./associateCards.entity";
 import { AssociateCardsServices } from "./associateCards.services";
+import { httpError } from "../../shared/utils/httpError.utils";
 export class AssociateCardsController extends AssociateCardsServices {
   constructor() {
     super();
@@ -13,7 +14,7 @@ export class AssociateCardsController extends AssociateCardsServices {
   async getAllController(req: Request, res: Response) {
     const { user } = req.session;
     try {
-      if (!user) return res.status(400).json({ status: "error", error: "User not found" });
+      if (!user) return httpError.response(res, 404, "User not found");
       const cards = await this.getAllByAccount(user?.account[0].id!);
       const payload = generalDto.filterCards(cards);
       res.json({
@@ -21,7 +22,7 @@ export class AssociateCardsController extends AssociateCardsServices {
         payload,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -34,7 +35,7 @@ export class AssociateCardsController extends AssociateCardsServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -42,7 +43,7 @@ export class AssociateCardsController extends AssociateCardsServices {
     const { cardNumber, cvv, issuingEntity, type, cardholder } = req.body;
     const { user } = req.session;
     try {
-      if (!user) return res.status(400).json({ status: "error", error: "User not found" });
+      if (!user) return httpError.response(res, 404, "User not found");
       const newCard = {
         cardNumber,
         cvv,
@@ -61,7 +62,7 @@ export class AssociateCardsController extends AssociateCardsServices {
         payload,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -71,14 +72,14 @@ export class AssociateCardsController extends AssociateCardsServices {
     try {
       const cardNumber = body.cardNumber;
       const card = await this.repository.findOne({ where: { cardNumber } });
-      if (!card) return res.status(400).json({ status: "error", error: "Card not found" });
+      if (!card) return httpError.response(res, 404, "Card not found");
       const result = await this.putService(card.id!, body);
       res.json({
         status: "success",
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -86,14 +87,14 @@ export class AssociateCardsController extends AssociateCardsServices {
     const { cardNumber } = req.body;
     try {
       const card = await this.repository.findOne({ where: { cardNumber } });
-      if (!card) return res.status(400).json({ status: "error", error: "Card not found" });
+      if (!card) return httpError.response(res, 404, "Card not found");
       await this.deleteService(card.id!);
       res.json({
         status: "success",
         msg: `Card number ${cardNumber} deleted`,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

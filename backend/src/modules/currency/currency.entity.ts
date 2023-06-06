@@ -4,7 +4,7 @@ import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
 import { BusinessEntity } from "../business/business.entity";
 @Entity()
 export class CurrencyEntity extends BaseEntityApp {
-  
+
   @Column()
   name: string;
 
@@ -17,5 +17,5 @@ export class CurrencyEntity extends BaseEntityApp {
 
   @OneToMany(() => AccountAmountEntity, accountAmount => accountAmount.currency)
   accountAmount: AccountAmountEntity[];
-  
+
 }

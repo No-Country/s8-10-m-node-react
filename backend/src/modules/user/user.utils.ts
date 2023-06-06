@@ -1,22 +1,15 @@
 import { EntityManager } from "typeorm";
+import { nodeMailerManager } from "../../config/nodemailer";
 import { AppDataSource } from "../../config/postgreSql";
 import { AccountAmountEntity } from "../accountAmount/accountAmount.entity";
-import { accountAmountServices } from "../accountAmount/accountAmount.services";
 import { AccountCardEntity } from "../accountCard/accountCard.entity";
-import { accountCardServices } from "../accountCard/accountCard.services";
 import { cardUtils } from "../accountCard/accountCard.utils";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
-import { accountUserServices } from "../accountUser/accountUser.services";
 import { accountUserUtils } from "../accountUser/accountUser.utils";
 import { currencyServices } from "../currency/currency.services";
-import { UserEntity } from "../user/user.entity";
-import { userServices } from "./user.services";
-import { hashPassword } from "./utils/hashPassword.utils";
-import { nodeMailerManager } from "../../config/nodemailer";
+import { UserEntity } from "./user.entity";
+import { hashPassword } from "../../shared/utils/hashPassword.utils";
 class AccountUserHandler {
-  constructor() {
-  
-  }
 
   async createUserTransaction(body: UserEntity) {
     try {
@@ -26,16 +19,16 @@ class AccountUserHandler {
         const user = await this.createUser(body, transactionalEntityManager);
 
         // Create accountUser
-        if(!user) throw new Error("Error: user is null");
-        await nodeMailerManager.sendVerifyEmail(user.email)
+        if (!user) throw new Error("user is null");
+        await nodeMailerManager.sendVerifyEmail(user.email);
         const accountUser = await this.createAccountUser(user, transactionalEntityManager);
 
         // Create accountAmount and accountCard
-        if(!accountUser) throw new Error("Error: accountUser is null");
+        if (!accountUser) throw new Error("accountUser is null");
         const accountAmount = await this.createAccountAmount(accountUser, transactionalEntityManager);
         const accountCard = await this.createAccountCard(accountUser, transactionalEntityManager);
 
-        if(!accountAmount || !accountCard) throw new Error("Error: accountAmount or accountCard is null");
+        if (!accountAmount || !accountCard) throw new Error("accountAmount or accountCard is null");
 
         return {
           user,
@@ -45,11 +38,11 @@ class AccountUserHandler {
         };
       });
       return result;
-  } catch (error) {
-    const e=error as Error
-    console.log(error,e);
-    return {message:e.message}
-  }
+    } catch (error) {
+      const e = error as Error;
+      console.log(error, e);
+      return { message: e.message };
+    }
   }
 
   async createUser(body: UserEntity, transactionalEntityManager: EntityManager) {
@@ -88,7 +81,7 @@ class AccountUserHandler {
     accountAmount.amount = 0;
 
     const currency = await currencyServices.getServicesById(1);
-    if (!currency) throw new Error("Error: currency is null");
+    if (!currency) throw new Error("currency is null");
     accountAmount.currency = currency;
 
     const result = await amountRepository.save(accountAmount);

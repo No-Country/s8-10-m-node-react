@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Request, Response } from "express";
-
 import { generalDto } from "../../shared/dto/generalDto";
+import { AccountUserEntity } from "../accountUser/accountUser.entity";
 import { FavoriteContactsEntity } from "./favoriteContacts.entity";
 import { FavoriteContactServices } from "./favoriteContacts.services";
-import { favoriteContactsUtils } from "./favoriteContacts.uitls";
-import { accountUserServices } from "../accountUser/accountUser.services";
-import { AccountUserEntity } from "../accountUser/accountUser.entity";
+import { favoriteContactsUtils } from "./favoriteContacts.utils";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class FavoriteContactController extends FavoriteContactServices {
   constructor() {
@@ -16,7 +15,7 @@ export class FavoriteContactController extends FavoriteContactServices {
   async getAllController(req: Request, res: Response) {
     const { user } = req.session;
     try {
-      if (!user) return res.status(400).json({ status: "error", error: "User not found" });
+      if (!user) return httpError.response(res, 404, "User not found");
       const contacts = await this.getAllByUser(user.userId);
       const payload = generalDto.favoriteContactsFilter(contacts!);
       res.json({
@@ -24,7 +23,7 @@ export class FavoriteContactController extends FavoriteContactServices {
         payload,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
   async getByIdController(req: Request, res: Response) {
@@ -36,7 +35,7 @@ export class FavoriteContactController extends FavoriteContactServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -44,9 +43,9 @@ export class FavoriteContactController extends FavoriteContactServices {
     const { user } = req.session;
     const { nickname, data } = req.body;
     try {
-      if (!user) return res.status(400).json({ status: "error", error: "User not found" });
+      if (!user) return httpError.response(res, 404, "User not found");
       const accountUser = (await favoriteContactsUtils.dataFilter(data)) as AccountUserEntity; // Filter data is alias or account number
-      if (!accountUser) return res.status(400).json({ status: "error", error: "AccountUser not found" });
+      if (!accountUser) return httpError.response(res, 404, "Account not found");
       const newFavoriteContact = {
         accountUser,
         nickname,
@@ -65,7 +64,7 @@ export class FavoriteContactController extends FavoriteContactServices {
       });
     } catch (error) {
       const e = error as Error;
-      res.status(500).json({ error: e.message });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -79,7 +78,7 @@ export class FavoriteContactController extends FavoriteContactServices {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -87,14 +86,14 @@ export class FavoriteContactController extends FavoriteContactServices {
     const { nickname } = req.body;
     try {
       const contact = await this.getFavoriteContactByNickName(nickname);
-      if (!contact) return res.status(400).json({ status: "error", error: "Favorite contact not found" });
+      if (!contact) return httpError.response(res, 404, "Favorite contact not found");
       await this.deleteService(contact.id!);
       res.json({
         status: "success",
         response: `Contact ${contact.nickname} deleted`,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

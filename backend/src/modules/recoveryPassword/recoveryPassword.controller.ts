@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { RecoveryPasswordService } from "./recoveryPassword.services";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class RecoveryPasswordController extends RecoveryPasswordService {
     constructor() {
@@ -7,7 +8,7 @@ export class RecoveryPasswordController extends RecoveryPasswordService {
     }
 
     async verifyEmailController(req: Request, res: Response) {
-        const{email}=req.params
+        const { email } = req.params;
         try {
             const result = await this.verifyEmail(email);
             res.json({
@@ -15,20 +16,20 @@ export class RecoveryPasswordController extends RecoveryPasswordService {
                 response: result
             });
         } catch (error) {
-            res.status(500).json({ error });
+            httpError.internal(res, 500, error as Error);
         }
     }
 
     async recoveryPasswordController(req: Request, res: Response) {
-        const{email}=req.params
+        const { email } = req.params;
         try {
-            const result = await this.recoveryPasswordServices(email)
+            const result = await this.recoveryPasswordServices(email);
             res.json({
                 status: "success",
                 response: result
             });
         } catch (error) {
-            res.status(500).json({ error });
+            httpError.internal(res, 500, error as Error);
         }
     }
 
@@ -41,7 +42,7 @@ export class RecoveryPasswordController extends RecoveryPasswordService {
                 response: result
             });
         } catch (error) {
-            res.status(500).json({ error });
+            httpError.internal(res, 500, error as Error);
         }
     }
 
@@ -55,7 +56,7 @@ export class RecoveryPasswordController extends RecoveryPasswordService {
                 response: result
             });
         } catch (error) {
-            res.status(500).json({ error });
+            httpError.internal(res, 500, error as Error);
         }
     }
 
@@ -68,7 +69,7 @@ export class RecoveryPasswordController extends RecoveryPasswordService {
                 response: result
             });
         } catch (error) {
-            res.status(500).json({ error });
+            httpError.internal(res, 500, error as Error);
         }
     }
 }

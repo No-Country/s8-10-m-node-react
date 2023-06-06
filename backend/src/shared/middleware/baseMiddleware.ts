@@ -1,9 +1,10 @@
-import { BaseEntity, EntityTarget, FindOptionsWhere, Repository } from "typeorm";
 import { NextFunction, Request, Response } from "express";
-import { AppDataSource } from "../../config/postgreSql";
-import { authUtils } from "../../modules/auth/auth.utils";
 import session from "express-session";
+import { BaseEntity, EntityTarget, FindOptionsWhere, Repository } from "typeorm";
+import { AppDataSource } from "../../config/postgreSql";
 import { UserEntity } from "../../modules/user/user.entity";
+import { authUtils } from "../utils/auth.utils";
+import { httpError } from "../utils/httpError.utils";
 
 declare module "express-session" {
   export interface SessionData {
@@ -24,15 +25,11 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
     const { id } = req.params;
     try {
       const idCheck = await this.repository.findOneBy({ id: Number(id) } as unknown as FindOptionsWhere<T>);
-      if (!idCheck)
-        return res.status(404).json({
-          status: false,
-          msg: "ID not found",
-        });
+      if (!idCheck) return httpError.response(res, 404, "ID not found");
 
       return next();
     } catch (error) {
-      res.status(500).json({ msg: error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -40,14 +37,14 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
     const token = req.session.token;
 
     try {
-      if (!token) return res.status(403).json({ error: "A token is expected" });
+      if (!token) return httpError.response(res, 500, "A token is expected");
 
       const jwtPayload = authUtils.verifyToken(token);
-      if (!jwtPayload) return res.status(403).json({ error: "Invalid token" });
+      if (!jwtPayload) return httpError.response(res, 500, "Invalid token");
 
       next();
     } catch (error) {
-      return res.status(403).json(error);
+      httpError.internal(res, 500, error as Error);
     }
   }
 

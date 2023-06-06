@@ -1,33 +1,33 @@
 import { NextFunction, Request, Response } from "express";
 import { BaseMiddlewares } from "../../shared/middleware/baseMiddleware";
 import { FavoriteContactsEntity } from "./favoriteContacts.entity";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class FavoriteContactMiddleware extends BaseMiddlewares<FavoriteContactsEntity> {
   constructor() {
     super(FavoriteContactsEntity);
   }
 
-  async checkData(req: Request, res: Response, nex: NextFunction) {
+  async checkData(req: Request, res: Response, next: NextFunction) {
     const { nickname, data } = req.body;
     try {
-      if (!nickname) return res.status(400).json({ status: "error", error: "nickname is required" });
+      if (!nickname) return httpError.response(res, 400, "Nickname is required");
       const existsNickname = await this.repository.findOne({ where: { nickname } });
-      if(existsNickname) return res.status(400).json({ status: "error", error: "The nickname already exists" });
-      if (!data) return res.status(400).json({ status: "error", error: "data: alias or account number is required" });
-      nex();
+      if (existsNickname) return httpError.response(res, 400, "The nickname already exists");
+      if (!data) return httpError.response(res, 400, "Alias or account number is required");
+      next();
     } catch (error) {
-      const e = error as Error;
-      res.status(500).json({ error: e.message });
+      httpError.internal(res, 500, error as Error);
     }
   }
-  async checkNickName(req: Request, res: Response, nex: NextFunction) {
+  async checkNickName(req: Request, res: Response, next: NextFunction) {
     const { nickname } = req.body;
     try {
-      if (!nickname) return res.status(400).json({ status: "error", error: "nickname is required" });
-      nex();
+      if (!nickname) return httpError.response(res, 400, "Nickname is required");
+
+      next();
     } catch (error) {
-      const e = error as Error;
-      res.status(500).json({ error: e.message });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

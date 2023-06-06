@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import { generalDto } from "../../shared/dto/generalDto";
 import { AuthServices } from "./auth.services";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class AuthController extends AuthServices {
   constructor() {
@@ -22,8 +23,7 @@ export class AuthController extends AuthServices {
       });
     } catch (error) {
       console.log(error);
-      const e = error as Error;
-      res.status(500).json({ error: e.message });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

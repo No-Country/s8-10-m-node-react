@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { BaseEntityApp } from "../../shared/entity/baseEntity";
 import { AccountUserEntity } from "../accountUser/accountUser.entity";
+
 enum cardType {
   DEBIT = "DEBIT",
   CREDIT = "CREDIT",
