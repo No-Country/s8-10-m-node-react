@@ -10,6 +10,8 @@ export class RecoveryPasswordService extends BaseServices<RecoveryPasswordEntity
 
   async verifyEmail(email: string) {
     const userRepository = await this.getRepository(UserEntity);
+    const user = await userRepository.findOne({ where: { email } });
+    if(!user) throw new Error("User not found");
     await userRepository.update({ email }, { isVerify: true });
     return { message: "User authenticated" };
   }

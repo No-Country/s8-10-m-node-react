@@ -4,7 +4,7 @@ import { RecoveryPasswordMiddlewares } from "./recoveryPassword.middleware";
 
 export class RecoveryPasswordRouter extends BaseRouter<RecoveryPasswordController, RecoveryPasswordMiddlewares>{
     constructor() {
-        super(RecoveryPasswordController, RecoveryPasswordMiddlewares, "recoveryPassword");
+        super(RecoveryPasswordController, RecoveryPasswordMiddlewares, "recovery");
     }
     routes(path: string): void {
         this.router.get(`/${path}/verifyEmail/:email`, (req, res) => this.controller.verifyEmailController(req, res));

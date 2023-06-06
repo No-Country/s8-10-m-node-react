@@ -19,16 +19,16 @@ class AccountUserHandler {
         const user = await this.createUser(body, transactionalEntityManager);
 
         // Create accountUser
-        if (!user) throw new Error("Error: user is null");
+        if (!user) throw new Error("user is null");
         await nodeMailerManager.sendVerifyEmail(user.email);
         const accountUser = await this.createAccountUser(user, transactionalEntityManager);
 
         // Create accountAmount and accountCard
-        if (!accountUser) throw new Error("Error: accountUser is null");
+        if (!accountUser) throw new Error("accountUser is null");
         const accountAmount = await this.createAccountAmount(accountUser, transactionalEntityManager);
         const accountCard = await this.createAccountCard(accountUser, transactionalEntityManager);
 
-        if (!accountAmount || !accountCard) throw new Error("Error: accountAmount or accountCard is null");
+        if (!accountAmount || !accountCard) throw new Error("accountAmount or accountCard is null");
 
         return {
           user,
@@ -81,7 +81,7 @@ class AccountUserHandler {
     accountAmount.amount = 0;
 
     const currency = await currencyServices.getServicesById(1);
-    if (!currency) throw new Error("Error: currency is null");
+    if (!currency) throw new Error("currency is null");
     accountAmount.currency = currency;
 
     const result = await amountRepository.save(accountAmount);

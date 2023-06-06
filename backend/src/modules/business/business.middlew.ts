@@ -14,7 +14,7 @@ export class BusinessMiddlewares extends BaseMiddlewares<BusinessEntity> {
 
     try {
       const type = Object.values(Transaction).includes(typeTransaction);
-      if (!type) return httpError.response(res, 400, "Transaction type not found");
+      if (!type) return httpError.response(res, 404, "Transaction type not found");
 
       next();
     } catch (error) {
@@ -30,9 +30,9 @@ export class BusinessMiddlewares extends BaseMiddlewares<BusinessEntity> {
       const userAddressee = await (await this.getRepository(AccountUserEntity)).findOne({ where: { accountNumber: addressee } });
       if (!userEmitter) {
         const userEmitterCard = await (await this.getRepository(AccountUserEntity)).findOne({ where: { accountCard: { cardNumber: emitter } } });
-        if (!userEmitterCard) return httpError.response(res, 400, "Emitter user not found");
+        if (!userEmitterCard) return httpError.response(res, 404, "Emitter user not found");
       }
-      if (!userAddressee) return httpError.response(res, 400, "Addressee user not found");
+      if (!userAddressee) return httpError.response(res, 404, "Addressee user not found");
       next();
     } catch (error) {
       httpError.internal(res, 500, error as Error);

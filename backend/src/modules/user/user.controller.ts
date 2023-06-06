@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { accountUserHandler } from "./user.utils";
 import { UserService } from "./user.services";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class UserController extends UserService {
   constructor() {
@@ -15,7 +16,7 @@ export class UserController extends UserService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -28,20 +29,20 @@ export class UserController extends UserService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
   async postController(req: Request, res: Response) {
     try {
       const result = await accountUserHandler.createUserTransaction(req.body);
-      if(!result) throw new Error("Error al crear usuario");
+      if(!result) httpError.response(res, 400, "Error creating user");
       res.json({
         status: "success",
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -55,7 +56,7 @@ export class UserController extends UserService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 
@@ -68,7 +69,7 @@ export class UserController extends UserService {
         response: result,
       });
     } catch (error) {
-      res.status(500).json({ error });
+      httpError.internal(res, 500, error as Error);
     }
   }
 }

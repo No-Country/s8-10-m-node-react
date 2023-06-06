@@ -1,30 +1,31 @@
 import { NextFunction, Request, Response } from "express";
 import { BaseMiddlewares } from "../../shared/middleware/baseMiddleware";
 import { UserEntity } from "./user.entity";
+import { httpError } from "../../shared/utils/httpError.utils";
 
 export class UserMiddlewares extends BaseMiddlewares<UserEntity> {
   constructor() {
     super(UserEntity);
   }
 
-  async checkUser(req: Request, res: Response, nex: NextFunction) {
+  async checkUser(req: Request, res: Response, next: NextFunction) {
     const { dni, email, phone } = req.body;
     try {
      
-      if (!dni || !email || !phone) return res.status(400).json({ status: "error", error: "Data not complete" });
+      if (!dni || !email || !phone) return httpError.response(res, 400, "Incomplete data");
      
       const userMail = await this.repository.findOne({ where: { email } });
-      if (userMail) return res.status(400).json({ status: "error", error: "Email already exists" });
+      if (userMail) return httpError.response(res, 400, "Email already exists");
      
       const userDni = await this.repository.findOne({ where: { dni } });
-      if (userDni) return res.status(400).json({ status: "error", error: "Dni already exists" });
+      if (userDni) return httpError.response(res, 400, "Dni already exists");
      
       const userPhone = await this.repository.findOne({ where: { phone } });
-      if (userPhone) return res.status(400).json({ status: "error", error: "Phone already exists" });
+      if (userPhone) return httpError.response(res, 400, "Phone already exists");
      
-      nex();
+      next();
     } catch (error) {
-      res.status(500).json(error);
+      httpError.internal(res, 500, error as Error);
     }
   }
 }
