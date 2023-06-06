@@ -12,10 +12,10 @@ import { currencyServices } from "../currency/currency.services";
 import { UserEntity } from "../user/user.entity";
 import { userServices } from "./user.services";
 import { hashPassword } from "./utils/hashPassword.utils";
-
+import { nodeMailerManager } from "../../config/nodemailer";
 class AccountUserHandler {
   constructor() {
-
+  
   }
 
   async createUserTransaction(body: UserEntity) {
@@ -27,6 +27,7 @@ class AccountUserHandler {
 
         // Create accountUser
         if(!user) throw new Error("Error: user is null");
+        await nodeMailerManager.sendVerifyEmail(user.email)
         const accountUser = await this.createAccountUser(user, transactionalEntityManager);
 
         // Create accountAmount and accountCard
@@ -45,8 +46,9 @@ class AccountUserHandler {
       });
       return result;
   } catch (error) {
-    
-    console.log(error);
+    const e=error as Error
+    console.log(error,e);
+    return {message:e.message}
   }
   }
 

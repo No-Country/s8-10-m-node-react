@@ -1,19 +1,19 @@
 import * as nodemailer from "nodemailer";
 
 export const transportOptions = {
-    host: process.env.EMAIL_HOST,
-    port: Number(process.env.EMAIL_PORT),
+    service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     }
 }
+
 class NodemailerManager {
 
-    async sendVerifyEmail(email: string, fullName: string, code: string) {
+    async sendVerifyEmail(email: string) {
         const transporter = nodemailer.createTransport(transportOptions)
         await transporter.sendMail({
-            from: 'Domino App <dominotester4@gmail.com>',
+            from: process.env.EMAIL_USER,
             to: email,
             subject: 'Por favor, validar cuenta',
             text: 'Por favor, validar cuenta',
@@ -132,7 +132,7 @@ class NodemailerManager {
             </table></td>
             </tr>
             <tr>
-            <td align="center" class="es-m-txt-l" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><span class="es-button-border" style="border-style:solid;border-color:#999999;background:#ffffff;border-width:1px;display:inline-block;border-radius:0px;width:auto"><a href="https://viewstripo.email" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#666666;font-size:16px;padding:10px 30px 10px 30px;display:inline-block;background:#ffffff;border-radius:0px;font-family:Montserrat, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #ffffff">Validar mi correo</a></span></td>
+            <td align="center" class="es-m-txt-l" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><span class="es-button-border" style="border-style:solid;border-color:#999999;background:#ffffff;border-width:1px;display:inline-block;border-radius:0px;width:auto"><a href="youtube.com" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#666666;font-size:16px;padding:10px 30px 10px 30px;display:inline-block;background:#ffffff;border-radius:0px;font-family:Montserrat, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #ffffff">Validar mi correo</a></span></td>
             </tr>
             </table></td>
             </tr>
@@ -189,7 +189,7 @@ class NodemailerManager {
             <td align="center" class="es-m-txt-l" style="padding:0;Margin:0;padding-bottom:5px;padding-top:10px"><h3 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#333333">Visita&nbsp;nuestro&nbsp;</h3></td>
             </tr>
             <tr>
-            <td align="left" class="es-m-txt-l" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><span class="es-button-border" style="border-style:solid;border-color:#999999;background:#ffffff;border-width:1px;display:block;border-radius:0px;width:auto"><a href="https://viewstripo.email" class="es-button es-button-1620385738243" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#666666;font-size:16px;padding:10px 30px;display:block;background:#ffffff;border-radius:0px;font-family:Montserrat, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #ffffff">Centro de atención al cliente</a></span></td>
+            <td align="left" class="es-m-txt-l" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><span class="es-button-border" style="border-style:solid;border-color:#999999;background:#ffffff;border-width:1px;display:block;border-radius:0px;width:auto"><a href="https://youtube.com" class="es-button es-button-1620385738243" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#666666;font-size:16px;padding:10px 30px;display:block;background:#ffffff;border-radius:0px;font-family:Montserrat, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #ffffff">Centro de atención al cliente</a></span></td>
             </tr>
             </table></td>
             </tr>
@@ -300,7 +300,7 @@ class NodemailerManager {
         })
     }
 
-    async recoveryPasswordEmail(email: string, fullName: string, code: string) {
+    async recoveryPasswordEmail(email: string, fullName: string,code:string) {
         const transporter = nodemailer.createTransport(transportOptions)
         await transporter.sendMail({
             from: 'Domino App <dominotester4@gmail.com>',
@@ -458,7 +458,7 @@ class NodemailerManager {
             <td align="center" style="padding:0;Margin:0;padding-right:35px;padding-left:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">Hubo una solicitud de cambio de tu contraseña</p></td>
             </tr>
             <tr style="border-collapse:collapse">
-            <td align="center" style="padding:0;Margin:0;padding-top:25px;padding-left:40px;padding-right:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">Sino hiciste ninguna solicitud, no hace falta que hagas nada. De lo contrario, hacé click en el enlace de abajo para realizar tu cambio de contraseña</p></td>
+            <td align="center" style="padding:0;Margin:0;padding-top:25px;padding-left:40px;padding-right:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">Sino hiciste ninguna solicitud, no hace falta que hagas nada. De lo contrario, Tu nueva contraseña es: ${code}</p></td>
             </tr>
             <tr style="border-collapse:collapse">
             <td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:40px;padding-bottom:40px"><span class="es-button-border" style="border-style:solid;border-color:#3D5CA3;background:#FFFFFF;border-width:2px;display:inline-block;border-radius:10px;width:auto"><a href="https://viewstripo.email/" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#3D5CA3;font-size:14px;display:inline-block;background:#FFFFFF;border-radius:10px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:bold;font-style:normal;line-height:17px;width:auto;text-align:center;padding:15px 20px 15px 20px;mso-padding-alt:0;mso-border-alt:10px solid #FFFFFF">CAMBIAR CONTRASEÑA</a></span></td>
