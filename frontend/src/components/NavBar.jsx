@@ -4,7 +4,7 @@ import { IoExitOutline } from 'react-icons/io5'
 import MenuItems from './MenuItems'
 import { Link } from 'react-router-dom'
 
-export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
+export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
   const { logOut } = useUserContext()
 
   return (
@@ -25,7 +25,7 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
       >
         Menu
       </h4>
-      <MenuItems isOpen={isOpen} setIsOpen={setIsOpen} />
+      <MenuItems isOpen={isOpen} items={items} setIsOpen={setIsOpen} />
       <div
         className={`w-full h-auto flex items-center justify-between bg-transparent border-t pt-3 text-white ${
           isOpen && 'gap-4'
@@ -33,7 +33,7 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
       >
         <Link>
           <img
-            className="w-14 h-14 rounded-lg object-cover cursor-pointer"
+            className="w-14 h-14 rounded-lg object-cover cursor-pointer "
             src="https://www.huie.org.nz/wp-content/uploads/2022/05/elizeu-dias-2EGNqazbAMk-unsplash-1-e1653620036569-350x233.jpg"
             alt=""
           />

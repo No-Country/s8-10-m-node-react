@@ -17,7 +17,6 @@ const UserProvider = ({ children }) => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      console.log(user)
     } else {
       setUser({})
     }
@@ -50,9 +49,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider value={{ user, login, logOut, loading }}>
-      <LayoutProvider>
-        {loading ? <Loader /> : children}
-      </LayoutProvider>
+      <LayoutProvider>{loading ? <Loader /> : children}</LayoutProvider>
     </UserContext.Provider>
   )
 }

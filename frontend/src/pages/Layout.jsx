@@ -2,6 +2,15 @@ import { NavBar } from '../components/NavBar'
 import { Outlet, redirect } from 'react-router-dom'
 import { useState } from 'react'
 import PanelNavMobile from '../components/PanelNavMobile'
+import {
+  FaArrowUp,
+  FaArrowRight,
+  FaHome,
+  FaArrowDown,
+  FaExchangeAlt,
+  FaDollarSign,
+} from 'react-icons/fa'
+import { useLayoutContext } from '../context/LayoutContext'
 
 export function loader() {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
@@ -17,11 +26,51 @@ export const UserLayout = () => {
   function toggleOpen() {
     setIsOpen(!isOpen)
   }
-
+  const { windowWidth } = useLayoutContext()
+  const menuItems = [
+    {
+      name: 'Home',
+      icon: <FaHome size={25} />,
+      link: '/user/home',
+    },
+    {
+      name: 'Movimientos',
+      icon: <FaExchangeAlt size={25} />,
+      link: '/user/movements',
+    },
+    {
+      name: 'Servicios',
+      icon: <FaDollarSign size={25} />,
+      link: '/user/services',
+      condition: windowWidth > 768 ? true : false,
+    },
+    {
+      name: 'Retirar',
+      icon: <FaArrowDown size={25} />,
+      link: '',
+      condition: windowWidth > 768 ? true : false,
+    },
+    {
+      name: 'Transferir',
+      icon: <FaArrowRight size={25} />,
+      link: '/user/transfers',
+    },
+    {
+      name: 'Recargar',
+      icon: <FaArrowUp size={25} />,
+      link: null,
+    },
+  ]
   return (
-    <main className="">
-      <PanelNavMobile toggleOpen={toggleOpen} />
-      <NavBar toggleOpen={toggleOpen} isOpen={isOpen} setIsOpen={setIsOpen} />
+    <main className="md:ml-24">
+      {}
+      <PanelNavMobile toggleOpen={toggleOpen} items={menuItems} />
+      <NavBar
+        toggleOpen={toggleOpen}
+        isOpen={isOpen}
+        items={menuItems}
+        setIsOpen={setIsOpen}
+      />
       <div className="">
         <Outlet />
       </div>

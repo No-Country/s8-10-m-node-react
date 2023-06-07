@@ -1,4 +1,11 @@
-export function formatCreditCardNumber (number) {
-  const parts = number.match(/[\s\S]{1,4}/g)
-  return parts.join(' ')
+export function formatCreditCardNumber(number) {
+  if (typeof number !== 'string') {
+    return ''
+  }
+
+  const parts = number.match(/[0-9]{1,4}/g)
+  if (parts) {
+    return parts.join(' ')
+  }
+  return ''
 }

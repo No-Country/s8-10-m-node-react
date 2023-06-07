@@ -1,26 +1,38 @@
-import { useLayoutContext } from '../context/LayoutContext'
 import { Link, useLocation } from 'react-router-dom'
 import { FaBars, FaBell } from 'react-icons/fa'
 import PanelBack from '../components/PanelBack'
 import { useState, useEffect } from 'react'
 
-const PanelNavMobile = ({ toggleOpen }) => {
-  const [mobilePanel, setMobilePanel] = useState(false)
+const PanelNavMobile = ({ toggleOpen, items }) => {
+  const [mobilePanel, setMobilePanel] = useState({
+    condition: false,
+    name: '',
+  })
 
   const location = useLocation()
-  const { windowWidth } = useLayoutContext()
   useEffect(() => {
-    if (location.pathname === '/user/home') {
-      setMobilePanel(true)
-    } else {
-      setMobilePanel(false)
+    for (const item of items) {
+      if (location.pathname === '/user/home' && item.link === '/user/home') {
+        return setMobilePanel({
+          condition: true,
+          name: item.name,
+        })
+      } else {
+        return setMobilePanel({
+          condition: false,
+          name: item.name,
+        })
+      }
     }
   }, [location])
 
-  // TODO: Terminar la condifción para que utilice bien estos paneles
   return (
-    <section className="w-full flex justify-evenly gap-8 items-center h-12 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] shadow-lg md:h-36">
-      {mobilePanel && windowWidth < 768 ? (
+    <section
+      className={`w-full flex justify-evenly gap-8 items-center h-12 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] shadow-lg md:h-36 md:mb-8 ${
+        location.pathname !== '/user/home' && 'md:h-16'
+      }`}
+    >
+      {mobilePanel.condition ? (
         <>
           <FaBars
             size={20}
@@ -36,7 +48,7 @@ const PanelNavMobile = ({ toggleOpen }) => {
           </Link>
         </>
       ) : (
-        <PanelBack name={location.pathname} />
+        <PanelBack name={mobilePanel.name} />
       )}
     </section>
   )

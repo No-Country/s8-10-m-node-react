@@ -3,9 +3,9 @@ import { BackButton } from './BackButton'
 
 const PanelBack = ({ name }) => {
   return (
-    <div className="mt-5 pl-2 h-16 w-full bg-white border-t-2 border-b-2 flex gap-5 items-center shadow-lg shadow-indigo-500/40 ">
+    <div className="h-16 w-full pl-6 bg-white flex gap-5 items-center shadow-lg shadow-indigo-500/40">
       <BackButton />
-      <h1 className="text-2xl font-bold">{name}</h1>
+      <h1 className="text-2xl font-bold font-roboto tracking-wide">{name}</h1>
     </div>
   )
 }

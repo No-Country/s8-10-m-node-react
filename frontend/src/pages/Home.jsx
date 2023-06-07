@@ -1,6 +1,6 @@
 import { Button } from '../components/Button'
 import { Link } from 'react-router-dom'
-// import { CreditCardComp } from '../components/CreditCardComp'
+import { CreditCardComp } from '../components/CreditCardComp'
 import {
   IoTrendingUp,
   IoTrendingDownOutline,
@@ -12,7 +12,9 @@ import { useState } from 'react'
 
 export const Home = () => {
   const [showBalance, setshowBalance] = useState(false)
-  const { logOut } = useUserContext()
+  const { user } = useUserContext()
+  const { payload } = user
+  console.log(payload)
 
   return (
     <>
@@ -45,7 +47,17 @@ export const Home = () => {
           </Button>
         </div>
       </section>
-      {/* <CreditCardComp height="160" cardNumber="4111111111111111" /> */}
+      <section>
+        {user ? (
+          <CreditCardComp
+            cardNumber={payload?.accountInfo?.dominoCard?.cardNumber}
+            isDomino={true}
+            name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}
+          />
+        ) : (
+          <p>Cargando tarjetas</p>
+        )}
+      </section>
     </>
   )
 }
