@@ -67,7 +67,6 @@ export class BusinessController extends BusinessService {
         payload,
       });
     } catch (error) {
-      const e = error as Error;
       httpError.internal(res, 500, error as Error);
     }
   }
