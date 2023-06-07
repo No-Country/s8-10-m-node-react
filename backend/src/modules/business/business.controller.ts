@@ -27,13 +27,14 @@ export class BusinessController extends BusinessService {
     }
   }
 
-  async getByIdController(req: Request, res: Response) {
-    const { id } = req.params;
+  async getByAccountController(req: Request, res: Response) {
+    const { accountNumber } = req.body;
     try {
-      const result = await this.getBusinessByUser(id);
+      const payload = await this.getBusinessByUser(accountNumber);
+      
       res.json({
         status: "success",
-        response: result,
+        payload,
       });
     } catch (error) {
       httpError.internal(res, 500, error as Error);
@@ -43,7 +44,7 @@ export class BusinessController extends BusinessService {
   async postController(req: Request, res: Response) {
     const { typeTransaction, emitter, addressee, amountQuantity, subject } = req.body;
     const { user } = req.session;
-
+    
     try {
       const result = (await operationsServices.operationManager(
         typeTransaction,
@@ -52,19 +53,21 @@ export class BusinessController extends BusinessService {
         amountQuantity,
         subject
       )) as BusinessEntity;
+
       const accountUser = user?.account[0];
       const newBusiness = {
         ...result,
         accountUser,
       } as BusinessEntity;
-      const data = await this.postService(newBusiness) as BusinessEntity;
-      const business: BusinessEntity[] = [];
-      business.push(data);
-      const payload = generalDto.businessFilter(business);
+      console.log(accountUser);
+      await this.postService(newBusiness) as BusinessEntity;
+
+      const data = await this.getServices();
+      const payload = generalDto.businessFilter(data);
 
       res.json({
         status: "success",
-        payload,
+        payload: payload[payload.length-1],
       });
     } catch (error) {
       httpError.internal(res, 500, error as Error);

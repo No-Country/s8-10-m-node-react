@@ -6,7 +6,7 @@ import { CurrencyEntity } from "../currency/currency.entity";
 @Entity()
 export class AccountAmountEntity extends BaseEntityApp {
 
-  @Column({ default: 0 })
+  @Column({ type: "float", default: 0 })
   amount: number;
 
   @ManyToOne(() => AccountUserEntity, (accountUser) => accountUser.accountAmount)

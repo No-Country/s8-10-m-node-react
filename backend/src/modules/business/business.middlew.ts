@@ -24,7 +24,7 @@ export class BusinessMiddlewares extends BaseMiddlewares<BusinessEntity> {
 
   async checkAccountUser(req: Request, res: Response, next: NextFunction) {
     const { emitter, addressee } = req.body;
-
+    
     try {
       const userEmitter = await (await this.getRepository(AccountUserEntity)).findOne({ where: { accountNumber: emitter } });
       const userAddressee = await (await this.getRepository(AccountUserEntity)).findOne({ where: { accountNumber: addressee } });
@@ -36,6 +36,7 @@ export class BusinessMiddlewares extends BaseMiddlewares<BusinessEntity> {
           if(!userEmitterAlias) return httpError.response(res, 404, "Emitter user not found");
         }
       }
+
 
       if (!userAddressee) {
         const userAddresseeCard = await (await this.getRepository(AccountUserEntity)).findOne({ where: { accountCard: { cardNumber: emitter } } });
