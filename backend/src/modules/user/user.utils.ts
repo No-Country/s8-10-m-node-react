@@ -15,16 +15,17 @@ class AccountUserHandler {
     try {
       const result = await AppDataSource.manager.transaction(async (transactionalEntityManager) => {
 
-        // Create user object
         const user = await this.createUser(body, transactionalEntityManager);
-
-        // Create accountUser
+        
         if (!user) throw new Error("user is null");
-        await nodeMailerManager.sendVerifyEmail(user.email);
+
+        // TODO: verificar opciones de transporte
+        // await nodeMailerManager.sendVerifyEmail(user.email);
+
         const accountUser = await this.createAccountUser(user, transactionalEntityManager);
 
-        // Create accountAmount and accountCard
         if (!accountUser) throw new Error("accountUser is null");
+
         const accountAmount = await this.createAccountAmount(accountUser, transactionalEntityManager);
         const accountCard = await this.createAccountCard(accountUser, transactionalEntityManager);
 
