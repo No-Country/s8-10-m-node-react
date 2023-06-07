@@ -47,7 +47,7 @@ export const Login = () => {
           Inicia sesión para acceder
         </h3>
         <form
-          className="w-full flex items-center flex-col gap-6"
+          className="w-full flex items-center flex-col gap-6 min-[450px]:px-5"
           onSubmit={validateUser}
         >
           <InputField
@@ -78,10 +78,10 @@ export const Login = () => {
             }
           />
 
-          <div className="flex items-center flex-col gap-6">
+          <div className="w-[108%] flex items-center flex-col gap-6">
             <Button
               type="submit"
-              nameClass="w-80 bg-[#4C27AE] py-3 rounded-lg text-md text-white font-light font-roboto tracking-wider cursor-pointer "
+              nameClass="w-full max-w-screen-sm bg-[#4C27AE] py-3 rounded-lg text-md text-white font-light font-roboto tracking-wider cursor-pointer "
             >
               Iniciar sesión
             </Button>
@@ -89,9 +89,9 @@ export const Login = () => {
         </form>
       </section>
       <div className="w-full flex items-center justify-center gap-3">
-        <span className="w-[40%] border-t-2 border-[#4C27AE] blur-[.5px] rounded-full"></span>
+        <span className="w-[40%] max-w-[300px] border-t-2 border-[#4C27AE] blur-[.5px] rounded-full"></span>
         <span className="font-bold font-roboto text-[#4C27AE] text-lg">O</span>
-        <span className="w-[40%] border-t-2 border-[#4C27AE] blur-[.5px] rounded-full"></span>
+        <span className="w-[40%] max-w-[300px] border-t-2 border-[#4C27AE] blur-[.5px] rounded-full"></span>
       </div>
       <section className="flex flex-col items-center gap-4">
         <p className="text-md  font-roboto text-center font-medium text-black">
