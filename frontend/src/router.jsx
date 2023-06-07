@@ -16,6 +16,7 @@ import { UserLayout, loader as userLoader } from './pages/Layout'
 import Soporte from './components/Soporte'
 import { Perfil } from './components/Perfil'
 import { Aspectos } from './components/Aspectos'
+import Success from './components/Success'
 
 export const router = createBrowserRouter([
   {
@@ -87,20 +88,24 @@ export const router = createBrowserRouter([
       },
       {
         path: 'options',
-        element: <ProfileOptions/>,
+        element: <ProfileOptions />,
       },
       {
         path: 'soporte',
-        element: <Soporte/>,
+        element: <Soporte />,
       },
       {
         path: 'perfil',
-        element: <Perfil/>,
+        element: <Perfil />,
       },
       {
         path: 'aspectos',
-        element: <Aspectos/>,
-      }
+        element: <Aspectos />,
+      },
+      {
+        path: 'success',
+        element: <Success qr={true} />,
+      },
     ],
   },
 ])

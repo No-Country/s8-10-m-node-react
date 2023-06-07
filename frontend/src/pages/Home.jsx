@@ -1,26 +1,22 @@
-import { Button } from '../components/Button'
 import { Link } from 'react-router-dom'
 import { CreditCardComp } from '../components/CreditCardComp'
-import {
-  IoTrendingUp,
-  IoTrendingDownOutline,
-  IoEyeOutline,
-  IoEyeOffOutline,
-} from 'react-icons/io5'
+import { IoTrendingUp, IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5'
 import { useUserContext } from '../context/UserContext'
 import { useState } from 'react'
+import WithdrawCash from '../components/WithdrawCash'
 
 export const Home = () => {
   const [showBalance, setshowBalance] = useState(false)
+
   const { user } = useUserContext()
   const { payload } = user
   console.log(payload)
 
   return (
     <>
-      <section className="w-full h-[250px] bg-[#4C27AE26] shadow-first flex flex-col items-center">
-        <p className="font-roboto mt-10">Disponible</p>
-        <div className="w-[85%] h-auto flex items-center justify-center gap-x-6 mt-2 border-b pb-4 border-[#4C27AE4D]">
+      <section className="w-full h-[250px] bg-[#4C27AE26] md:bg-transparent md:shadow-none shadow-first flex md:flex-row md:flex-wrap md:w-[500px] md:h-[150px] md:gap-x-6 md:justify-center flex-col items-center">
+        <p className="font-roboto mt-10 md:mt-0">Disponible</p>
+        <div className="w-[85%] md:w-auto h-auto flex items-center justify-center gap-x-6 mt-2 border-b pb-4 border-[#4C27AE4D] md:border-0">
           <h3 className="text-5xl font-roboto font-bold tracking-wide">
             {showBalance ? '$100.000' : '********'}
           </h3>
@@ -41,22 +37,36 @@ export const Home = () => {
             <IoTrendingUp size={20} />
             Transferir
           </Link>
-          <Button nameClass="w-[150px] flex items-center justify-center gap-2 rounded-lg text-white font-inter bg-[#4C27AE]">
-            <IoTrendingDownOutline size={20} />
-            Retirar
-          </Button>
+          <WithdrawCash />
         </div>
       </section>
-      <section>
-        {user ? (
-          <CreditCardComp
-            cardNumber={payload?.accountInfo?.dominoCard?.cardNumber}
-            isDomino={true}
-            name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}
-          />
-        ) : (
-          <p>Cargando tarjetas</p>
-        )}
+      <section className="pl-6 mt-8">
+        <h2 className="font-roboto text-lg pl-2 mb-4">Mis tarjetas</h2>
+        <div className="flex flex-wrap">
+          {user ? (
+            <>
+              <CreditCardComp
+                cardNumber={payload?.accountInfo?.dominoCard?.cardNumber}
+                isDomino={true}
+                name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}
+              />
+              {payload?.accountInfo?.associateCards?.map((card) => {
+                console.log(card)
+                return (
+                  <CreditCardComp
+                    cardNumber={
+                      payload?.accountInfo?.associateCards?.cardNumber
+                    }
+                    isDomino={false}
+                    name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}
+                  />
+                )
+              })}
+            </>
+          ) : (
+            <p>Cargando tarjetas</p>
+          )}
+        </div>
       </section>
     </>
   )

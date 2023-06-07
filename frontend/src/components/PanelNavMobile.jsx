@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { FaBars, FaBell } from 'react-icons/fa'
+import { FaBars, FaRegBell } from 'react-icons/fa'
 import PanelBack from '../components/PanelBack'
 import { useState, useEffect } from 'react'
 
@@ -36,14 +36,14 @@ const PanelNavMobile = ({ toggleOpen, items }) => {
           <FaBars
             size={20}
             onClick={toggleOpen}
-            className=" text-black text-xl cursor-pointer md:hidden"
+            className=" text-[#4C27AE] text-xl cursor-pointer md:hidden"
           />
           <div className="flex gap-3 items-center font-roboto md:flex-col md:gap-0">
             <p>Bienvenido</p>
             <h2 className="md:text-2xl">Carlos</h2>
           </div>
           <Link>
-            <FaBell size={20} />
+            <FaRegBell className="text-[#4C27AE] text-xl md:text-2xl md:cursor-pointer" />
           </Link>
         </>
       ) : (
