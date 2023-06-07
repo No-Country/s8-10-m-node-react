@@ -103,8 +103,8 @@ class OperationsServices {
         return this.paymentResponse(amountQuantity, emitter, PayServices.NETFLIX, subject);
 
       case Transaction.DEPOSIT:
-        await this.operationDeposit(addressee, amountQuantity);
-        return this.despositResponse(amountQuantity, addressee, subject);
+        await this.operationDeposit(emitter, amountQuantity);
+        return this.despositResponse(amountQuantity, emitter, subject);
       default:
         throw new Error("Transaction type not found");
     }

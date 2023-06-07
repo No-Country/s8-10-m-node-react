@@ -10,6 +10,7 @@ declare module "express-session" {
   export interface SessionData {
     token: string;
     user: UserEntity;
+    accountNumber: string;
   }
 }
 
@@ -35,12 +36,12 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
 
   async checkToken(req: Request, res: Response, next: NextFunction) {
     const token = req.session.token;
-
+    
     try {
-      if (!token) return httpError.response(res, 500, "A token is expected");
+      if (!token) return httpError.response(res, 400, "A token is expected");
 
       const jwtPayload = authUtils.verifyToken(token);
-      if (!jwtPayload) return httpError.response(res, 500, "Invalid token");
+      if (!jwtPayload) return httpError.response(res, 400, "Invalid token");
 
       next();
     } catch (error) {
