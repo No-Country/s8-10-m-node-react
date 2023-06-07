@@ -14,7 +14,7 @@ const InputField = ({
   return (
     <div className="w-[108%] max-w-screen-sm flex flex-col relative">
       <input
-        className="outline-0 px-4 py-3 border border-[#4C27AE4D] rounded-lg peer focus:border-black transition duration-400 placeholder:font-inter placeholder:text-gray-400 placeholder:font-roboto placeholder:tracking-wider placeholder:text-sm"
+        className="outline-0 px-4 py-3 border border-[#4C27AE4D] rounded-lg peer focus:border-black transition duration-400 placeholder:font-inter placeholder:text-gray-400 placeholder:font-roboto placeholder:tracking-wider placeholder:text-sm focus:border-[#4C27AE]"
         id={id}
         type={type}
         name={name}

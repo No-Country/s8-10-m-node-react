@@ -18,7 +18,7 @@ export const CreditCardComp = ({ cardNumber, isDomino, name }) => {
 
   return (
     <article
-      className={`rounded-[48px] max-w-[385px] min-w-[300px] text-xl relative overflow-hidden font-inter shadow-lg`}
+      className={`rounded-[30px] max-w-[385px] min-w-[300px] text-xl relative overflow-hidden font-inter shadow-lg`}
       style={cardStyle}
     >
       <div className="h-full w-full flex flex-col justify-between py-4 px-8 relative">
