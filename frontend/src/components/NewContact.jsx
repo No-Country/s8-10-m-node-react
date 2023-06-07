@@ -18,7 +18,9 @@ const NewContact = () => {
   const [confirm, setConfirm] = useState(false)
   const [user, setUser] = useState({})
   const [contact, setContact] = useState({})
+  const [accountNumber, setAccountNumber] = useState({})
   const [accountName, setAccountName]= useState({name:'',lasname:''})
+
 
   //data from api
   useEffect(() => {
@@ -31,9 +33,9 @@ const NewContact = () => {
   }, [])
   
   const { response } = user
-  console.log(response)
+  
 
- // console.log(response[1].account)
+
 
 //filter data
 const validateForm = (e) => {
@@ -46,6 +48,8 @@ const validateForm = (e) => {
 
     if (foundAccount) {
       const account = foundAccount.account[0];
+      console.log(account)
+      setAccountNumber(account.accountNumber)
       const fullName = foundAccount.fullName
       const lastName = foundAccount.lastName
       setAccountName({name:fullName,lasname:lastName})
@@ -145,7 +149,10 @@ const validateForm = (e) => {
           )}
         </>
       ) : (
-        <ToTransfer setConfirm={setConfirm} close={closeSearchModal} />
+        <ToTransfer setConfirm={setConfirm} close={closeSearchModal} 
+        accountNumber={accountNumber}
+        accountName={accountName.name}
+        />
       )}
     </section>
   )

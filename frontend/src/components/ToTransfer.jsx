@@ -1,30 +1,52 @@
-import { PropTypes } from 'prop-types'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import back from '../assets/images/back.svg'
-import PopUp from './PopUp'
-import Success from './Success'
-import { useUserContext } from '../context/UserContext'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import back from '../assets/images/back.svg';
+import PopUp from './PopUp';
+import Success from './Success';
+import { useUserContext } from '../context/UserContext';
 
-const ToTransfer = ({ setConfirm, close }) => {
-  const [amount, setAmount] = useState(0)
-  const [error, setError] = useState(false)
-  const [showSuccess, setShowSuccess] = useState(false)
-  const {user}=useUserContext()
- const {payload}=user
- 
+const ToTransfer = ({ setConfirm, close, accountNumber }) => {
+  const [amount, setAmount] = useState(0);
+  const [error, setError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const { user } = useUserContext();
+  const { payload } = user;
+  console.log(payload.accountInfo);
 
   const validateAmount = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (parseInt(amount) === 0 || parseInt(amount) > parseInt(payload.accountInfo.amount)) {
-      setError(true)
+      setError(true);
     } else {
-   
-      if (parseInt(amount) <= parseInt(payload.accountInfo.amount)) {
-        setShowSuccess(true)
-      }
+      // Crear objeto con los datos de la transferencia
+      const transferData = {
+        typeTransaction: 'TRANSFER',
+        emitter: payload.accountInfo.accountNumber,
+        addressee: accountNumber,
+        amountQuantity: parseInt(amount),
+        subject: 'Un mensaje breve'
+      };
+
+      // Realizar solicitud POST a la API
+      fetch('https://pagaya.onrender.com/api/business', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(transferData)
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Manejar la respuesta del servidor
+          console.log(data);
+          setShowSuccess(true);
+        })
+        .catch((error) => {
+          // Manejar errores
+          console.log(error);
+        });
     }
-  }
+  };
 
   const navigate = useNavigate()
 
@@ -75,8 +97,5 @@ const ToTransfer = ({ setConfirm, close }) => {
   )
 }
 
-ToTransfer.propTypes = {
-  setConfirm: PropTypes.func,
-  close: PropTypes.func,
-}
+
 export default ToTransfer
