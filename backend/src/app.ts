@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import session from "express-session";
+import cookieParser from "cookie-parser";
 import { AppDataSource } from "./config/postgreSql";
 import { RoutesApp } from "./shared/router";
 
@@ -28,6 +29,7 @@ class AppServer {
   middlewares() {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cookieParser());
     this.app.use(cors());
     this.app.use(morgan("dev"));
     this.app.use(

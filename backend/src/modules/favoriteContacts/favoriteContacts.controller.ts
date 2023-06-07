@@ -13,7 +13,7 @@ export class FavoriteContactController extends FavoriteContactServices {
   }
 
   async getAllController(req: Request, res: Response) {
-    const { user } = req.session;
+    const { user } = req.cookies;
     try {
       if (!user) return httpError.response(res, 404, "User not found");
       const contacts = await this.getAllByUser(user.userId);
@@ -40,7 +40,7 @@ export class FavoriteContactController extends FavoriteContactServices {
   }
 
   async postController(req: Request, res: Response) {
-    const { user } = req.session;
+    const { user } = req.cookies;
     const { nickname, data } = req.body;
     try {
       if (!user) return httpError.response(res, 404, "User not found");
