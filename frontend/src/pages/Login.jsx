@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import slider from '../assets/images/login-slider.svg'
+import logo from '../assets/images/Logo.svg'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { Button } from '../components/Button'
 import InputField from '../components/InputField'
 import { useUserContext } from '../context/UserContext'
-import { redirect } from 'react-router-dom'
+import { Link, redirect, useNavigation } from 'react-router-dom'
 
 export function loader() {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
@@ -19,7 +19,7 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [validateForm, setValidateForm] = useState({})
 
-  const { user, login } = useUserContext()
+  const { login } = useUserContext()
 
   const handleChange = (e) => {
     setValidateForm({
@@ -34,12 +34,22 @@ export const Login = () => {
   }
 
   return (
-    <main className="w-full min-h-screen flex flex-col items-center gap-20">
-      <section className="mt-10">
-        <img src={slider} alt="" />
+    <main className="w-full min-h-screen flex flex-col justify-center items-center gap-8">
+      <section className="">
+        <img
+          className="w-[300px] h-[135px]"
+          src={logo}
+          alt="logotipo de domino"
+        />
       </section>
       <section className="w-full px-8">
-        <form className="w-full flex flex-col gap-6" onSubmit={validateUser}>
+        <h3 className="text-center font-roboto text-md mb-6 text-[#3E3F3F] tracking-wider">
+          Inicia sesión para acceder
+        </h3>
+        <form
+          className="w-full flex items-center flex-col gap-6 min-[450px]:px-5"
+          onSubmit={validateUser}
+        >
           <InputField
             id="email"
             type="email"
@@ -59,21 +69,43 @@ export const Login = () => {
             func={handleChange}
             setValue={setShowPassword}
             condition={showPassword}
-            icon={showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+            icon={
+              showPassword ? (
+                <FaRegEyeSlash size={20} className="text-[#4C27AE]" />
+              ) : (
+                <FaRegEye size={20} className="text-[#4C27AE]" />
+              )
+            }
           />
 
-          <div className="flex flex-col gap-6">
+          <div className="w-[108%] flex items-center flex-col gap-6">
             <Button
               type="submit"
-              nameClass="bg-[#012340] mt-10 py-3 rounded-full text-white font-semibold tracking-wide"
+              nameClass="w-full max-w-screen-sm bg-[#4C27AE] py-3 rounded-lg text-md text-white font-light font-roboto tracking-wider cursor-pointer "
             >
-              Ingresar
+              Iniciar sesión
             </Button>
-            <p className="text-sm text-center text-[#012340] underline underline-offset-2">
-              ¿Olvidaste tu contraseña?
-            </p>
           </div>
         </form>
+      </section>
+      <div className="w-full flex items-center justify-center gap-3">
+        <span className="w-[40%] max-w-[300px] border-t-2 border-[#4C27AE] blur-[.5px] rounded-full"></span>
+        <span className="font-bold font-roboto text-[#4C27AE] text-lg">O</span>
+        <span className="w-[40%] max-w-[300px] border-t-2 border-[#4C27AE] blur-[.5px] rounded-full"></span>
+      </div>
+      <section className="flex flex-col items-center gap-4">
+        <p className="text-md  font-roboto text-center font-medium text-black">
+          No tienes una cuenta?{' '}
+          <Link
+            to="/register"
+            className="cursor-pointer font-normal text-[#4C27AE]"
+          >
+            Regístrate aquí
+          </Link>
+        </p>
+        <p className="text-[15px] text-center cursor-pointer font-roboto">
+          ¿Has olvidado tu contraseña?
+        </p>
       </section>
     </main>
   )

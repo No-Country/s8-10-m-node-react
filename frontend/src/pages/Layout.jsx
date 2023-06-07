@@ -1,5 +1,7 @@
 import { NavBar } from '../components/NavBar'
-import { Outlet, useRouteLoaderData, redirect } from 'react-router-dom'
+import { Outlet, redirect } from 'react-router-dom'
+import { useState } from 'react'
+import PanelNavMobile from '../components/PanelNavMobile'
 
 export function loader() {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
@@ -11,13 +13,18 @@ export function loader() {
 }
 
 export const UserLayout = () => {
-  const isUserLoggedIn = useRouteLoaderData('userLoggedIn')
+  const [isOpen, setIsOpen] = useState(false)
+  function toggleOpen() {
+    setIsOpen(!isOpen)
+  }
 
-  //pl-24 es el minimo para el navBar
   return (
     <main className="">
-      {/* <NavBar /> */}
-      <Outlet />
+      <PanelNavMobile toggleOpen={toggleOpen} />
+      <NavBar toggleOpen={toggleOpen} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <div className="">
+        <Outlet />
+      </div>
     </main>
   )
 }

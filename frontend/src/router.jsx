@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
 import OnBoarding from './pages/OnBoarding'
-import { Login } from './pages/Login'
+import { Login, loader as checkUserLoggedLoader } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
 import { MyCards } from './pages/MyCards'
-import { MyCreditCard } from './pages/MyCreditCard'
+import { CreditCard, loader as creditCardPageLoader } from './pages/CreditCard'
 import { Services } from './pages/Services'
 import { Movements } from './pages/Movements'
 import Transfers from './pages/Transfers'
@@ -25,10 +25,12 @@ export const router = createBrowserRouter([
   {
     path: 'register',
     element: <Register />,
+    loader: checkUserLoggedLoader,
   },
   {
     path: 'login',
     element: <Login />,
+    loader: checkUserLoggedLoader,
   },
   {
     path: 'user',
@@ -46,7 +48,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'mycards/:creditCardId',
-        element: <MyCreditCard />,
+        element: <CreditCard />,
+        loader: creditCardPageLoader,
       },
       {
         path: 'transfers',

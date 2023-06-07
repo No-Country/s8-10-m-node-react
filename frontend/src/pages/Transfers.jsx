@@ -48,16 +48,11 @@ const Transfers = () => {
 
   return (
     <main className=" w-full min-h-screen bg-gray-100 relative">
-      <h2 className="pl-4 pt-4">
-        <Link to="/home" className="cursor-pointer">
-          Inicio
-        </Link>{' '}
-        / Transferencias
-      </h2>
+      <div className="pl-4 pt-4">
+        <Link to="../home">Inicio</Link> / Transferencias
+      </div>
       <section className="mt-6 mb-24 w-full flex justify-center gap-[5.25rem] relative pl-4">
-        <Link className="" replace="user/transfers">
-          Contactos
-        </Link>
+        <Link replace="user/transfers">Contactos</Link>
         <Link className="pr-4" to="newContact">
           Nuevo
         </Link>

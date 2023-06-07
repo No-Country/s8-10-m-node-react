@@ -5,6 +5,8 @@ import UserInformation from '../components/UserInformation'
 import Validation from '../components/Validation'
 import PersonalInfo from '../components/PersonalInfo'
 import { useUserContext } from '../context/UserContext'
+import logo from '../assets/images/Logo.svg'
+import { IoArrowBack } from 'react-icons/io5'
 
 export const Register = () => {
   const [page, setPage] = useState(0)
@@ -193,45 +195,56 @@ export const Register = () => {
         break
     }
   }
-
   return (
     <main className="w-full min-h-screen flex flex-col justify-center items-center">
-      <h1 className="text-3xl font-bold font-inter text-center text-gray-700 mb-4">
-        Registrate
+      <img
+        className="w-[300px] h-[160px]"
+        src={logo}
+        alt="logotipo de domino"
+      />
+      <h1 className="text-2xl font-medium font-roboto text-center mt-7 mb-4">
+        Registro
       </h1>
-      <h3 className="font-inter text-lg text-center text-gray-500 mb-[4.5rem]">
+      <h3 className="font-roboto text-md text-center text-gray-500 mb-4">
         {formTitles[page]}
       </h3>
 
-      <section className="w-full flex justify-center">
-        <form className="w-5/6 flex flex-col gap-8">
+      <section className="w-full flex justify-center px-8 mt-8">
+        <form className="w-full  flex flex-col items-center gap-8 min-[450px]:px-8">
           {pageLoaded()}
-
-          <div className="flex gap-4 justify-center">
-            <Button
-              func={(e) => {
-                e.preventDefault()
-                managePaging('prev')
-              }}
-              disabled={page === 0 && true}
-              type="button"
-              nameClass="text-center mt-12 px-10 py-2 rounded-full bg-[#348AD0] text-white font-semibold tracking-wider cursor-pointer disabled:opacity-40"
-            >
-              Anterior
-            </Button>
-
-            <Button
-              func={(e) => {
-                e.preventDefault()
-                validateRegister(page)
-              }}
-              type="button"
-              nameClass="text-center mt-12 px-10 py-2 rounded-full  bg-[#348AD0] text-white font-semibold tracking-wider cursor-pointer disabled:opacity-40"
-            >
-              {page === formTitles.length - 1 ? 'Registrarse' : 'Siguiente'}
-            </Button>
-          </div>
         </form>
+      </section>
+      <section className="w-full flex flex-col items-center max-w-screen-sm px-5">
+        <h3 className="text-center mt-7 font-roboto tracking-wide">
+          <span className="text-[#EB554E] text-md">*</span>
+          Todos los campos con asterisco son obligatorios
+        </h3>
+        <div className="w-full  h-auto flex items-center gap-5 justify-center md:justify-between mt-9">
+          <div className="flex gap-6 items-center">
+            {page >= 1 && (
+              <IoArrowBack
+                className="cursor-pointer"
+                size={20}
+                onClick={() => {
+                  managePaging('prev')
+                }}
+              />
+            )}
+            <p className="font-roboto">
+              Paso {page + 1} de {formTitles.length}
+            </p>
+          </div>
+          <Button
+            func={(e) => {
+              e.preventDefault()
+              validateRegister(page)
+            }}
+            type="button"
+            nameClass="text-center w-36 md:w-72 md:transition-[width] md:duration-500 h-12 py-2 rounded-full  bg-[#4C27AE] text-white font-medium font-roboto tracking-wider cursor-pointer disabled:opacity-40"
+          >
+            {page === formTitles.length - 1 ? 'Registrarse' : 'Continuar'}
+          </Button>
+        </div>
       </section>
     </main>
   )
