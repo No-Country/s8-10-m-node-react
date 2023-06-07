@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { accountUserHandler } from "./user.utils";
 import { UserService } from "./user.services";
 import { httpError } from "../../shared/utils/httpError.utils";
+import { generalDto } from "../../shared/dto/generalDto";
+import { UserEntity } from "./user.entity";
 
 export class UserController extends UserService {
   constructor() {
@@ -14,6 +16,22 @@ export class UserController extends UserService {
       res.json({
         status: "success",
         response: result,
+      });
+    } catch (error) {
+      httpError.internal(res, 500, error as Error);
+    }
+  }
+
+  async getByEmail(req: Request, res: Response) {
+    const { email } = req.body;
+    try {
+      const result = await this.repository.findOne({ where: { email } }) as UserEntity;
+
+      const payload = generalDto.loginReturn(result);
+
+      res.json({
+        status: "success",
+        payload,
       });
     } catch (error) {
       httpError.internal(res, 500, error as Error);
@@ -36,7 +54,7 @@ export class UserController extends UserService {
   async postController(req: Request, res: Response) {
     try {
       const result = await accountUserHandler.createUserTransaction(req.body);
-      if(!result) httpError.response(res, 400, "Error creating user");
+      if (!result) httpError.response(res, 400, "Error creating user");
       res.json({
         status: "success",
         response: result,
