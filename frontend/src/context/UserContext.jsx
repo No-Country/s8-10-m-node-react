@@ -20,7 +20,6 @@ const UserProvider = ({ children }) => {
     } else {
       setUser({})
     }
-
     setLoading(false)
   }, [])
 

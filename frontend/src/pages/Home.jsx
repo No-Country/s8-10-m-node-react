@@ -4,6 +4,8 @@ import { IoTrendingUp, IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5'
 import { useUserContext } from '../context/UserContext'
 import { useState } from 'react'
 import WithdrawCash from '../components/WithdrawCash'
+import { formatCurrency } from '../utils/formatCurrency'
+import { FaAsterisk } from 'react-icons/fa'
 
 export const Home = () => {
   const [showBalance, setshowBalance] = useState(false)
@@ -14,11 +16,11 @@ export const Home = () => {
 
   return (
     <>
-      <section className="w-full h-[250px] bg-[#4C27AE26] md:bg-transparent md:shadow-none shadow-first flex md:flex-row md:flex-wrap md:w-[500px] md:h-[150px] md:gap-x-6 md:justify-center flex-col items-center">
-        <p className="font-roboto mt-10 md:mt-0">Disponible</p>
+      <section className="w-full bg-tableRowColor md:bg-transparent md:shadow-none shadow-first flex md:flex-row md:flex-wrap md:gap-x-6 md:justify-center flex-col items-center justify-center py-6 md:mx-auto">
+        <p className="font-roboto md:mt-0">Disponible</p>
         <div className="w-[85%] md:w-auto h-auto flex items-center justify-center gap-x-6 mt-2 border-b pb-4 border-[#4C27AE4D] md:border-0">
-          <h3 className="text-5xl font-roboto font-bold tracking-wide">
-            {showBalance ? '$100.000' : '********'}
+          <h3 className="text-5xl font-roboto font-bold text-center tracking-wide min-w-[200px]">
+            {showBalance ? formatCurrency(100) : ('*****')}
           </h3>
           <span onClick={() => setshowBalance(!showBalance)}>
             {showBalance ? (
@@ -28,7 +30,6 @@ export const Home = () => {
             )}
           </span>
         </div>
-
         <div className="w-full flex justify-center gap-x-6 mt-8">
           <Link
             to="../transfers"

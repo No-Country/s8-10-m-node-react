@@ -2,10 +2,9 @@ import { FaCheckCircle } from 'react-icons/fa'
 import { FaExclamationCircle } from 'react-icons/fa'
 
 import React from 'react'
+import { formatCurrency } from '../utils/formatCurrency'
 
 export const MovementsList = ({ movements }) => {
-
-  const formatDate = (date) => new Intl.DateTimeFormat('es-AR').format(date)
 
   return (
     <div className='grid grid-cols-movementsTable w-full sm:w-[80%] items-stretch gap-x-0 gap-y-2 [&>*]:p-2 [&>*]:sm:text-base [&>*]:text-xs'>
@@ -23,11 +22,11 @@ export const MovementsList = ({ movements }) => {
               <p className='text-center'>{movement.subject}</p>
             </span>
             <span className='flex justify-center w-full h-full bg-tableRowColor'>
-              <p className='truncate'>{formatDate(movement.date)}</p>
+              <p className='truncate'>{movement.date}</p>
             </span>
             <span className='flex justify-end w-full h-full bg-tableRowColor sm:rounded-r-md'>
               <p>
-                {movement.amount}
+                {formatCurrency(movement.amount)}
               </p >
             </span>
           </>

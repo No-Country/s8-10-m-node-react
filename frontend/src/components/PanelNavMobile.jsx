@@ -28,8 +28,7 @@ const PanelNavMobile = ({ toggleOpen, items }) => {
 
   return (
     <section
-      className={`w-full flex justify-evenly gap-8 items-center bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] shadow-lg md:h-36 ${location.pathname !== '/user/home' && 'md:h-16'
-        }`}
+      className={`w-full flex justify-evenly gap-8 items-center bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] drop shadow-tableRowColor shadow-lg md:h-36 ${location.pathname !== '/user/home' && 'md:h-16'}`}
     >
       {mobilePanel.condition ? (
         <>
@@ -38,7 +37,7 @@ const PanelNavMobile = ({ toggleOpen, items }) => {
             onClick={toggleOpen}
             className=" text-[#4C27AE] text-xl cursor-pointer md:hidden"
           />
-          <div className="flex gap-3 items-center font-roboto md:flex-col md:gap-0">
+          <div className="flex gap-3 items-center font-roboto md:flex-col md:gap-0 py-4">
             <p>Bienvenido</p>
             <h2 className="md:text-2xl">Carlos</h2>
           </div>

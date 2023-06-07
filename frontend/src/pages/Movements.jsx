@@ -3,9 +3,15 @@ import { PageTitle } from './../components/PageTitle'
 import { useRouteLoaderData } from 'react-router-dom'
 import { MovementsList } from '../components/MovementsList'
 import { PayServicesLink } from '../components/PayServicesLink'
+import { TbFaceIdError } from "react-icons/tb"
+
+export const loader = () => {
+
+}
 
 export const Movements = () => {
   const { payload } = useRouteLoaderData('userLoggedIn')
+  console.log(payload)
 
   const moves = payload.movements
 
@@ -15,7 +21,13 @@ export const Movements = () => {
         Movimientos
       </PageTitle>
       <div className='w-full flex flex-col items-center justify-center gap-12'>
-        <MovementsList movements={moves} />
+        {moves.length > 0 ?
+          <MovementsList movements={moves} /> :
+          <span className='flex items-center gap-2'>
+            <TbFaceIdError className='h-6 w-6' />
+            <h3 className='text-center text-xl'>
+              No tiene movimientos hechos</h3>
+          </span>}
         <PayServicesLink />
       </div>
     </div >

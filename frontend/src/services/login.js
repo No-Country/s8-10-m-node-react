@@ -4,7 +4,6 @@ export const loginUser = async (credentials) => {
   try {
     const response = await fetch(`${BASE_URL}/auth`, {
       method: 'POST',
-      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },

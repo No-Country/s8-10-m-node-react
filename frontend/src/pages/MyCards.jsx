@@ -3,6 +3,7 @@ import { CreditCardComp } from '../components/CreditCardComp'
 import { PageTitle } from './../components/PageTitle'
 import { Link, useRouteLoaderData } from 'react-router-dom'
 import { FaRegCreditCard, FaAngleRight } from 'react-icons/fa'
+import { CreditCardWithLink } from '../components/CreditCardWithLink'
 
 export const MyCards = () => {
   const user = useRouteLoaderData('userLoggedIn')
@@ -18,34 +19,13 @@ export const MyCards = () => {
     <div className='py-6 md:py-4 px-4 flex flex-col gap-4'>
       <PageTitle>Tarjetas</PageTitle>
       <h3 className="font-semibold w-full text-xl">Tu tarjeta</h3>
-      <span className='flex items-center'>
-        <CreditCardComp cardNumber={dominoCard} name={cardName} isDomino={true} />
-        <Link
-          to={`/user/mycards/${dominoCard}?domino=true`}
-        >
-          <FaAngleRight fill='##4C27AE' />
-        </Link>
-      </span>
+      <CreditCardWithLink cardName={cardName} isDomino={true} cardNumber={dominoCard} />
       {associateCards.length == 0 ? (
         <div className='flex flex-col gap-4'>
           <h2 className="font-semibold w-full text-xl">Tarjetas asociadas</h2>
           <div className="flex flex-wrap w-full items-center justify-center gap-6">
-            <span className='flex items-center'>
-              <CreditCardComp cardNumber="378282246310005" name={cardName} />
-              <Link
-                to={`/user/mycards/${dominoCard}`}
-              >
-                <FaAngleRight fill='##4C27AE' />
-              </Link>
-            </span>
-            <span className='flex items-center'>
-              <CreditCardComp cardNumber="6331245123123" name={cardName} />
-              <Link
-                to={`/user/mycards/${dominoCard}`}
-              >
-                <FaAngleRight fill='##4C27AE' />
-              </Link>
-            </span>
+            <CreditCardWithLink cardNumber="378282246310005" name={cardName} />
+            <CreditCardWithLink cardNumber="6331245123123" name={cardName} />
           </div>
         </div>
       ) : null}
