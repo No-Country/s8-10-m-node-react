@@ -9,7 +9,7 @@ export class UserRouter extends BaseRouter<UserController, UserMiddlewares> {
 
   routes(path: string): void {
     // this.router.get(`/${path}`, (req, res) => this.controller.getAllController(req, res));
-    this.router.get(`/${path}/:id`, (req, res) => this.controller.getByIdController(req, res));
+    this.router.get(`/${path}`, (req, res) => this.controller.getByEmail(req, res));
     this.router.post(`/${path}`,
       (req, res, next) => this.middleware.checkUser(req, res, next),
       (req, res) => this.controller.postController(req, res));
