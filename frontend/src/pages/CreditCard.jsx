@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { CreditCardComp } from '../components/CreditCardComp'
 import { TogglePill } from '../components/TogglePill'
 import { FaAngleDoubleRight, FaTrash } from 'react-icons/fa'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useRouteLoaderData } from 'react-router-dom'
 import { PageTitle } from '../components/PageTitle'
-import { getCreditCardInfo } from '../services/creditCard'
 
-export const loader = async ({ params, request }) => {
-  const creditCardId = params.creditCardId
-  const data = await getCreditCardInfo(creditCardId)
+export const loader = async ({ request, params }) => {
+  const { creditCardId } = params
   const isDomino = new URL(request.url).searchParams.get('domino')
-  console.log(isDomino)
-  return { data, isDomino }
+  return { isDomino, creditCardId }
 }
 
 export const CreditCard = () => {
-  const { data, isDomino } = useLoaderData()
+  const { isDomino, creditCardId } = useLoaderData()
+  const userData = useRouteLoaderData('userLoggedIn')
+
+  const card = isDomino ? userData.payload.accountInfo.dominoCard : userData.payload.accountInfo.associateCards.filter(card => card.cardNumber === creditCardId)
+
   return (
     <>
       <PageTitle>Tarjetas</PageTitle>
-      <CreditCardComp cardNumber={data.cardNumber} isDomino={isDomino} />
+      <CreditCardComp cardNumber={card.cardNumber} isDomino={isDomino} />
       <div className="flex flex-col w-full gap-2 font-medium font-roboto px-2">
         <div className="flex w-full items-center justify-between">
           <p>Pausar tarjeta</p>
@@ -44,7 +45,6 @@ export const CreditCard = () => {
           </p>
         </button>
       </div>
-      {/* {windowWidth > 480 ? <p>Estamos en desktop o tablet</p> : <p>Estamos en mobile</p>} */}
     </>
   )
 }

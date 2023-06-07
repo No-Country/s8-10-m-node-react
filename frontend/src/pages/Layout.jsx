@@ -12,10 +12,10 @@ import {
 } from 'react-icons/fa'
 import { useLayoutContext } from '../context/LayoutContext'
 
-export function loader() {
+export async function loader () {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
   if (loggedUserJSON) {
-    return JSON.parse(loggedUserJSON)
+    return (JSON.parse(loggedUserJSON))
   } else {
     return redirect('/login')
   }
@@ -23,7 +23,7 @@ export function loader() {
 
 export const UserLayout = () => {
   const [isOpen, setIsOpen] = useState(false)
-  function toggleOpen() {
+  function toggleOpen () {
     setIsOpen(!isOpen)
   }
   const { windowWidth } = useLayoutContext()
@@ -63,7 +63,7 @@ export const UserLayout = () => {
   ]
   return (
     <main className="md:ml-24">
-      {}
+      { }
       <PanelNavMobile toggleOpen={toggleOpen} items={menuItems} />
       <NavBar
         toggleOpen={toggleOpen}
