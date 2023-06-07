@@ -6,6 +6,7 @@ import { BusinessService } from "./business.services";
 import { httpError } from "../../shared/utils/httpError.utils";
 import { userServices } from "../user/user.services";
 import { accountUserServices } from "../accountUser/accountUser.services";
+import { businessUtils } from "./business.utils";
 
 export class BusinessController extends BusinessService {
   constructor() {
@@ -46,10 +47,15 @@ export class BusinessController extends BusinessService {
     const { user } = req.cookies;
 
     try {
+      const emitterNumber = await businessUtils.getAccountNumber(emitter);
+      const addresseeNumber = await businessUtils.getAccountNumber(addressee);
+
+      console.log(emitterNumber, addresseeNumber);
+
       const result = (await operationsServices.operationManager(
         typeTransaction,
-        emitter,
-        addressee,
+        emitterNumber,
+        addresseeNumber,
         amountQuantity,
         subject
       )) as BusinessEntity;
