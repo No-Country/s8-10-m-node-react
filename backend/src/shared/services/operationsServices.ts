@@ -2,41 +2,39 @@ import { FindOptionsWhere } from "typeorm";
 import { AppDataSource } from "../../config/postgreSql";
 import { AccountAmountEntity } from "../../modules/accountAmount/accountAmount.entity";
 import { AccountUserEntity } from "../../modules/accountUser/accountUser.entity";
-import { PayServices, Status, Transaction } from "../../modules/business/business.entity";
 import { BusinessDto } from "../../modules/business/business.dto";
-import { UserEntity } from "../../modules/user/user.entity";
+import { PayServices, Status, Transaction } from "../../modules/business/business.entity";
 
 class OperationsServices {
   async addMoney(amountQuantity: number, account: string) {
     const accountUser = await this.getAccount(account);
+    const id = accountUser?.accountAmount[0].id;
     const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOne({
       where: {
-        accountUser: accountUser,
+        id,
       } as unknown as FindOptionsWhere<AccountAmountEntity>,
     });
 
     await AppDataSource.getRepository(AccountAmountEntity).update(
       { accountUser: accountUser } as unknown as FindOptionsWhere<AccountAmountEntity>,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      { amount: (accountAmount!.amount) + amountQuantity }
+      { amount: (accountAmount?.amount as number) + amountQuantity }
     );
   }
 
   async removeMoney(amountQuantity: number, account: string) {
     const accountUser = await this.getAccount(account);
+    const id = accountUser?.accountAmount[0].id;
     const accountAmount = await AppDataSource.getRepository(AccountAmountEntity).findOne({
       where: {
-        accountUser: accountUser,
+        id,
       } as unknown as FindOptionsWhere<AccountAmountEntity>,
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    if ((accountAmount!.amount) < amountQuantity) throw new Error("Insufficient funds");
+    if ((accountAmount?.amount as number) < amountQuantity) throw new Error("Insufficient funds");
 
     await AppDataSource.getRepository(AccountAmountEntity).update(
       { accountUser: accountUser } as unknown as FindOptionsWhere<AccountAmountEntity>,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      { amount: (accountAmount!.amount) - amountQuantity }
+      { amount: (accountAmount?.amount as number) - amountQuantity }
     );
   }
 

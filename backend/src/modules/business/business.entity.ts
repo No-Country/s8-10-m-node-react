@@ -35,7 +35,7 @@ export class BusinessEntity extends BaseEntityApp {
   @Column()
   currencyId: number;
 
-  @Column({ type: "float" })
+  @Column({ type: "real" })
   amount: number;
 
   @Column({

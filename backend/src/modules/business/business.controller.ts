@@ -59,7 +59,7 @@ export class BusinessController extends BusinessService {
         ...result,
         accountUser,
       } as BusinessEntity;
-      console.log(accountUser);
+      
       await this.postService(newBusiness) as BusinessEntity;
 
       const data = await this.getServices();
