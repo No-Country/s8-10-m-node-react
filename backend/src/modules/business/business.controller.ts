@@ -42,7 +42,7 @@ export class BusinessController extends BusinessService {
 
   async postController(req: Request, res: Response) {
     const { typeTransaction, emitter, addressee, amountQuantity, subject } = req.body;
-    const { user } = req.session;
+    const { user } = req.cookies;
 
     try {
       const result = (await operationsServices.operationManager(

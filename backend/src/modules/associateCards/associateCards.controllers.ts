@@ -12,7 +12,7 @@ export class AssociateCardsController extends AssociateCardsServices {
   }
 
   async getAllController(req: Request, res: Response) {
-    const { user } = req.session;
+    const { user } = req.cookies;
     try {
       if (!user) return httpError.response(res, 404, "User not found");
       const cards = await this.getAllByAccount(user?.account[0].id!);
@@ -41,7 +41,7 @@ export class AssociateCardsController extends AssociateCardsServices {
 
   async postController(req: Request, res: Response) {
     const { cardNumber, cvv, issuingEntity, type, cardholder } = req.body;
-    const { user } = req.session;
+    const { user } = req.cookies;
     try {
       if (!user) return httpError.response(res, 404, "User not found");
       const newCard = {
@@ -68,7 +68,6 @@ export class AssociateCardsController extends AssociateCardsServices {
 
   async putController(req: Request, res: Response) {
     const body = req.body;
-    const { user } = req.session;
     try {
       const cardNumber = body.cardNumber;
       const card = await this.repository.findOne({ where: { cardNumber } });

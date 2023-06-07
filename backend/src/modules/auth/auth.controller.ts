@@ -17,6 +17,12 @@ export class AuthController extends AuthServices {
       req.session.token = token;
       req.session.user = user;
       const payload = generalDto.loginReturn(user);
+      res.cookie("token", token, {
+        httpOnly: true,
+      });
+      res.cookie("user", user, {
+        httpOnly: true,
+      });
       res.json({
         status: "success",
         payload,

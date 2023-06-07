@@ -34,7 +34,7 @@ export abstract class BaseMiddlewares<T extends BaseEntity> {
   }
 
   async checkToken(req: Request, res: Response, next: NextFunction) {
-    const token = req.session.token;
+    const {token}= req.cookies;
 
     try {
       if (!token) return httpError.response(res, 500, "A token is expected");
