@@ -12,6 +12,9 @@ const ToTransfer = ({ setConfirm, close, accountNumber }) => {
   const { user } = useUserContext();
   const { payload } = user;
   console.log(payload.accountInfo);
+  const cuenta = payload.accountInfo.accountNumber;
+  console.log(accountNumber);
+
 
   const validateAmount = (e) => {
     e.preventDefault();
@@ -21,11 +24,12 @@ const ToTransfer = ({ setConfirm, close, accountNumber }) => {
       // Crear objeto con los datos de la transferencia
       const transferData = {
         typeTransaction: 'TRANSFER',
-        emitter: payload.accountInfo.accountNumber,
+        emitter: cuenta,
         addressee: accountNumber,
         amountQuantity: parseInt(amount),
         subject: 'Un mensaje breve'
       };
+      console.log(transferData);
 
       // Realizar solicitud POST a la API
       fetch('https://pagaya.onrender.com/api/business', {
