@@ -4,7 +4,7 @@ export class BaseEntityApp extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @CreateDateColumn({ select: false })
+  @CreateDateColumn({ select: true })
   createdAt?: Date;
   @UpdateDateColumn({ select: false })
   updatedAt?: Date;

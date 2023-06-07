@@ -2,6 +2,7 @@ import { AssociateCardsEntity } from "../../modules/associateCards/associateCard
 import { BusinessEntity, Status, Transaction } from "../../modules/business/business.entity";
 import { FavoriteContactsEntity } from "../../modules/favoriteContacts/favoriteContacts.entity";
 import { UserEntity } from "../../modules/user/user.entity";
+import { dateHandler } from "../utils/date.utils";
 
 interface ArrayCards {
   cardNumber: string;
@@ -14,6 +15,7 @@ export interface ArrayBusiness {
   status: Status;
   amount: number;
   subject: string;
+  date?: Date | string;
 }
 
 interface ArrayFavoriteContacts {
@@ -71,12 +73,14 @@ export class GeneralDto {
 
   businessFilter(business: BusinessEntity[] = []): ArrayBusiness[] {
     const arrayBusiness: ArrayBusiness[] = [];
+    
     business.forEach((b) => {
       const newBusiness: ArrayBusiness = {
         status: b.status,
         amount: b.amount,
         subject: b.subject,
         transaction: b.transaction,
+        date: dateHandler.formatDate(b.createdAt as Date),
       };
       arrayBusiness.push(newBusiness);
     });

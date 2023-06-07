@@ -9,6 +9,13 @@ import { accountUserUtils } from "../accountUser/accountUser.utils";
 import { currencyServices } from "../currency/currency.services";
 import { UserEntity } from "./user.entity";
 import { hashPassword } from "../../shared/utils/hashPassword.utils";
+
+export interface UserData {
+  user: UserEntity;
+  accountAmount: AccountAmountEntity;
+  accountCard: AccountCardEntity;
+  accountUser: AccountUserEntity;
+}
 class AccountUserHandler {
 
   async createUserTransaction(body: UserEntity) {
@@ -38,11 +45,10 @@ class AccountUserHandler {
           accountUser
         };
       });
-      return result;
+      return result as UserData;
     } catch (error) {
       const e = error as Error;
-      console.log(error, e);
-      return { message: e.message };
+      throw new Error(e.message);
     }
   }
 
