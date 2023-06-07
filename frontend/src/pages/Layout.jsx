@@ -63,7 +63,6 @@ export const UserLayout = () => {
   ]
   return (
     <main className="md:ml-24">
-      { }
       <PanelNavMobile toggleOpen={toggleOpen} items={menuItems} />
       <NavBar
         toggleOpen={toggleOpen}
@@ -71,9 +70,7 @@ export const UserLayout = () => {
         items={menuItems}
         setIsOpen={setIsOpen}
       />
-      <div className="">
-        <Outlet />
-      </div>
+      <Outlet />
     </main>
   )
 }

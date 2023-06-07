@@ -28,9 +28,8 @@ const PanelNavMobile = ({ toggleOpen, items }) => {
 
   return (
     <section
-      className={`w-full flex justify-evenly gap-8 items-center h-12 bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] shadow-lg md:h-36 md:mb-8 ${
-        location.pathname !== '/user/home' && 'md:h-16'
-      }`}
+      className={`w-full flex justify-evenly gap-8 items-center bg-gradient-to-r from-[#FDFBFB] to-[#EBEDEE] shadow-lg md:h-36 ${location.pathname !== '/user/home' && 'md:h-16'
+        }`}
     >
       {mobilePanel.condition ? (
         <>

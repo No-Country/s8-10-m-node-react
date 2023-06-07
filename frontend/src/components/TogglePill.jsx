@@ -7,7 +7,7 @@ export const TogglePill = () => {
     setToggle(prevToggle => !prevToggle)
   }
 
-  const bgColor = toggle ? 'bg-[#42ADD5]' : 'bg-slate-500'
+  const bgColor = toggle ? 'bg-primary' : 'bg-slate-500'
 
   return (
     <div className={`w-[34px] h-5 relative rounded-full p-2 ${bgColor} cursor-pointer transition-colors duration-300`} onClick={togglePause}>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import servicesBot from '../assets/images/servicesBotCompressed.png'
 
 
-export const PayServices = () => {
+export const PayServicesLink = () => {
   return (
     <>
       <Link to='/user/services' className='justify-self-end h-full w-[95%] sm:w-[80%] bg-primary rounded-md p-4 text-white flex justify-center items-center'>
