@@ -31,7 +31,8 @@ export class BusinessController extends BusinessService {
   async getByAccountController(req: Request, res: Response) {
     const { accountNumber } = req.body;
     try {
-      const payload = await this.getBusinessByUser(accountNumber);
+      const number = await businessUtils.getAccountNumber(accountNumber);
+      const payload = await this.getBusinessByUser(number);
       
       res.json({
         status: "success",
