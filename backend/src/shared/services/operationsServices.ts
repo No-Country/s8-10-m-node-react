@@ -17,7 +17,8 @@ class OperationsServices {
 
     await AppDataSource.getRepository(AccountAmountEntity).update(
       { accountUser: accountUser } as unknown as FindOptionsWhere<AccountAmountEntity>,
-      { amount: (accountAmount?.amount as number) + amountQuantity }
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      { amount: (accountAmount!.amount) + amountQuantity }
     );
   }
 
@@ -29,11 +30,13 @@ class OperationsServices {
       } as unknown as FindOptionsWhere<AccountAmountEntity>,
     });
 
-    if ((accountAmount?.amount as number) < amountQuantity) throw new Error("Insufficient funds");
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    if ((accountAmount!.amount) < amountQuantity) throw new Error("Insufficient funds");
 
     await AppDataSource.getRepository(AccountAmountEntity).update(
       { accountUser: accountUser } as unknown as FindOptionsWhere<AccountAmountEntity>,
-      { amount: (accountAmount?.amount as number) - amountQuantity }
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      { amount: (accountAmount!.amount) - amountQuantity }
     );
   }
 
