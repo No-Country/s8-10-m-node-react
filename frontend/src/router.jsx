@@ -24,6 +24,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <OnBoarding />,
+    errorElement: <ErrorPage />,
   },
   {
     path: 'register',
@@ -40,7 +41,6 @@ export const router = createBrowserRouter([
     element: <UserLayout />,
     loader: userLoader,
     id: 'userLoggedIn',
-    errorElement: <ErrorPage />,
     children: [
       {
         path: 'home',
