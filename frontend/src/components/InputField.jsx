@@ -23,7 +23,7 @@ const InputField = ({
         value={inputValue}
       />
       <label
-        className="absolute left-4 -top-[10px] px-1 bg-white text-sm text-[#4C27AE] font-roboto tracking-wide transition duration-400 peer-focus:text-black font-inter rounded-md border-[#4C27AE4D] border-[1px]"
+        className="absolute left-4 -top-[10px] px-1 bg-white text-sm text-[#4C27AE] font-roboto tracking-wide transition duration-400 peer-focus:text-black font-inter rounded-md border-[#4C27AE4D] "
         htmlFor={labelFor}
       >
         {content}

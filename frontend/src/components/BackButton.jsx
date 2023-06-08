@@ -5,7 +5,7 @@ export const BackButton = () => {
   const navigate = useNavigate()
 
   const goBackPage = () => {
-    navigate(-1)
+    navigate('../user/home')
   }
 
   return (
