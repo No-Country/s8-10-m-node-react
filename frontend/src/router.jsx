@@ -5,7 +5,7 @@ import { Register } from './pages/Register'
 import { Home } from './pages/Home'
 import { MyCards } from './pages/MyCards'
 import { CreditCard, loader as creditCardPageLoader } from './pages/CreditCard'
-import { Services } from './pages/Services'
+import { Services, loader as servicesLoader } from './pages/Services'
 import { Movements } from './pages/Movements'
 import Transfers from './pages/Transfers'
 import Contacts from './components/Contacts'
@@ -17,11 +17,14 @@ import Soporte from './components/Soporte'
 import { Perfil } from './components/Perfil'
 import { Aspectos } from './components/Aspectos'
 import Success from './components/Success'
+import { PayService, loader as payServiceLoader } from './pages/PayService'
+import { ErrorPage } from './pages/errorPage'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <OnBoarding />,
+    errorElement: <ErrorPage />,
   },
   {
     path: 'register',
@@ -81,6 +84,12 @@ export const router = createBrowserRouter([
       {
         path: 'services',
         element: <Services />,
+        loader: servicesLoader,
+      },
+      {
+        path: 'services/:serviceId',
+        element: <PayService />,
+        loader: payServiceLoader,
       },
       {
         path: 'movements',

@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link, useRouteLoaderData } from 'react-router-dom'
 import { CreditCardComp } from '../components/CreditCardComp'
 import { IoTrendingUp, IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5'
-import { useUserContext } from '../context/UserContext'
 import { useState } from 'react'
 import WithdrawCash from '../components/WithdrawCash'
 import { formatCurrency } from '../utils/formatCurrency'
@@ -10,8 +9,7 @@ import { PayServicesLink } from '../components/PayServicesLink'
 
 export const Home = () => {
   const [showBalance, setshowBalance] = useState(false)
-
-  const { user } = useUserContext()
+  const user = useRouteLoaderData('userLoggedIn')
   const { payload } = user
   const listMovements = payload?.movements.slice(0, 4)
 
@@ -51,6 +49,7 @@ export const Home = () => {
           {user ? (
             <>
               <CreditCardComp
+                key={payload?.accountInfo?.dominoCard?.cardNumber}
                 cardNumber={payload?.accountInfo?.dominoCard?.cardNumber}
                 isDomino={true}
                 name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}

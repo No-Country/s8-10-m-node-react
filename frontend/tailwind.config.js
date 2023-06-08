@@ -8,7 +8,8 @@ export default {
         inter: ['Inter', 'Consolas', 'ui-monospace', 'Menlo'],
       },
       gridTemplateColumns: {
-        'movementsTable': 'auto 1fr auto auto'
+        'movementsTable': 'auto 1fr auto auto',
+        'servicesTables': 'repeat( auto-fit, minmax(160px, 1fr) )'
       },
       keyframes: {
         'slide-in-desktop': {
