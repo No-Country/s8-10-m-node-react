@@ -18,6 +18,7 @@ import { Perfil } from './components/Perfil'
 import { Aspectos } from './components/Aspectos'
 import Success from './components/Success'
 import { PayService, loader as payServiceLoader } from './pages/PayService'
+import { ErrorPage } from './pages/errorPage'
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ export const router = createBrowserRouter([
     element: <UserLayout />,
     loader: userLoader,
     id: 'userLoggedIn',
+    errorElement: <ErrorPage />,
     children: [
       {
         path: 'home',

@@ -1,22 +1,19 @@
-import { Link } from 'react-router-dom'
+import { Link, useRouteLoaderData } from 'react-router-dom'
 import { CreditCardComp } from '../components/CreditCardComp'
 import { IoTrendingUp, IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5'
-import { useUserContext } from '../context/UserContext'
 import { useState } from 'react'
 import WithdrawCash from '../components/WithdrawCash'
 import { formatCurrency } from '../utils/formatCurrency'
-import { FaAsterisk } from 'react-icons/fa'
 
 export const Home = () => {
   const [showBalance, setshowBalance] = useState(false)
-
-  const { user } = useUserContext()
+  const user = useRouteLoaderData('userLoggedIn')
   const { payload } = user
   console.log(payload)
 
   return (
     <>
-      <section className="w-full bg-tableRowColor md:bg-transparent md:shadow-none shadow-first flex md:flex-row md:flex-wrap md:gap-x-6 md:justify-center flex-col items-center justify-center py-6 md:mx-auto">
+      <section className="w-full bg-tableRowColor  md:shadow-none shadow-first flex md:flex-row md:flex-wrap md:gap-x-6 md:justify-center flex-col items-center justify-center py-6 md:mx-auto">
         <p className="font-roboto md:mt-0">Disponible</p>
         <div className="w-[85%] md:w-auto h-auto flex items-center justify-center gap-x-6 mt-2 border-b pb-4 border-[#4C27AE4D] md:border-0">
           <h3 className="text-5xl font-roboto font-bold text-center tracking-wide min-w-[200px]">
@@ -43,10 +40,11 @@ export const Home = () => {
       </section>
       <section className="pl-6 mt-8">
         <h2 className="font-roboto text-lg pl-2 mb-4">Mis tarjetas</h2>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap gap-4">
           {user ? (
             <>
               <CreditCardComp
+                key={payload?.accountInfo?.dominoCard?.cardNumber}
                 cardNumber={payload?.accountInfo?.dominoCard?.cardNumber}
                 isDomino={true}
                 name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}
@@ -55,8 +53,9 @@ export const Home = () => {
                 console.log(card)
                 return (
                   <CreditCardComp
+                    key={card.cardNumber}
                     cardNumber={
-                      payload?.accountInfo?.associateCards?.cardNumber
+                      card.cardNumber
                     }
                     isDomino={false}
                     name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}
