@@ -26,7 +26,7 @@ export class UserController extends UserService {
     const { term } = req.params;
     if(!term) return httpError.response(res, 400, "Alias or term is requerid");
     try {
-      const result=await this.getUserByaliasOremail(term)
+      const result=await this.getUserByaliasOremail(term);
       if(!result) return httpError.response(res, 400, "Alias or term is requerid");
       req.session.user = result;
       const payload = generalDto.loginReturn(result);
