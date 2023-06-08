@@ -17,19 +17,19 @@ export class AssociateCardsRouter extends BaseRouter<AssociateCardsController, A
     
     this.router.post(
       `/${path}`,
-      (req, res, nex) => this.middleware.checkToken(req, res, nex),
+      // (req, res, nex) => this.middleware.checkToken(req, res, nex),
       (req, res, nex) => this.middleware.checkDataCards(req, res, nex),
       (req, res) => this.controller.postController(req, res)
     );
     this.router.put(
       `/${path}`,
-      (req, res, nex) => this.middleware.checkToken(req, res, nex),
+      // (req, res, nex) => this.middleware.checkToken(req, res, nex),
       (req, res, nex) => this.middleware.checkCardNumber(req, res, nex),
       (req, res) => this.controller.putController(req, res)
     );
     this.router.delete(
       `/${path}`,
-      (req, res, nex) => this.middleware.checkToken(req, res, nex),
+      // (req, res, nex) => this.middleware.checkToken(req, res, nex),
       (req, res, nex) => this.middleware.checkCardNumber(req, res, nex),
       (req, res) => this.controller.deleteController(req, res)
     );

@@ -27,6 +27,7 @@ export class AuthController extends AuthServices {
         status: "success",
         payload,
       });
+
     } catch (error) {
       console.log(error);
       httpError.internal(res, 500, error as Error);
