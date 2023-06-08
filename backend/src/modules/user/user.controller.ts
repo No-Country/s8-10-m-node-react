@@ -22,13 +22,13 @@ export class UserController extends UserService {
     }
   }
 
-  async getByEmail(req: Request, res: Response) {
-    const { email } = req.body;
-    if(!email) return httpError.response(res, 400, "Email is required");
+  async getByEmailorAlias(req: Request, res: Response) {
+    const { term } = req.params;
+    if(!term) return httpError.response(res, 400, "Alias or term is requerid");
     try {
-      const result = await this.repository.findOne({ where: { email } }) as UserEntity;
+      const result=await this.getUserByaliasOremail(term)
+      if(!result) return httpError.response(res, 400, "Alias or term is requerid");
       req.session.user = result;
-
       const payload = generalDto.loginReturn(result);
       res.cookie("user", result, {
         httpOnly: true,
