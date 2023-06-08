@@ -29,7 +29,9 @@ export class UserController extends UserService {
       const result = await this.repository.findOne({ where: { email } }) as UserEntity;
 
       const payload = generalDto.loginReturn(result);
-
+      res.cookie("user", result, {
+        httpOnly: true,
+      });
       res.json({
         status: "success",
         payload,
