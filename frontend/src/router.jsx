@@ -14,7 +14,8 @@ import ToTransfer from './components/ToTransfer'
 import { Configuration } from './pages/Configuration'
 import { UserLayout, loader as userLoader } from './pages/Layout'
 import Soporte from './components/Soporte'
-import { Profile } from './pages/Profile'
+import { Perfil } from './components/Perfil'
+import RecargaBilletera from './components/RecargaBilletera'
 
 import Success from './components/Success'
 import { PayService, loader as payServiceLoader } from './pages/PayService'
@@ -111,6 +112,10 @@ export const router = createBrowserRouter([
       {
         path: 'perfil',
         element: <Profile />,
+      },
+      {
+        path: 'recarga',
+        element: <RecargaBilletera />,
       },
 
       {

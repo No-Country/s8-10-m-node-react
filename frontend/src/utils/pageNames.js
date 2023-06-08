@@ -10,4 +10,5 @@ export const PAGE_NAMES = {
   configuracion: 'configuración',
   soporte: 'soporte',
   perfil: 'perfil',
+  recarga: 'recarga',
 }

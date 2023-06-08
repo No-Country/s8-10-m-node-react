@@ -4,8 +4,10 @@ import { IoExitOutline } from 'react-icons/io5'
 import MenuItems from './MenuItems'
 import { Link, useRouteLoaderData } from 'react-router-dom'
 
-export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
+
+export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
   const { logOut } = useUserContext()
+  const { user } = useUserContext()
 
   const userData = useRouteLoaderData('userLoggedIn')
   const userName = `${userData.payload.profile.fullName} ${userData.payload.profile.lastName}`
@@ -44,15 +46,19 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
             }  `}
         >
           <p className="text-center text-sm font-roboto tracking-wider">
-            {userName}
-          </p>
-          <IoExitOutline
-            size={25}
-            className="rotate-180 cursor-pointer"
-            onClick={logOut}
-          />
-        </div>
-      </div>
-    </nav>
+<<<<<<< HEAD
+  { userName }
+=======
+           {`${user.payload.profile.fullName} ${user.payload.profile.lastName}`}
+>>>>>>> 651944dd77a7d208baf9cc24161ab2b119083764
+          </p >
+  <IoExitOutline
+    size={25}
+    className="rotate-180 cursor-pointer"
+    onClick={logOut}
+  />
+        </div >
+      </div >
+    </nav >
   )
 }
