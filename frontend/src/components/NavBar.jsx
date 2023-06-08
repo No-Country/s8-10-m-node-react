@@ -38,7 +38,10 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
             src="https://www.huie.org.nz/wp-content/uploads/2022/05/elizeu-dias-2EGNqazbAMk-unsplash-1-e1653620036569-350x233.jpg"
             alt="imagen predeterminada de usuario"
           />
+
         </Link>
+       
+
 
         <div
           className={`max-sm:w-full ${
