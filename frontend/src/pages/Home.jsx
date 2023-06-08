@@ -44,7 +44,9 @@ export const Home = () => {
       </section>
 
       <section className="grid ml-10 min-[850px]:justify-center min-[850px]:items-center md:ml-10">
-        <h2 className="font-roboto text-lg pl-2 mb-4">Mis tarjetas</h2>
+        <Link to="../mycards" className="font-roboto text-lg pl-2 mb-4">
+          Mis tarjetas
+        </Link>
         <div className="flex flex-wrap xl:flex-nowrap  gap-5">
           {user ? (
             <>
@@ -72,13 +74,16 @@ export const Home = () => {
       </section>
 
       <section className="w-[90%] mx-auto col-span-2 lg:mt-10">
+        <Link to="../movements" className="font-roboto text-lg text-center">
+          Movimientos
+        </Link>
         {payload?.movements?.length > 0 ? (
           <MovementsList movements={listMovements} />
         ) : (
           <p>No hay movimientos en tu cuenta</p>
         )}
       </section>
-      <section className="col-span-2 flex justify-center items-center mr-12">
+      <section className="col-span-2 flex justify-center items-center mr-12 mb-10">
         <PayServicesLink />
       </section>
     </article>

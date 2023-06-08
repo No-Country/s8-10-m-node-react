@@ -28,7 +28,6 @@ const PanelNavMobile = ({ toggleOpen, items }) => {
       }
     }
   }, [location])
-  console.log(payload)
 
   return (
     <section

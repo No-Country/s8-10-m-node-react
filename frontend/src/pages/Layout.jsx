@@ -6,20 +6,19 @@ import {
   FaArrowUp,
   FaArrowRight,
   FaHome,
-  FaArrowDown,
   FaExchangeAlt,
   FaDollarSign,
-  FaRegCreditCard
+  FaRegCreditCard,
 } from 'react-icons/fa'
 import { useLayoutContext } from '../context/LayoutContext'
 import { checkUserData } from '../services/checkUserData.js'
 
-export async function loader () {
+export async function loader() {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
   const userData = await checkUserData()
   console.log(userData)
   if (loggedUserJSON) {
-    return (JSON.parse(loggedUserJSON))
+    return JSON.parse(loggedUserJSON)
   } else {
     return redirect('/login')
   }
@@ -27,7 +26,7 @@ export async function loader () {
 
 export const UserLayout = () => {
   const [isOpen, setIsOpen] = useState(false)
-  function toggleOpen () {
+  function toggleOpen() {
     setIsOpen(!isOpen)
   }
   const { windowWidth } = useLayoutContext()
@@ -52,7 +51,6 @@ export const UserLayout = () => {
       name: 'Tarjetas',
       icon: <FaRegCreditCard size={25} />,
       link: '/user/mycards',
-      condition: windowWidth > 768 ? true : false,
     },
     {
       name: 'Transferir',
@@ -62,7 +60,7 @@ export const UserLayout = () => {
     {
       name: 'Recargar',
       icon: <FaArrowUp size={25} />,
-      link: null,
+      link: '/user/recarga',
     },
   ]
   return (
