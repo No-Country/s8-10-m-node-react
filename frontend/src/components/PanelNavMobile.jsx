@@ -10,21 +10,6 @@ const PanelNavMobile = ({ toggleOpen, items }) => {
   })
 
   const location = useLocation()
-  useEffect(() => {
-    for (const item of items) {
-      if (location.pathname === '/user/home' && item.link === '/user/home') {
-        return setMobilePanel({
-          condition: true,
-          name: item.name,
-        })
-      } else {
-        return setMobilePanel({
-          condition: false,
-          name: item.name,
-        })
-      }
-    }
-  }, [location])
 
   return (
     <section

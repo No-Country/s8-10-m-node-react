@@ -2,24 +2,16 @@ import { NavBar } from '../components/NavBar'
 import { Outlet, redirect } from 'react-router-dom'
 import { useState } from 'react'
 import PanelNavMobile from '../components/PanelNavMobile'
-import {
-  FaArrowUp,
-  FaArrowRight,
-  FaHome,
-  FaArrowDown,
-  FaExchangeAlt,
-  FaDollarSign,
-  FaRegCreditCard
-} from 'react-icons/fa'
-import { useLayoutContext } from '../context/LayoutContext'
 import { checkUserData } from '../services/checkUserData.js'
 
 export async function loader () {
-  const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
-  const userData = await checkUserData()
-  console.log(userData)
-  if (loggedUserJSON) {
-    return (JSON.parse(loggedUserJSON))
+  const loggedUser = window.sessionStorage.getItem('dominoUser')
+  const loggedUserJSON = JSON.parse(loggedUser)
+  console.log(loggedUserJSON)
+  const userAlias = loggedUserJSON.payload.accountInfo.alias
+  const userData = await checkUserData(userAlias)
+  if (userData) {
+    return (userData)
   } else {
     return redirect('/login')
   }
@@ -30,48 +22,13 @@ export const UserLayout = () => {
   function toggleOpen () {
     setIsOpen(!isOpen)
   }
-  const { windowWidth } = useLayoutContext()
-  const menuItems = [
-    {
-      name: 'Home',
-      icon: <FaHome size={25} />,
-      link: '/user/home',
-    },
-    {
-      name: 'Movimientos',
-      icon: <FaExchangeAlt size={25} />,
-      link: '/user/movements',
-    },
-    {
-      name: 'Servicios',
-      icon: <FaDollarSign size={25} />,
-      link: '/user/services',
-      condition: windowWidth > 768 ? true : false,
-    },
-    {
-      name: 'Tarjetas',
-      icon: <FaRegCreditCard size={25} />,
-      link: '/user/mycards',
-      condition: windowWidth > 768 ? true : false,
-    },
-    {
-      name: 'Transferir',
-      icon: <FaArrowRight size={25} />,
-      link: '/user/transfers',
-    },
-    {
-      name: 'Recargar',
-      icon: <FaArrowUp size={25} />,
-      link: null,
-    },
-  ]
+
   return (
     <main className="md:ml-24 min-h-screen">
-      <PanelNavMobile toggleOpen={toggleOpen} items={menuItems} />
+      <PanelNavMobile toggleOpen={toggleOpen} />
       <NavBar
         toggleOpen={toggleOpen}
         isOpen={isOpen}
-        items={menuItems}
         setIsOpen={setIsOpen}
       />
       <Outlet />

@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { SERVICES } from '../utils/servicesItems'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate, useRouteLoaderData } from 'react-router-dom'
 import InputField from '../components/InputField'
+import { Modal } from '../components/Modal'
+import { TbCash } from 'react-icons/tb'
+import { payService } from '../services/payServices'
 
 export const loader = ({ params }) => {
   const { serviceId } = params
@@ -10,12 +13,38 @@ export const loader = ({ params }) => {
 }
 
 export const PayService = () => {
-  const [serviceCode, setServiceCode] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const navigate = useNavigate()
+
+  const user = useRouteLoaderData('userLoggedIn')
+  console.log(user.payload.accountInfo.alias)
+  const saldo = user.payload.accountInfo.amount
+  const costoServicio = 2
 
   const service = useLoaderData()
 
-  function handleChange () {
+  const navigateBack = () => {
+    navigate(-1)
+  }
 
+  const handleShowModalClick = () => {
+    setShowModal(true)
+  }
+
+  const hideModalClick = () => {
+    setShowModal(false)
+  }
+
+  const handlePayment = async () => {
+    const subject = `Pago del servicio de ${service.name}`
+    try {
+      const res = await payService(user.payload.accountInfo.alias, costoServicio, subject)
+      console.log(res)
+      navigate('/user/services')
+      return res
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -28,9 +57,29 @@ export const PayService = () => {
       <p>Descuento del 5% pagando con VISA</p>
       <InputField labelFor='Codigo' content='Código' />
       <span className='w-full flex items-center justify-between gap-6'>
-        <button className='py-1 px-8 w-[300px] rounded-full border-red-500 border-[1px] text-red-700 font-medium'>Cancelar</button>
-        <button className='py-1 px-8 w-[300px] rounded-full bg-primary text-white font-medium'>Continuar</button>
+        <button className='py-1 px-8 w-[300px] rounded-full border-red-500 border-[1px] text-red-700 font-medium' onClick={navigateBack}>Cancelar</button>
+        <button className='py-1 px-8 w-[300px] rounded-full bg-primary text-white font-medium' onClick={handleShowModalClick}>Continuar</button>
       </span>
+      {
+        showModal &&
+        <Modal closeModal={hideModalClick}>
+          <div className='flex flex-col gap-4 font-inter justify-evenly h-full'>
+            <span className='flex flex-col items-center gap-2 justify-center'>
+              <TbCash stroke='#4C27AE' size={24} />
+              <h3 className='font-bold text-2xl text-primary'>Pagar {service.name}</h3>
+            </span>
+            <span className='flex flex-col items-center gap-1 text-sm'>
+              <p>¿Estas seguro que deseas pagar {service.name}?</p>
+              <p>Saldo disponible: ${saldo}</p>
+              <p>Costo del servicio: ${costoServicio}</p>
+            </span>
+            <span className='w-full flex justify-between text-primary'>
+              <button className='py-2 px-8 rounded-full border-[1px] border-tableRowColor' onClick={hideModalClick}>Cancelar</button>
+              <button className='py-2 px-8 rounded-full bg-tableRowColor disabled:cursor-not-allowed' disabled={costoServicio > saldo} onClick={handlePayment}>Pagar</button>
+            </span>
+          </div>
+        </Modal>
+      }
     </div>
   )
 }

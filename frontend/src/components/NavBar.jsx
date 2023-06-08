@@ -4,14 +4,14 @@ import { IoExitOutline } from 'react-icons/io5'
 import MenuItems from './MenuItems'
 import { Link } from 'react-router-dom'
 
-export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
+export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
   const { logOut } = useUserContext()
 
   return (
     <nav
       className={`flex flex-col fixed bg-[#4C27AE] p-6 top-0 gap-4 left-0 h-screen ${isOpen
-          ? 'max-sm:w-full md:w-72 translate-x-0'
-          : 'max-sm:w-0 -translate-x-[150%] md:w-24 md:translate-x-0'
+        ? 'max-sm:w-full md:w-72 translate-x-0'
+        : 'max-sm:w-0 -translate-x-[150%] md:w-24 md:translate-x-0'
         } items-center transition-all duration-500 z-10`}
     >
       <NavAppTitle func={toggleOpen} isOpen={isOpen}>
@@ -23,7 +23,7 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
       >
         Menu
       </h4>
-      <MenuItems isOpen={isOpen} items={items} setIsOpen={setIsOpen} />
+      <MenuItems isOpen={isOpen} setIsOpen={setIsOpen} />
       <div
         className={`w-full h-auto flex items-center justify-between bg-transparent border-t pt-3 text-white ${isOpen && 'gap-4'
           }`}

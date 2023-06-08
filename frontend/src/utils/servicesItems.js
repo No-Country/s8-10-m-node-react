@@ -11,7 +11,7 @@ import wifi from '../assets/images/services/wifi.svg'
 
 export const SERVICES = [
   {
-    name: 'Disney +',
+    name: 'Disney+',
     svg: disney,
     path: 'disney',
     bgColor: 'bg-gradient-to-t from-blue-900 to-blue-950'

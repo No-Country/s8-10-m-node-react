@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 export const Modal = ({ children, closeModal }) => {
   return (
@@ -7,7 +7,7 @@ export const Modal = ({ children, closeModal }) => {
       onClick={closeModal}
     >
       <div
-        className="sm:w-[448px] sm:min-h-[304px] w-screen bg-white absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 -bottom-4 rounded-2xl  p-6 flex flex-col items-center justify-center sm:animate-slide-in-desktop animate-slide-in-phone"
+        className="sm:w-[448px] sm:min-h-[304px] w-screen bg-white absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 -bottom-4 rounded-2xl  p-8 flex flex-col items-center justify-center border-primary border-2 sm:animate-slide-in-desktop animate-slide-in-phone"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

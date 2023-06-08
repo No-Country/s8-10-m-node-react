@@ -1,7 +1,6 @@
-export async function checkUserData () {
+export async function checkUserData (userEmail) {
   try {
-
-    const data = await fetch('https://dominoback.onrender.com/api/business/542116943394048')
+    const data = await fetch(`https://dominoback.onrender.com/api/user/${userEmail}`)
     const json = await data.json()
     return json
   } catch (error) {

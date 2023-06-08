@@ -24,19 +24,19 @@ export const Services = () => {
       <h2 className='font-medium text-xl text-primary'>Entretenimiento</h2>
       <div className='w-full grid grid-cols-servicesTables gap-4 justify-items-center'>
         {entertainmentArr.map(service => (
-          <ServiceCard service={service} />
+          <ServiceCard service={service} key={service.name} />
         ))}
       </div>
       <h2 className='font-medium text-xl text-primary'>Hogar</h2>
       <div className='w-full grid grid-cols-servicesTables gap-4 justify-items-center'>
         {homeArr.map(service => (
-          <ServiceCard service={service} />
+          <ServiceCard service={service} key={service.name} />
         ))}
       </div>
       <h2 className='font-medium text-xl text-primary'>Trabajo</h2>
       <div className='w-full grid grid-cols-servicesTables gap-4 justify-items-center'>
         {workArr.map(service => (
-          <ServiceCard service={service} />
+          <ServiceCard service={service} key={service.name} />
         ))}
       </div>
     </div>

@@ -1,6 +1,50 @@
 import { NavLink } from 'react-router-dom'
+import {
+  FaArrowUp,
+  FaArrowRight,
+  FaHome,
+  FaArrowDown,
+  FaExchangeAlt,
+  FaDollarSign,
+  FaRegCreditCard
+} from 'react-icons/fa'
+import { useLayoutContext } from '../context/LayoutContext'
 
-const MenuItems = ({ isOpen, setIsOpen, items }) => {
+const MenuItems = ({ isOpen, setIsOpen }) => {
+
+  const items = [
+    {
+      'name': 'Home',
+      'icon': <FaHome size={25} />,
+      'link': '/user/home',
+    },
+    {
+      'name': 'Movimientos',
+      'icon': <FaExchangeAlt size={25} />,
+      'link': '/user/movements',
+    },
+    {
+      'name': 'Servicios',
+      'icon': <FaDollarSign size={25} />,
+      'link': '/user/services',
+    },
+    {
+      'name': 'Tarjetas',
+      'icon': <FaRegCreditCard size={25} />,
+      'link': '/user/mycards',
+    },
+    {
+      'name': 'Transferir',
+      'icon': <FaArrowRight size={25} />,
+      'link': '/user/transfers',
+    },
+    {
+      'name': 'Recargar',
+      'icon': <FaArrowUp size={25} />,
+      'link': null,
+    }
+  ]
+
   return (
     <>
       {items.map((item) => (
