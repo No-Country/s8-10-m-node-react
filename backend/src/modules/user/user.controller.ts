@@ -24,10 +24,9 @@ export class UserController extends UserService {
 
   async getByEmail(req: Request, res: Response) {
     const { email } = req.body;
-    const { accountNumber } = req.body;
+    if(!email) return httpError.response(res, 400, "Email is required");
     try {
-      // const result = await this.repository.findOne({ where: { email } }) as UserEntity;
-      const result = await this.repository.findOne({ where: { account: { accountNumber } } }) as UserEntity;
+      const result = await this.repository.findOne({ where: { email } }) as UserEntity;
 
       const payload = generalDto.loginReturn(result);
 
