@@ -32,8 +32,6 @@ const LISTA_DE_CONTACTOS = [
 
 const Transfers = () => {
 
-
-
   const [isLocation, setIsLocation] = useState('')
 
   const location = useLocation()

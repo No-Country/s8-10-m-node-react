@@ -2,15 +2,20 @@ const BASE_URL = 'https://dominoback.onrender.com/api/business'
 
 export async function payService (emitter, amount, subject) {
   const data = {
-    'typeTransaction': 'PAY',
-    'emitter': emitter,
-    'amountQuantity': Number(amount),
-    'subject': subject
+    "typeTransaction": "PAY",
+    "emitter": emitter,
+    "amountQuantity": Number(amount),
+    "subject": subject
   }
+
+  console.log(data)
 
   const reqOptions = {
     method: 'POST',
-    body: data
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
   }
 
   try {

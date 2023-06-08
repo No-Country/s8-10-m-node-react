@@ -2,10 +2,13 @@ import { NavAppTitle } from './NavButton'
 import { useUserContext } from '../context/UserContext'
 import { IoExitOutline } from 'react-icons/io5'
 import MenuItems from './MenuItems'
-import { Link } from 'react-router-dom'
+import { Link, useRouteLoaderData } from 'react-router-dom'
 
 export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
   const { logOut } = useUserContext()
+
+  const userData = useRouteLoaderData('userLoggedIn')
+  const userName = `${userData.payload.profile.fullName} ${userData.payload.profile.lastName}`
 
   return (
     <nav
@@ -45,7 +48,7 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
             }  `}
         >
           <p className="text-center text-sm font-roboto tracking-wider">
-            {nameUser}
+            {userName}
           </p>
           <IoExitOutline
             size={25}

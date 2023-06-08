@@ -1,14 +1,12 @@
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
   FaArrowUp,
   FaArrowRight,
   FaHome,
-  FaArrowDown,
   FaExchangeAlt,
   FaDollarSign,
   FaRegCreditCard
 } from 'react-icons/fa'
-import { useLayoutContext } from '../context/LayoutContext'
 
 const MenuItems = ({ isOpen, setIsOpen }) => {
 
@@ -48,7 +46,7 @@ const MenuItems = ({ isOpen, setIsOpen }) => {
   return (
     <>
       {items.map((item) => (
-        <NavLink
+        <Link
           className={`px-3 py-3 bg-white flex ${item.condition && 'hidden'
             } rounded-[10px] items-center justify-center w-full gap-2 duration-600`}
           key={item.link}
@@ -62,7 +60,7 @@ const MenuItems = ({ isOpen, setIsOpen }) => {
           >
             {item.name}
           </p>
-        </NavLink>
+        </Link>
       ))}
     </>
   )

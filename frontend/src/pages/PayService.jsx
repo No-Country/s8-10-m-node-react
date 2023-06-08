@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { SERVICES } from '../utils/servicesItems'
-import { useLoaderData, useNavigate, useRouteLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate, useRouteLoaderData, redirect } from 'react-router-dom'
 import InputField from '../components/InputField'
 import { Modal } from '../components/Modal'
 import { TbCash } from 'react-icons/tb'
@@ -17,9 +17,8 @@ export const PayService = () => {
   const navigate = useNavigate()
 
   const user = useRouteLoaderData('userLoggedIn')
-  console.log(user.payload.accountInfo.alias)
   const saldo = user.payload.accountInfo.amount
-  const costoServicio = 2
+  const costoServicio = 20
 
   const service = useLoaderData()
 
@@ -37,10 +36,10 @@ export const PayService = () => {
 
   const handlePayment = async () => {
     const subject = `Pago del servicio de ${service.name}`
+    const alias = user.payload.accountInfo.alias
     try {
-      const res = await payService(user.payload.accountInfo.alias, costoServicio, subject)
-      console.log(res)
-      navigate('/user/services')
+      const res = await payService(alias, costoServicio, subject)
+      navigate('/user/home')
       return res
     } catch (error) {
       console.error(error)

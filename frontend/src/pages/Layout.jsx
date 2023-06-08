@@ -7,13 +7,16 @@ import { checkUserData } from '../services/checkUserData.js'
 export async function loader () {
   const loggedUser = window.sessionStorage.getItem('dominoUser')
   const loggedUserJSON = JSON.parse(loggedUser)
-  console.log(loggedUserJSON)
   const userAlias = loggedUserJSON.payload.accountInfo.alias
-  const userData = await checkUserData(userAlias)
-  if (userData) {
-    return (userData)
-  } else {
-    return redirect('/login')
+  try {
+    const userData = await checkUserData(userAlias)
+    if (loggedUser) {
+      return (userData)
+    } else {
+      return redirect('/login')
+    }
+  } catch (error) {
+    console.error(error)
   }
 }
 

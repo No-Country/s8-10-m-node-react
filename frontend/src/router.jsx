@@ -107,7 +107,7 @@ export const router = createBrowserRouter([
         path: 'perfil',
         element: <Perfil />,
       },
-      
+
       {
         path: 'success',
         element: <Success qr={true} />,

@@ -5,7 +5,7 @@ import { MovementsList } from '../components/MovementsList'
 import { PayServicesLink } from '../components/PayServicesLink'
 import { TbFaceIdError } from 'react-icons/tb'
 
-export const loader = () => {}
+export const loader = () => { }
 
 export const Movements = () => {
   const { payload } = useRouteLoaderData('userLoggedIn')
@@ -13,7 +13,7 @@ export const Movements = () => {
   const moves = payload.movements
 
   return (
-    <section className="w-full h-[70vh] flex flex-col lg:justify-center lg:items-center  gap-12 py-8 md:py-4 px-5">
+    <section className="w-full h-full flex flex-col lg:justify-center lg:items-center gap-12 py-4 px-5">
       <PageTitle>Movimientos</PageTitle>
       <div className="w-full flex flex-col items-center  justify-center gap-12">
         {moves.length > 0 ? (
