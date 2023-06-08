@@ -62,7 +62,7 @@ export const UserLayout = () => {
     {
       name: 'Recargar',
       icon: <FaArrowUp size={25} />,
-      link: null,
+      link: '/user/recarga',
     },
   ]
   return (

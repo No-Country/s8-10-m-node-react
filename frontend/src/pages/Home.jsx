@@ -6,12 +6,15 @@ import WithdrawCash from '../components/WithdrawCash'
 import { formatCurrency } from '../utils/formatCurrency'
 import { MovementsList } from '../components/MovementsList'
 import { PayServicesLink } from '../components/PayServicesLink'
+import { useUserContext } from '../context/UserContext';
 
 export const Home = () => {
   const [showBalance, setshowBalance] = useState(false)
   const user = useRouteLoaderData('userLoggedIn')
   const { payload } = user
   const listMovements = payload?.movements.slice(0, 4)
+console.log()
+
 
   return (
     <article className="w-full flex flex-col gap-10 md:mt-5 min-[850px]:grid  md:grid-cols-auto md:gap-7 ">
@@ -20,7 +23,7 @@ export const Home = () => {
 
         <div className="w-[85%] md:w-auto h-auto flex items-center justify-center gap-x-6 md:gap-x-5 mt-2 border-b pb-4 border-[#4C27AE4D] md:border-0">
           <h3 className="text-5xl font-roboto font-bold text-center tracking-wide min-w-[200px]">
-            {showBalance ? formatCurrency(100) : '*****'}
+            {showBalance ? formatCurrency(`${payload.accountInfo.amount}`) : '*****'}
           </h3>
           <span onClick={() => setshowBalance(!showBalance)}>
             {showBalance ? (

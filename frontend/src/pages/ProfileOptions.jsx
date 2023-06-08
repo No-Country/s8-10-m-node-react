@@ -7,7 +7,7 @@ import OptionContainer from '../components/OptionContainer'
 
 export const ProfileOptions = () => {
   const { user } = useUserContext();
-  console.log(user.payload.profile);
+ 
 
   // Contenido del componente Profile
   return (

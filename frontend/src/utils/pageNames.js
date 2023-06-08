@@ -9,5 +9,6 @@ export const PAGE_NAMES = {
   services: 'servicios',
   options: 'opciones',
   soporte: 'soporte',
-  perfil: 'perfil'
+  perfil: 'perfil',
+  recarga: 'recarga',
 }

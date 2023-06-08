@@ -4,6 +4,7 @@ import { IoExitOutline } from 'react-icons/io5'
 import MenuItems from './MenuItems'
 import { Link } from 'react-router-dom'
 
+
 export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
   const { logOut } = useUserContext()
 
