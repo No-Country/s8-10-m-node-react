@@ -5,7 +5,8 @@ import MenuItems from './MenuItems'
 import { Link } from 'react-router-dom'
 
 export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
-  const { logOut } = useUserContext()
+  const { logOut, user } = useUserContext()
+  const nameUser = `${user?.payload?.profile?.fullName} ${user?.payload?.profile?.lastName}`
 
   return (
     <nav
@@ -47,7 +48,7 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
           }  `}
         >
           <p className="text-center text-sm font-roboto tracking-wider">
-            Elizeu Dias
+            {nameUser}
           </p>
           <IoExitOutline
             size={25}
