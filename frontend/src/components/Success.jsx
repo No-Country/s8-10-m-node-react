@@ -19,7 +19,7 @@ const Success = ({ amount, name }) => {
         </p>
       </div>
       <button
-        onClick={() => navigate('/transfers')}
+        onClick={() => navigate('/user/home')}
         className="w-2/3 py-3 bg-sky-800 rounded-md text-white font-bold"
       >
         Volver al inicio

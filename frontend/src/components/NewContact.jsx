@@ -1,6 +1,5 @@
 import PopUp from './PopUp'
 import { Modal } from '../components/Modal'
-import cross from '../assets/images/cross.svg'
 import { useModal } from '../hooks/useModal'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -22,17 +21,23 @@ const NewContact = () => {
   const [accountName, setAccountName]= useState({name:'',lasname:''})
 
 
+
   //data from api
   useEffect(() => {
-    fetch('https://pagaya.onrender.com/api/user', requestOptions)
+    fetch('https://dominoback.onrender.com/api/user', requestOptions)
       .then((res) => res.json())
       .then((data) => setUser(data))
-      
+   
       .catch((error) => console.log('error', error))
       
   }, [])
   
-  const { response } = user
+  const response = user.payload
+
+
+  
+ 
+  
   
 
 
@@ -44,17 +49,18 @@ const validateForm = (e) => {
     setError(true);
   } else {
     const aliasToFind = e.target.alias.value.trim();
-    const foundAccount = response.find(person => person.account[0].alias === aliasToFind);
+    const foundAccount = response.accountInfo.alias === aliasToFind ? response : null;
+  
 
     if (foundAccount) {
-      const account = foundAccount.account[0];
-      console.log(account)
+      const account = foundAccount.accountInfo;
+    
       setAccountNumber(account.accountNumber)
-      const fullName = foundAccount.fullName
-      const lastName = foundAccount.lastName
+      const fullName = foundAccount.profile.fullName
+      const lastName = foundAccount.profile.lastName
       setAccountName({name:fullName,lasname:lastName})
      
-     // console.log(account); // Muestra la cuenta correspondiente al alias encontrado
+     console.log(account.accountNumber); // Muestra la cuenta correspondiente al alias encontrado
       setContact(account);
       // Aquí puedes realizar la lógica adicional que necesites con la cuenta encontrada
     
