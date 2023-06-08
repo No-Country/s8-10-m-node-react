@@ -14,7 +14,7 @@ import ToTransfer from './components/ToTransfer'
 import { Configuration } from './pages/Configuration'
 import { UserLayout, loader as userLoader } from './pages/Layout'
 import Soporte from './components/Soporte'
-import { Perfil } from './components/Perfil'
+import { Profile } from './pages/Profile'
 import RecargaBilletera from './components/RecargaBilletera'
 
 import Success from './components/Success'

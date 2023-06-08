@@ -10,55 +10,51 @@ const requestOptions = {
   redirect: 'follow',
 }
 
-
 const NewContact = () => {
   const [searchOpen, openSearchModal, closeSearchModal] = useModal()
   const [error, setError] = useState(false)
   const [confirm, setConfirm] = useState(false)
   const [user, setUser] = useState({})
-  const [accountName, setAccountName]= useState({name:'',lasname:'',alias:''})
+  const [accountName, setAccountName] = useState({
+    name: '',
+    lasname: '',
+    alias: '',
+  })
 
+  const validateForm = async (e) => {
+    e.preventDefault()
+    if (e.target.alias.value.trim() === '') {
+      setError(true)
+    } else {
+      const aliasToFind = e.target.alias.value.trim()
+      try {
+        const response = await fetch(
+          `https://dominoback.onrender.com/api/user/${aliasToFind}`,
+          requestOptions
+        )
+        if (response.ok) {
+          const user = await response.json()
+          setUser(user)
 
-
-
-  
- 
-
-  
- 
-  
-  
-
-
-
-//filter data
-const validateForm = async (e) => {
-  e.preventDefault();
-  if (e.target.alias.value.trim() === '') {
-    setError(true);
-  } else {
-    const aliasToFind = e.target.alias.value.trim();
-    try {
-      const response = await fetch(`https://dominoback.onrender.com/api/user/${aliasToFind}`, requestOptions);
-      if (response.ok) {
-        const user = await response.json();
-        setUser(user);
-        
-        setAccountName({name:user.payload.profile.fullName,lasname:user.payload.profile.lastName,alias:user.payload.accountInfo.alias})
-        openSearchModal();
-      } else {
-        console.log('No se encontró ningún usuario con ese alias.');
+          setAccountName({
+            name: user.payload.profile.fullName,
+            lasname: user.payload.profile.lastName,
+            alias: user.payload.accountInfo.alias,
+          })
+          openSearchModal()
+        } else {
+          console.log('No se encontró ningún usuario con ese alias.')
+        }
+      } catch (error) {
+        console.log('Error en la solicitud:', error)
       }
-    } catch (error) {
-      console.log('Error en la solicitud:', error);
     }
   }
-};
-//console.log(contact)
+  //console.log(contact)
   const navigate = useNavigate()
 
   return (
-    <section className="mt-[10rem]">
+    <section className="mt-[10rem] md:mt-0 max-w-screen-sm mx-auto">
       {!confirm ? (
         <>
           <form
@@ -88,14 +84,19 @@ const validateForm = async (e) => {
           {searchOpen && (
             <Modal className="w-full h-full">
               <div
-                className={`w-full h-[400px] fixed bottom-0 bg-white  ${searchOpen
+                className={`w-full h-[400px] fixed bottom-0 bg-white  ${
+                  searchOpen
                     ? 'translate-y-0 duration-300 ease-in'
                     : 'transition-transform translate-y-full duration-300 ease-out delay-300'
-                  } rounded-t-[40px] flex flex-col justify-evenly items-center`}
+                } rounded-t-[40px] flex flex-col justify-evenly items-center`}
               >
                 <div className="w-full text-center relative pt-3">
-                  <h3 className="text-2xl font-semibold">{accountName.name} {accountName.lasname}</h3>
-                  <p className="text-gray-400 text-md">{user.payload.accountInfo.accountNumber}</p>
+                  <h3 className="text-2xl font-semibold">
+                    {accountName.name} {accountName.lasname}
+                  </h3>
+                  <p className="text-gray-400 text-md">
+                    {user.payload.accountInfo.accountNumber}
+                  </p>
                   <FaTimes
                     className="absolute -top-1 right-[30px] cursor-pointer"
                     size={20}
@@ -109,7 +110,9 @@ const validateForm = async (e) => {
                   </div>
                   <div>
                     <h4 className="text-2xl font-semibold">CBU</h4>
-                    <p className="text-gray-500">{user.payload.accountInfo.accountNumber} </p>
+                    <p className="text-gray-500">
+                      {user.payload.accountInfo.accountNumber}{' '}
+                    </p>
                   </div>
                   <div>
                     <h4 className="text-2xl font-semibold">Banco</h4>
@@ -138,10 +141,12 @@ const validateForm = async (e) => {
           )}
         </>
       ) : (
-        <ToTransfer setConfirm={setConfirm} close={closeSearchModal} 
-        accountNumber={user.payload.accountInfo.accountNumber}
-        accountName={accountName.name}
-        name={accountName}
+        <ToTransfer
+          setConfirm={setConfirm}
+          close={closeSearchModal}
+          accountNumber={user.payload.accountInfo.accountNumber}
+          accountName={accountName.name}
+          name={accountName}
         />
       )}
     </section>

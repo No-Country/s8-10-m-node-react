@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { useState } from 'react'
 import { Button } from '../components/Button'
 import InputField from '../components/InputField'
 import { ProfileImage } from '../components/ProfileImage'
@@ -126,7 +125,7 @@ export const Profile = () => {
             </>
           )}
 
-          <div className="flex w-2/4 md:flex-row flex-col gap-4 mt-8">
+          <div className="flex w-2/4 justify-center gap-4 mt-8">
             <Button
               type="submit"
               nameClass="bg-customColor w-44 md:w-96 py-3 rounded-full text-white font-semibold tracking-wide"

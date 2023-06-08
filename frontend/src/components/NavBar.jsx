@@ -4,7 +4,6 @@ import { IoExitOutline } from 'react-icons/io5'
 import MenuItems from './MenuItems'
 import { Link, useRouteLoaderData } from 'react-router-dom'
 
-
 export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
   const { logOut } = useUserContext()
   const { user } = useUserContext()
@@ -14,24 +13,27 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
 
   return (
     <nav
-      className={`flex flex-col fixed bg-[#4C27AE] p-6 top-0 gap-4 left-0 h-screen ${isOpen
-        ? 'max-sm:w-full md:w-72 translate-x-0'
-        : 'max-sm:w-0 -translate-x-[150%] md:w-24 md:translate-x-0'
-        } items-center transition-all duration-500 z-10`}
+      className={`flex flex-col fixed bg-[#4C27AE] p-6 top-0 gap-4 left-0 h-screen ${
+        isOpen
+          ? 'max-sm:w-full md:w-72 translate-x-0'
+          : 'max-sm:w-0 -translate-x-[150%] md:w-24 md:translate-x-0'
+      } items-center transition-all duration-500 z-10`}
     >
       <NavAppTitle func={toggleOpen} isOpen={isOpen}>
         D{isOpen && 'ominó'}
       </NavAppTitle>
       <h4
-        className={`text-center ${isOpen && 'text-start'
-          } font-roboto tracking-wide text-white w-full pb-2 border-b`}
+        className={`text-center ${
+          isOpen && 'text-start'
+        } font-roboto tracking-wide text-white w-full pb-2 border-b`}
       >
         Menu
       </h4>
       <MenuItems isOpen={isOpen} setIsOpen={setIsOpen} />
       <div
-        className={`w-full h-auto flex items-center justify-between bg-transparent border-t pt-3 text-white ${isOpen && 'gap-4'
-          }`}
+        className={`w-full h-auto flex items-center justify-between bg-transparent border-t pt-3 text-white ${
+          isOpen && 'gap-4'
+        }`}
       >
         <Link to="configuracion" onClick={() => setIsOpen(false)}>
           <img
@@ -41,24 +43,22 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
           />
         </Link>
         <div
-          className={`max-sm:w-full ${isOpen ? 'md:w-44' : 'md:w-0'
-            } justify-between items-center transition-opacity duration-800  ${isOpen ? ' opacity-1 flex duration-[1500ms]' : 'opacity-0'
-            }  `}
+          className={`max-sm:w-full ${
+            isOpen ? 'md:w-44' : 'md:w-0'
+          } justify-between items-center transition-opacity duration-800  ${
+            isOpen ? ' opacity-1 flex duration-[1500ms]' : 'opacity-0'
+          }  `}
         >
           <p className="text-center text-sm font-roboto tracking-wider">
-<<<<<<< HEAD
-  { userName }
-=======
-           {`${user.payload.profile.fullName} ${user.payload.profile.lastName}`}
->>>>>>> 651944dd77a7d208baf9cc24161ab2b119083764
-          </p >
-  <IoExitOutline
-    size={25}
-    className="rotate-180 cursor-pointer"
-    onClick={logOut}
-  />
-        </div >
-      </div >
-    </nav >
+            {userName}
+          </p>
+          <IoExitOutline
+            size={25}
+            className="rotate-180 cursor-pointer"
+            onClick={logOut}
+          />
+        </div>
+      </div>
+    </nav>
   )
 }
