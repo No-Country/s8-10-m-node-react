@@ -28,13 +28,16 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
         className={`w-full h-auto flex items-center justify-between bg-transparent border-t pt-3 text-white ${isOpen && 'gap-4'
           }`}
       >
-        <Link>
+        <Link to="perfil">
           <img
             className="w-14 h-14 rounded-lg object-cover cursor-pointer "
             src="https://www.huie.org.nz/wp-content/uploads/2022/05/elizeu-dias-2EGNqazbAMk-unsplash-1-e1653620036569-350x233.jpg"
-            alt=""
+            alt="imagen predeterminada de usuario"
           />
+
         </Link>
+
+
 
         <div
           className={`max-sm:w-full ${isOpen ? 'md:w-44' : 'md:w-0'
@@ -42,7 +45,7 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
             }  `}
         >
           <p className="text-center text-sm font-roboto tracking-wider">
-            Elizeu Dias
+            {nameUser}
           </p>
           <IoExitOutline
             size={25}
