@@ -10,7 +10,6 @@ const requestOptions = {
   redirect: 'follow',
 }
 
-
 const NewContact = () => {
   const [searchOpen, openSearchModal, closeSearchModal] = useModal()
   const [error, setError] = useState(false)
@@ -43,7 +42,7 @@ const NewContact = () => {
   const navigate = useNavigate()
 
   return (
-    <section className="mt-[10rem]">
+    <section className="mt-[10rem] md:mt-0 max-w-screen-sm mx-auto">
       {!confirm ? (
         <>
           <form
@@ -73,14 +72,26 @@ const NewContact = () => {
           {searchOpen && (
             <Modal className="w-full h-full">
               <div
+<<<<<<< HEAD
                 className={`w-full h-[400px] fixed bottom-0 bg-white  ${searchOpen
                   ? 'translate-y-0 duration-300 ease-in'
                   : 'transition-transform translate-y-full duration-300 ease-out delay-300'
                   } rounded-t-[40px] flex flex-col justify-evenly items-center`}
+=======
+                className={`w-full h-[400px] fixed bottom-0 bg-white  ${
+                  searchOpen
+                    ? 'translate-y-0 duration-300 ease-in'
+                    : 'transition-transform translate-y-full duration-300 ease-out delay-300'
+                } rounded-t-[40px] flex flex-col justify-evenly items-center`}
+>>>>>>> efbe8f0151c7729279c57aabb6ae5373222bf626
               >
                 <div className="w-full text-center relative pt-3">
-                  <h3 className="text-2xl font-semibold">{accountName.name} {accountName.lasname}</h3>
-                  <p className="text-gray-400 text-md">{user.payload.accountInfo.accountNumber}</p>
+                  <h3 className="text-2xl font-semibold">
+                    {accountName.name} {accountName.lasname}
+                  </h3>
+                  <p className="text-gray-400 text-md">
+                    {user.payload.accountInfo.accountNumber}
+                  </p>
                   <FaTimes
                     className="absolute -top-1 right-[30px] cursor-pointer"
                     size={20}
@@ -94,7 +105,9 @@ const NewContact = () => {
                   </div>
                   <div>
                     <h4 className="text-2xl font-semibold">CBU</h4>
-                    <p className="text-gray-500">{user.payload.accountInfo.accountNumber} </p>
+                    <p className="text-gray-500">
+                      {user.payload.accountInfo.accountNumber}{' '}
+                    </p>
                   </div>
                   <div>
                     <h4 className="text-2xl font-semibold">Banco</h4>
@@ -123,7 +136,13 @@ const NewContact = () => {
           )}
         </>
       ) : (
+<<<<<<< HEAD
         <ToTransfer setConfirm={setConfirm} close={closeSearchModal}
+=======
+        <ToTransfer
+          setConfirm={setConfirm}
+          close={closeSearchModal}
+>>>>>>> efbe8f0151c7729279c57aabb6ae5373222bf626
           accountNumber={user.payload.accountInfo.accountNumber}
           accountName={accountName.name}
           name={accountName}

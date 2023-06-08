@@ -11,7 +11,7 @@ export async function loader () {
   try {
     const userData = await checkUserData(userAlias)
     if (loggedUser) {
-      return (userData)
+      return userData
     } else {
       return redirect('/login')
     }
@@ -25,15 +25,10 @@ export const UserLayout = () => {
   function toggleOpen () {
     setIsOpen(!isOpen)
   }
-
   return (
     <main className="md:ml-24 min-h-screen">
       <PanelNavMobile toggleOpen={toggleOpen} />
-      <NavBar
-        toggleOpen={toggleOpen}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
+      <NavBar toggleOpen={toggleOpen} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Outlet />
     </main>
   )

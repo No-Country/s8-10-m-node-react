@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import Contacts from '../components/Contacts'
 
-
 const LISTA_DE_CONTACTOS = [
   {
     name: 'Juan Perez',
@@ -26,12 +25,7 @@ const LISTA_DE_CONTACTOS = [
   },
 ]
 
-//get data from api
-
-
-
 const Transfers = () => {
-
   const [isLocation, setIsLocation] = useState('')
 
   const location = useLocation()
@@ -46,19 +40,22 @@ const Transfers = () => {
 
   return (
     <main className=" w-full min-h-screen relative">
-      <section className="mt-6 mb-24 w-full flex justify-center gap-[5.25rem] relative pl-4">
-        <Link replace="user/transfers">Contactos</Link>
-        <Link className="pr-4" to="newContact">
+      <section className="mb-24 w-full flex justify-center gap-[5.25rem] relative pl-4">
+        <Link replace="user/transfers" className="mt-6">
+          Contactos
+        </Link>
+        <Link className="pr-4 mt-6" to="newContact">
           Nuevo
         </Link>
         <div
-          className={`w-4/5 border-b-2 border-white absolute bottom-[-2px] bg-white`}
+          className={`w-72 border-b-2 border-white absolute bottom-[-2px] bg-white`}
         >
           <span
-            className={`border-b-2 border-sky-500  ${isLocation === 'contacts'
-              ? 'w-[50%] transform translate-x-[0%] transition-all duration-300'
-              : 'w-[50%] transform translate-x-[100%] transition-all duration-300'
-              } absolute bottom-[-2px]`}
+            className={`border-b-2 border-sky-500  ${
+              isLocation === 'contacts'
+                ? 'w-[50%] transform translate-x-[0%] transition-all duration-300'
+                : 'w-[50%] transform translate-x-[100%] transition-all duration-300'
+            } absolute bottom-[-2px]`}
           ></span>
         </div>
       </section>
