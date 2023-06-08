@@ -42,7 +42,6 @@ const UserProvider = ({ children }) => {
   const logOut = () => {
     sessionStorage.removeItem('dominoUser')
     setUser(null)
-    console.log('Logging out user...')
     location.replace('/')
   }
 

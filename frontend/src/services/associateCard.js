@@ -20,7 +20,6 @@ export async function associateCard (cardNumber, cvv, type, titular, accountNumb
 
   try {
     const res = await fetch(BASE_URL, reqOptions)
-    console.log(res)
     return res
   } catch (error) {
     console.error(error)

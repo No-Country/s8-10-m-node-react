@@ -16,45 +16,30 @@ const NewContact = () => {
   const [error, setError] = useState(false)
   const [confirm, setConfirm] = useState(false)
   const [user, setUser] = useState({})
-  const [accountName, setAccountName]= useState({name:'',lasname:'',alias:''})
+  const [accountName, setAccountName] = useState({ name: '', lasname: '', alias: '' })
 
+  //filter data
+  const validateForm = async (e) => {
+    e.preventDefault();
+    if (e.target.alias.value.trim() === '') {
+      setError(true);
+    } else {
+      const aliasToFind = e.target.alias.value.trim();
+      try {
+        const response = await fetch(`https://dominoback.onrender.com/api/user/${aliasToFind}`, requestOptions);
+        if (response.ok) {
+          const user = await response.json();
+          setUser(user);
 
-
-
-  
- 
-
-  
- 
-  
-  
-
-
-
-//filter data
-const validateForm = async (e) => {
-  e.preventDefault();
-  if (e.target.alias.value.trim() === '') {
-    setError(true);
-  } else {
-    const aliasToFind = e.target.alias.value.trim();
-    try {
-      const response = await fetch(`https://dominoback.onrender.com/api/user/${aliasToFind}`, requestOptions);
-      if (response.ok) {
-        const user = await response.json();
-        setUser(user);
-        
-        setAccountName({name:user.payload.profile.fullName,lasname:user.payload.profile.lastName,alias:user.payload.accountInfo.alias})
-        openSearchModal();
-      } else {
-        console.log('No se encontró ningún usuario con ese alias.');
+          setAccountName({ name: user.payload.profile.fullName, lasname: user.payload.profile.lastName, alias: user.payload.accountInfo.alias })
+          openSearchModal();
+        } else {
+        }
+      } catch (error) {
       }
-    } catch (error) {
-      console.log('Error en la solicitud:', error);
     }
-  }
-};
-//console.log(contact)
+  };
+  //console.log(contact)
   const navigate = useNavigate()
 
   return (
@@ -89,8 +74,8 @@ const validateForm = async (e) => {
             <Modal className="w-full h-full">
               <div
                 className={`w-full h-[400px] fixed bottom-0 bg-white  ${searchOpen
-                    ? 'translate-y-0 duration-300 ease-in'
-                    : 'transition-transform translate-y-full duration-300 ease-out delay-300'
+                  ? 'translate-y-0 duration-300 ease-in'
+                  : 'transition-transform translate-y-full duration-300 ease-out delay-300'
                   } rounded-t-[40px] flex flex-col justify-evenly items-center`}
               >
                 <div className="w-full text-center relative pt-3">
@@ -138,10 +123,10 @@ const validateForm = async (e) => {
           )}
         </>
       ) : (
-        <ToTransfer setConfirm={setConfirm} close={closeSearchModal} 
-        accountNumber={user.payload.accountInfo.accountNumber}
-        accountName={accountName.name}
-        name={accountName}
+        <ToTransfer setConfirm={setConfirm} close={closeSearchModal}
+          accountNumber={user.payload.accountInfo.accountNumber}
+          accountName={accountName.name}
+          name={accountName}
         />
       )}
     </section>

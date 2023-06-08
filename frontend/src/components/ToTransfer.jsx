@@ -5,17 +5,13 @@ import PopUp from './PopUp';
 import Success from './Success';
 import { useUserContext } from '../context/UserContext';
 
-const ToTransfer = ({ setConfirm, close, accountNumber,name }) => {
+const ToTransfer = ({ setConfirm, close, accountNumber, name }) => {
   const [amount, setAmount] = useState(0);
   const [error, setError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const { user } = useUserContext();
   const { payload } = user;
-  console.log(payload.accountInfo.accountNumber);
   const cuenta = payload.accountInfo.accountNumber;
-
-  
-
 
   const validateAmount = (e) => {
     e.preventDefault();
@@ -30,7 +26,7 @@ const ToTransfer = ({ setConfirm, close, accountNumber,name }) => {
         amountQuantity: parseInt(amount),
         subject: 'Un mensaje breve'
       };
-     
+
 
       // Realizar solicitud POST a la API
       fetch('https://pagaya.onrender.com/api/business', {
@@ -48,7 +44,6 @@ const ToTransfer = ({ setConfirm, close, accountNumber,name }) => {
         })
         .catch((error) => {
           // Manejar errores
-          console.log(error);
         });
     }
   };

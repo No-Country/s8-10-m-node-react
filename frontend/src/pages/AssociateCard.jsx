@@ -16,7 +16,6 @@ export const AssociateCard = () => {
   function handleChange (e, setValueFunc) {
     e.preventDefault()
     const value = e.target.value
-    console.log(value)
     setValueFunc(value)
   }
 
