@@ -7,6 +7,7 @@ import { httpError } from "../../shared/utils/httpError.utils";
 import { userServices } from "../user/user.services";
 import { accountUserServices } from "../accountUser/accountUser.services";
 import { businessUtils } from "./business.utils";
+import { AccountUserEntity } from "../accountUser/accountUser.entity";
 
 export class BusinessController extends BusinessService {
   constructor() {
@@ -61,7 +62,10 @@ export class BusinessController extends BusinessService {
         subject
       )) as BusinessEntity;
 
-      const accountUser = user?.account[0];
+      //! ESTO ES UN PARCHE
+      const accountUser = await accountUserServices.getAccountUserByAccountNumber(emitterNumber);
+      
+      result.accountUser = accountUser;
       const newBusiness = {
         ...result,
         accountUser,
