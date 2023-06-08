@@ -23,6 +23,10 @@ export class AuthController extends AuthServices {
       res.cookie("user", user, {
         httpOnly: true,
       });
+
+      console.log("Token", req.cookies.token);
+      console.log("User", req.cookies.user);
+
       res.json({
         status: "success",
         payload,
