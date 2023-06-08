@@ -4,7 +4,6 @@ import { IoTrendingUp, IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5'
 import { useState } from 'react'
 import WithdrawCash from '../components/WithdrawCash'
 import { formatCurrency } from '../utils/formatCurrency'
-
 export const Home = () => {
   const [showBalance, setshowBalance] = useState(false)
   const user = useRouteLoaderData('userLoggedIn')
