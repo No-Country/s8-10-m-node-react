@@ -27,7 +27,7 @@ const Success = ({ amount, name, qr }) => {
             </p>
           </div>
           <Button
-            func={() => navigate('/transfers')}
+            func={() => navigate('/user/home')}
             nameClass="w-2/3 py-3 bg-sky-800 rounded-md text-white font-bold"
           >
             Volver al inicio

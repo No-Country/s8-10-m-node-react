@@ -16,24 +16,13 @@ const NewContact = () => {
   const [error, setError] = useState(false)
   const [confirm, setConfirm] = useState(false)
   const [user, setUser] = useState({})
-  const [contact, setContact] = useState({})
-  const [accountNumber, setAccountNumber] = useState({})
-  const [accountName, setAccountName]= useState({name:'',lasname:''})
+  const [accountName, setAccountName]= useState({name:'',lasname:'',alias:''})
 
 
 
-  //data from api
-  useEffect(() => {
-    fetch('https://dominoback.onrender.com/api/user', requestOptions)
-      .then((res) => res.json())
-      .then((data) => setUser(data))
-   
-      .catch((error) => console.log('error', error))
-      
-  }, [])
+
   
-  const response = user.payload
-
+ 
 
   
  
@@ -43,31 +32,25 @@ const NewContact = () => {
 
 
 //filter data
-const validateForm = (e) => {
+const validateForm = async (e) => {
   e.preventDefault();
   if (e.target.alias.value.trim() === '') {
     setError(true);
   } else {
     const aliasToFind = e.target.alias.value.trim();
-    const foundAccount = response.accountInfo.alias === aliasToFind ? response : null;
-  
-
-    if (foundAccount) {
-      const account = foundAccount.accountInfo;
-    
-      setAccountNumber(account.accountNumber)
-      const fullName = foundAccount.profile.fullName
-      const lastName = foundAccount.profile.lastName
-      setAccountName({name:fullName,lasname:lastName})
-     
-     console.log(account.accountNumber); // Muestra la cuenta correspondiente al alias encontrado
-      setContact(account);
-      // Aquí puedes realizar la lógica adicional que necesites con la cuenta encontrada
-    
-
-      openSearchModal();
-    } else {
-      console.log('No se encontró ninguna cuenta con ese alias.');
+    try {
+      const response = await fetch(`https://dominoback.onrender.com/api/user/${aliasToFind}`, requestOptions);
+      if (response.ok) {
+        const user = await response.json();
+        setUser(user);
+        
+        setAccountName({name:user.payload.profile.fullName,lasname:user.payload.profile.lastName,alias:user.payload.accountInfo.alias})
+        openSearchModal();
+      } else {
+        console.log('No se encontró ningún usuario con ese alias.');
+      }
+    } catch (error) {
+      console.log('Error en la solicitud:', error);
     }
   }
 };
@@ -112,7 +95,7 @@ const validateForm = (e) => {
               >
                 <div className="w-full text-center relative pt-3">
                   <h3 className="text-2xl font-semibold">{accountName.name} {accountName.lasname}</h3>
-                  <p className="text-gray-400 text-md">{contact.accountNumber}</p>
+                  <p className="text-gray-400 text-md">{user.payload.accountInfo.accountNumber}</p>
                   <FaTimes
                     className="absolute -top-1 right-[30px] cursor-pointer"
                     size={20}
@@ -122,11 +105,11 @@ const validateForm = (e) => {
                 <div className="w-full flex flex-col gap-4 pl-8">
                   <div>
                     <h4 className="text-2xl font-semibold">Alias</h4>
-                    <p className="text-gray-500">{contact.alias}</p>
+                    <p className="text-gray-500">{accountName.alias}</p>
                   </div>
                   <div>
                     <h4 className="text-2xl font-semibold">CBU</h4>
-                    <p className="text-gray-500">{contact.accountNumber} </p>
+                    <p className="text-gray-500">{user.payload.accountInfo.accountNumber} </p>
                   </div>
                   <div>
                     <h4 className="text-2xl font-semibold">Banco</h4>
@@ -156,8 +139,9 @@ const validateForm = (e) => {
         </>
       ) : (
         <ToTransfer setConfirm={setConfirm} close={closeSearchModal} 
-        accountNumber={accountNumber}
+        accountNumber={user.payload.accountInfo.accountNumber}
         accountName={accountName.name}
+        name={accountName}
         />
       )}
     </section>

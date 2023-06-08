@@ -5,15 +5,15 @@ import PopUp from './PopUp';
 import Success from './Success';
 import { useUserContext } from '../context/UserContext';
 
-const ToTransfer = ({ setConfirm, close, accountNumber,accountName }) => {
+const ToTransfer = ({ setConfirm, close, accountNumber,name }) => {
   const [amount, setAmount] = useState(0);
   const [error, setError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const { user } = useUserContext();
   const { payload } = user;
-  console.log(payload.accountInfo);
+  console.log(payload.accountInfo.accountNumber);
   const cuenta = payload.accountInfo.accountNumber;
-  console.log(cuenta);
+
   
 
 
@@ -58,7 +58,7 @@ const ToTransfer = ({ setConfirm, close, accountNumber,accountName }) => {
   return (
     <section>
       {showSuccess ? (
-        <Success amount={parseInt(amount)} name={accountName} />
+        <Success amount={parseInt(amount)} name={name.name} />
       ) : (
         <>
           <img

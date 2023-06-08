@@ -66,24 +66,13 @@ export const Perfil = () => {
       <section className="mt-10 flex">
         <ProfileImage name="Marcos Leiva" />
       </section>
-      <section className="w-full flex justify-center gap-[5.25rem] relative pl-4">
-        <p onClick={handleClick}>USUARIO</p>
-        <p onClick={handleClick}>ASPECTOS</p>
-        <div
-          className={`w-4/5 border-b-2 border-white absolute bottom-[-2px] bg-white`}
-        >
-          <span
-            className={`border-b-2 border-black ${
-              showuser === false
-                ? "w-[45%] transform translate-x-[0%] transition-all duration-300"
-                : "w-[45%] transform translate-x-[100%] transition-all duration-300"
-            } absolute bottom-[-2px]`}
-          ></span>
-        </div>
-      </section>
+      
       {cheked ? (
-        <section className="w-full flex px-8">
-          <form className="w-full flex flex-col gap-6" onSubmit={validateUser}>
+        
+        <section className="w-full flex px-8 flex-col items-center sm:flex-col sm:justify-center">
+          <p className="pb-5" >USUARIO</p>
+          <form className="w-full flex  gap-6 flex-col items-center sm:flex-col sm:justify-center" onSubmit={validateUser}>
+           
             <InputField
               id="name"
               type="text"
@@ -123,6 +112,7 @@ export const Perfil = () => {
               condition={showPassword}
               icon={showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
             />
+            <p  >ASPECTOS</p>
              <InputField
               id="dni"
               type="number"
@@ -160,10 +150,10 @@ export const Perfil = () => {
               func={handleChange}
             />
 
-            <div className="flex flex-col gap-6">
+            <div className="flex w-2/4 flex-col gap-4">
               <Button
                 type="submit"
-                nameClass="bg-customColor mt-8 py-3 rounded-full text-white font-semibold tracking-wide"
+                nameClass="bg-customColor  mt-8 py-3 rounded-full text-white font-semibold tracking-wide"
               >
                 Guardar Cambios
               </Button>
@@ -171,15 +161,32 @@ export const Perfil = () => {
                 type="submit"
                 nameClass="border-2 border-red-500 mt-2 py-3 rounded-full text-red-500 font-semibold tracking-wide"
               >
-                Guardar Cambios
+                Eliminar Cuenta
               </Button>
             </div>
           </form>
         </section>
       ) : showuser ? (
+        
         <section className="w-full flex px-8">
+          
           <form className="w-full flex flex-col gap-6" onSubmit={validateUser}>
-           
+            
+          <section className="w-full flex  justify-center gap-[5.25rem] relative pl-4">
+        <p onClick={handleClick}>USUARIO</p>
+        <p onClick={handleClick}>ASPECTOS</p>
+        <div
+          className={`w-4/5 border-b-2 border-white absolute bottom-[-2px] bg-white`}
+        >
+          <span
+            className={`border-b-2 border-black ${
+              showuser === false
+                ? "w-[45%] transform translate-x-[0%] transition-all duration-300"
+                : "w-[45%] transform translate-x-[100%] transition-all duration-300"
+            } absolute bottom-[-2px]`}
+          ></span>
+        </div>
+      </section>
             <InputField
               id="dni"
               type="number"
@@ -237,6 +244,21 @@ export const Perfil = () => {
       ) : (
         <section className="w-full px-8">
           <form className="w-full flex flex-col gap-6" onSubmit={validateUser}>
+          <section className="w-full flex  justify-center gap-[5.25rem] relative pl-4">
+        <p onClick={handleClick}>USUARIO</p>
+        <p onClick={handleClick}>ASPECTOS</p>
+        <div
+          className={`w-4/5 border-b-2 border-white absolute bottom-[-2px] bg-white`}
+        >
+          <span
+            className={`border-b-2 border-black ${
+              showuser === false
+                ? "w-[45%] transform translate-x-[0%] transition-all duration-300"
+                : "w-[45%] transform translate-x-[100%] transition-all duration-300"
+            } absolute bottom-[-2px]`}
+          ></span>
+        </div>
+      </section>
           <InputField
               id="name"
               type="text"

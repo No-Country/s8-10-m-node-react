@@ -5,6 +5,9 @@ import config from '../assets/images/config.svg'
 import Data from '../assets/images/Data.svg'
 import message from '../assets/images/message.svg'
 import security from '../assets/images/security.svg'
+import luna from '../assets/images/luna.svg'
+import term from '../assets/images/term.svg'
+import cerrar from '../assets/images/cerrar.svg'
 
 const OptionContainer = () => {
     const [optionData, setOptionData] = useState([{
@@ -30,25 +33,25 @@ const OptionContainer = () => {
     {
         id: 4,
         name: 'Activar Modo Oscuro ',
-        icon: <img src={config} alt="Data" />,
+        icon: <img src={luna} alt="Data" />,
         color: 'text-black-500'
     },
     {
         id: 5,
         name: 'Terminos y condiciones',
-        icon: "X",
+        icon: <img src={term} alt="Data" />,
         color: "text-black-500"
     },
     {
         id: 6,
         name: 'Politica de privacidad',
-        icon: "X",
+        icon: <img src={term} alt="Data" />,
         color: 'text-black-500'
     },
     {
         id: 7,
         name: 'Cerrar sesión',
-        icon: "X",
+        icon: <img src={cerrar} alt="Data" />,
         color: 'text-red-500'
     },
 
