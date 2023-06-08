@@ -19,6 +19,7 @@ import { Perfil } from './components/Perfil'
 import Success from './components/Success'
 import { PayService, loader as payServiceLoader } from './pages/PayService'
 import { ErrorPage } from './pages/errorPage'
+import { AssociateCard } from './pages/AssociateCard'
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
         path: 'mycards/:creditCardId',
         element: <CreditCard />,
         loader: creditCardPageLoader,
+      },
+      {
+        path: 'mycards/associateCard',
+        element: <AssociateCard />,
       },
       {
         path: 'transfers',

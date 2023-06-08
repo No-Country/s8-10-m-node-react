@@ -20,20 +20,19 @@ export const MyCards = () => {
       <PageTitle>Tarjetas</PageTitle>
       <h3 className="font-semibold w-full text-xl">Tu tarjeta</h3>
       <CreditCardWithLink cardName={cardName} isDomino={true} cardNumber={dominoCard} />
-      {associateCards.length == 0 ? (
+      {associateCards.length > 0 ? (
         <div className='flex flex-col gap-4'>
           <h2 className="font-semibold w-full text-xl">Tarjetas asociadas</h2>
           <div className="flex flex-wrap w-full items-center justify-center gap-6">
-            <CreditCardWithLink cardNumber="378282246310005" name={cardName} />
-            <CreditCardWithLink cardNumber="6331245123123" name={cardName} />
+            {associateCards.map(card => <CreditCardWithLink key={card.cardNumber} cardNumber={card.cardNumber} cardName={card.holder} />)}
           </div>
         </div>
       ) : null}
       <button className="bg-[#F9FAFB] border-primary border-[1px] rounded-md flex items-center justify-center gap-4 w-[90%] self-center sm:w-52 py-2 px-4">
         <FaRegCreditCard fill='#4C27AE' />
-        <p className="font-medium text-center text-lg text-primary">
+        <Link to='/user/mycards/associateCard' className="font-medium text-center text-lg text-primary">
           Asociar tarjeta
-        </p>
+        </Link>
       </button>
     </div>
   )
