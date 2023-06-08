@@ -3,6 +3,7 @@ import { FaBars, FaRegBell } from 'react-icons/fa'
 import PanelBack from '../components/PanelBack'
 import { useState, useEffect } from 'react'
 import { useUserContext } from '../context/UserContext'
+import { useLayoutContext } from '../context/LayoutContext'
 
 const PanelNavMobile = ({ toggleOpen }) => {
   const [mobilePanel, setMobilePanel] = useState({
@@ -13,6 +14,17 @@ const PanelNavMobile = ({ toggleOpen }) => {
   const { payload } = user
 
   const location = useLocation()
+  useEffect(() => {
+    if (location.pathname === '/user/home') {
+      return setMobilePanel({
+        condition: true,
+      })
+    } else {
+      return setMobilePanel({
+        condition: false,
+      })
+    }
+  }, [location])
 
   return (
     <section

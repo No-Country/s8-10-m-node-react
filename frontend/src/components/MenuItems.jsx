@@ -35,11 +35,6 @@ const MenuItems = ({ isOpen, setIsOpen }) => {
       'name': 'Transferir',
       'icon': <FaArrowRight size={25} />,
       'link': '/user/transfers',
-    },
-    {
-      'name': 'Recargar',
-      'icon': <FaArrowUp size={25} />,
-      'link': null,
     }
   ]
 
