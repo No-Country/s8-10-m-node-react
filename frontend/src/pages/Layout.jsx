@@ -62,7 +62,7 @@ export const UserLayout = () => {
     },
   ]
   return (
-    <main className="md:ml-24">
+    <main className="md:ml-24 min-h-screen">
       <PanelNavMobile toggleOpen={toggleOpen} items={menuItems} />
       <NavBar
         toggleOpen={toggleOpen}

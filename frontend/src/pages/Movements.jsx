@@ -11,7 +11,6 @@ export const loader = () => {
 
 export const Movements = () => {
   const { payload } = useRouteLoaderData('userLoggedIn')
-  console.log(payload)
 
   const moves = payload.movements
 
