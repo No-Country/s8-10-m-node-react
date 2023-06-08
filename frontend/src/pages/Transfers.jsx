@@ -32,7 +32,7 @@ const LISTA_DE_CONTACTOS = [
 
 const Transfers = () => {
 
-  
+
 
   const [isLocation, setIsLocation] = useState('')
 
@@ -47,10 +47,7 @@ const Transfers = () => {
   }, [location.pathname, isLocation])
 
   return (
-    <main className=" w-full min-h-screen bg-gray-100 relative">
-      <div className="pl-4 pt-4">
-        <Link to="../home">Inicio</Link> / Transferencias
-      </div>
+    <main className=" w-full min-h-screen relative">
       <section className="mt-6 mb-24 w-full flex justify-center gap-[5.25rem] relative pl-4">
         <Link replace="user/transfers">Contactos</Link>
         <Link className="pr-4" to="newContact">
@@ -60,11 +57,10 @@ const Transfers = () => {
           className={`w-4/5 border-b-2 border-white absolute bottom-[-2px] bg-white`}
         >
           <span
-            className={`border-b-2 border-sky-500  ${
-              isLocation === 'contacts'
-                ? 'w-[50%] transform translate-x-[0%] transition-all duration-300'
-                : 'w-[50%] transform translate-x-[100%] transition-all duration-300'
-            } absolute bottom-[-2px]`}
+            className={`border-b-2 border-sky-500  ${isLocation === 'contacts'
+              ? 'w-[50%] transform translate-x-[0%] transition-all duration-300'
+              : 'w-[50%] transform translate-x-[100%] transition-all duration-300'
+              } absolute bottom-[-2px]`}
           ></span>
         </div>
       </section>

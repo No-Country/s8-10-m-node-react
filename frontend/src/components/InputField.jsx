@@ -14,7 +14,7 @@ const InputField = ({
   return (
     <div className="w-[108%] max-w-screen-sm flex flex-col relative">
       <input
-        className="outline-0 px-4 py-3 border border-[#4C27AE4D] rounded-lg peer focus:border-black transition duration-400 placeholder:font-inter placeholder:text-gray-400 placeholder:font-roboto placeholder:tracking-wider placeholder:text-sm"
+        className="outline-0 px-4 py-3 border border-tableHeadColor rounded-lg peer transition duration-400 placeholder:text-gray-400 placeholder:font-roboto placeholder:tracking-wider placeholder:text-sm focus:border-primary"
         id={id}
         type={type}
         name={name}
@@ -22,9 +22,8 @@ const InputField = ({
         onChange={func}
         value={inputValue}
       />
-
       <label
-        className="absolute left-4 -top-[10px] px-1 bg-white text-sm text-[#4C27AE] font-roboto tracking-wide transition duration-400 peer-focus:text-black font-inter"
+        className="absolute left-4 -top-[10px] px-1 bg-white text-sm text-primary font-roboto tracking-wide duration-500 peer-focus:text-black rounded-md border-tableHeadColor peer-focus:border-primary border-[1px]"
         htmlFor={labelFor}
       >
         {content}

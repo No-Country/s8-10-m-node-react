@@ -9,8 +9,8 @@ export const BackButton = () => {
   }
 
   return (
-    <button onClick={goBackPage} className="top-4  rotate-180">
-      <IoArrowBack />
+    <button onClick={goBackPage}>
+      <IoArrowBack size={25} />
     </button>
   )
 }

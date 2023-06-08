@@ -1,40 +1,26 @@
-import { Button } from '../components/Button'
 import { Link } from 'react-router-dom'
+import { CreditCardComp } from '../components/CreditCardComp'
+import { IoTrendingUp, IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5'
 import { useUserContext } from '../context/UserContext'
-import { useEffect, useState } from 'react'
-
-// import { CreditCardComp } from '../components/CreditCardComp'
-import {
-  IoTrendingUp,
-  IoTrendingDownOutline,
-  IoEyeOutline,
-  IoEyeOffOutline,
-} from 'react-icons/io5'
-
-
-
+import { useState } from 'react'
+import WithdrawCash from '../components/WithdrawCash'
+import { formatCurrency } from '../utils/formatCurrency'
+import { FaAsterisk } from 'react-icons/fa'
 
 export const Home = () => {
   const [showBalance, setshowBalance] = useState(false)
-  const { logOut } = useUserContext()
-  const [user, setUser] = useState()
-const [amount, setAmount] = useState();
 
- 
-
-
-
-
-  
-  
+  const { user } = useUserContext()
+  const { payload } = user
+  console.log(payload)
 
   return (
     <>
-      <section className="w-full h-[250px] bg-[#4C27AE26] shadow-first flex flex-col items-center">
-        <p className="font-roboto mt-10">Disponible</p>
-        <div className="w-[85%] h-auto flex items-center justify-center gap-x-6 mt-2 border-b pb-4 border-[#4C27AE4D]">
-          <h3 className="text-5xl font-roboto font-bold tracking-wide">
-            {showBalance ? `` : '********'}
+      <section className="w-full bg-tableRowColor md:bg-transparent md:shadow-none shadow-first flex md:flex-row md:flex-wrap md:gap-x-6 md:justify-center flex-col items-center justify-center py-6 md:mx-auto">
+        <p className="font-roboto md:mt-0">Disponible</p>
+        <div className="w-[85%] md:w-auto h-auto flex items-center justify-center gap-x-6 mt-2 border-b pb-4 border-[#4C27AE4D] md:border-0">
+          <h3 className="text-5xl font-roboto font-bold text-center tracking-wide min-w-[200px]">
+            {showBalance ? formatCurrency(100) : ('*****')}
           </h3>
           <span onClick={() => setshowBalance(!showBalance)}>
             {showBalance ? (
@@ -44,7 +30,6 @@ const [amount, setAmount] = useState();
             )}
           </span>
         </div>
-
         <div className="w-full flex justify-center gap-x-6 mt-8">
           <Link
             to="../transfers"
@@ -53,13 +38,37 @@ const [amount, setAmount] = useState();
             <IoTrendingUp size={20} />
             Transferir
           </Link>
-          <Button nameClass="w-[150px] flex items-center justify-center gap-2 rounded-lg text-white font-inter bg-[#4C27AE]">
-            <IoTrendingDownOutline size={20} />
-            Retirar
-          </Button>
+          <WithdrawCash />
         </div>
       </section>
-      {/* <CreditCardComp height="160" cardNumber="4111111111111111" /> */}
+      <section className="pl-6 mt-8">
+        <h2 className="font-roboto text-lg pl-2 mb-4">Mis tarjetas</h2>
+        <div className="flex flex-wrap">
+          {user ? (
+            <>
+              <CreditCardComp
+                cardNumber={payload?.accountInfo?.dominoCard?.cardNumber}
+                isDomino={true}
+                name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}
+              />
+              {payload?.accountInfo?.associateCards?.map((card) => {
+                console.log(card)
+                return (
+                  <CreditCardComp
+                    cardNumber={
+                      payload?.accountInfo?.associateCards?.cardNumber
+                    }
+                    isDomino={false}
+                    name={`${payload?.profile?.fullName} ${payload?.profile?.lastName}`}
+                  />
+                )
+              })}
+            </>
+          ) : (
+            <p>Cargando tarjetas</p>
+          )}
+        </div>
+      </section>
     </>
   )
 }

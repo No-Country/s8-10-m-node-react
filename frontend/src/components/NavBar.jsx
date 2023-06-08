@@ -4,47 +4,42 @@ import { IoExitOutline } from 'react-icons/io5'
 import MenuItems from './MenuItems'
 import { Link } from 'react-router-dom'
 
-export const NavBar = ({ isOpen, toggleOpen, setIsOpen }) => {
+export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
   const { logOut } = useUserContext()
 
   return (
     <nav
-      className={`flex flex-col fixed bg-[#4C27AE] p-6 top-0 gap-4 left-0 h-screen ${
-        isOpen
+      className={`flex flex-col fixed bg-[#4C27AE] p-6 top-0 gap-4 left-0 h-screen ${isOpen
           ? 'max-sm:w-full md:w-72 translate-x-0'
           : 'max-sm:w-0 -translate-x-[150%] md:w-24 md:translate-x-0'
-      } items-center transition-all duration-500 z-10`}
+        } items-center transition-all duration-500 z-10`}
     >
       <NavAppTitle func={toggleOpen} isOpen={isOpen}>
         D{isOpen && 'ominó'}
       </NavAppTitle>
       <h4
-        className={`text-center ${
-          isOpen && 'text-start'
-        } font-roboto tracking-wide text-white w-full pb-2 border-b`}
+        className={`text-center ${isOpen && 'text-start'
+          } font-roboto tracking-wide text-white w-full pb-2 border-b`}
       >
         Menu
       </h4>
-      <MenuItems isOpen={isOpen} setIsOpen={setIsOpen} />
+      <MenuItems isOpen={isOpen} items={items} setIsOpen={setIsOpen} />
       <div
-        className={`w-full h-auto flex items-center justify-between bg-transparent border-t pt-3 text-white ${
-          isOpen && 'gap-4'
-        }`}
+        className={`w-full h-auto flex items-center justify-between bg-transparent border-t pt-3 text-white ${isOpen && 'gap-4'
+          }`}
       >
         <Link>
           <img
-            className="w-14 h-14 rounded-lg object-cover cursor-pointer"
+            className="w-14 h-14 rounded-lg object-cover cursor-pointer "
             src="https://www.huie.org.nz/wp-content/uploads/2022/05/elizeu-dias-2EGNqazbAMk-unsplash-1-e1653620036569-350x233.jpg"
             alt=""
           />
         </Link>
 
         <div
-          className={`max-sm:w-full ${
-            isOpen ? 'md:w-44' : 'md:w-0'
-          } justify-between items-center transition-opacity duration-800  ${
-            isOpen ? ' opacity-1 flex duration-[1500ms]' : 'opacity-0'
-          }  `}
+          className={`max-sm:w-full ${isOpen ? 'md:w-44' : 'md:w-0'
+            } justify-between items-center transition-opacity duration-800  ${isOpen ? ' opacity-1 flex duration-[1500ms]' : 'opacity-0'
+            }  `}
         >
           <p className="text-center text-sm font-roboto tracking-wider">
             Elizeu Dias

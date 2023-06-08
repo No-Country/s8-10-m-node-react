@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { CreditCardComp } from '../components/CreditCardComp'
 import { TogglePill } from '../components/TogglePill'
 import { FaAngleDoubleRight, FaTrash } from 'react-icons/fa'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useRouteLoaderData } from 'react-router-dom'
 import { PageTitle } from '../components/PageTitle'
-import { getCreditCardInfo } from '../services/creditCard'
 
-export const loader = async ({ params, request }) => {
-  const creditCardId = params.creditCardId
-  const data = await getCreditCardInfo(creditCardId)
+export const loader = async ({ request, params }) => {
+  const { creditCardId } = params
   const isDomino = new URL(request.url).searchParams.get('domino')
-  console.log(isDomino)
-  return { data, isDomino }
+  return { isDomino, creditCardId }
 }
 
 export const CreditCard = () => {
-  const { data, isDomino } = useLoaderData()
+  const { isDomino, creditCardId } = useLoaderData()
+  const userData = useRouteLoaderData('userLoggedIn')
+
+  const card = isDomino ? userData.payload.accountInfo.dominoCard : userData.payload.accountInfo.associateCards.filter(card => card.cardNumber === creditCardId)
+
   return (
-    <>
+    <div className='py-6 md:py-4 px-4 gap-4 max-w-5xl mx-auto'>
       <PageTitle>Tarjetas</PageTitle>
-      <CreditCardComp cardNumber={data.cardNumber} isDomino={isDomino} />
-      <div className="flex flex-col w-full gap-2 font-medium font-roboto px-2">
+      <span className='flex items-center w-full justify-center py-4'>
+        <CreditCardComp cardNumber={card.cardNumber} isDomino={isDomino} />
+      </span>
+      <div className="flex flex-col w-full gap-4 font-medium font-roboto px-2 py-6">
         <div className="flex w-full items-center justify-between">
           <p>Pausar tarjeta</p>
           <TogglePill />
@@ -37,14 +40,15 @@ export const CreditCard = () => {
             <FaAngleDoubleRight />
           </span>
         </div>
-        <button className="bg-[#42ADD5] text-white">
-          <FaTrash />
-          <p className="font-medium text-center text-lg w-[70%]">
-            Eliminar tarjeta
-          </p>
-        </button>
+        {!isDomino &&
+          <button className="bg-[#42ADD5] text-white w-[90%] self-center sm:w-52 py-2 px-4 flex items-center justify-center gap-4">
+            <FaTrash />
+            <p className="font-medium text-center text-lg">
+              Eliminar tarjeta
+            </p>
+          </button>
+        }
       </div>
-      {/* {windowWidth > 480 ? <p>Estamos en desktop o tablet</p> : <p>Estamos en mobile</p>} */}
-    </>
+    </div>
   )
 }
