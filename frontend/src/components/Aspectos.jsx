@@ -41,7 +41,7 @@ export const Aspectos = () => {
         <Link className="" replace="user/aspecto">
          USUARIO
         </Link>
-        <Link className="pr-4" to="perfil">
+        <Link className="pr-4" to="../perfil">
          ASPECTOS
         </Link>
         <div
