@@ -72,18 +72,7 @@ const NewContact = () => {
           {searchOpen && (
             <Modal className="w-full h-full">
               <div
-<<<<<<< HEAD
-                className={`w-full h-[400px] fixed bottom-0 bg-white  ${searchOpen
-                  ? 'translate-y-0 duration-300 ease-in'
-                  : 'transition-transform translate-y-full duration-300 ease-out delay-300'
-                  } rounded-t-[40px] flex flex-col justify-evenly items-center`}
-=======
-                className={`w-full h-[400px] fixed bottom-0 bg-white  ${
-                  searchOpen
-                    ? 'translate-y-0 duration-300 ease-in'
-                    : 'transition-transform translate-y-full duration-300 ease-out delay-300'
-                } rounded-t-[40px] flex flex-col justify-evenly items-center`}
->>>>>>> efbe8f0151c7729279c57aabb6ae5373222bf626
+                className={`w-full h-[400px] bottom-0 bg-white rounded-t-[40px] flex flex-col justify-evenly items-center`}
               >
                 <div className="w-full text-center relative pt-3">
                   <h3 className="text-2xl font-semibold">
@@ -136,13 +125,9 @@ const NewContact = () => {
           )}
         </>
       ) : (
-<<<<<<< HEAD
-        <ToTransfer setConfirm={setConfirm} close={closeSearchModal}
-=======
         <ToTransfer
           setConfirm={setConfirm}
           close={closeSearchModal}
->>>>>>> efbe8f0151c7729279c57aabb6ae5373222bf626
           accountNumber={user.payload.accountInfo.accountNumber}
           accountName={accountName.name}
           name={accountName}

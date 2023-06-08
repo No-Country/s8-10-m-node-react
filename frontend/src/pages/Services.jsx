@@ -6,9 +6,9 @@ import { PageTitle } from '../components/PageTitle'
 
 export const loader = () => {
   const servicesArr = SERVICES
-  const entertainmentArr = servicesArr.slice(0, 4)
-  const homeArr = servicesArr.slice(4, 7)
-  const workArr = servicesArr.slice(7)
+  const entertainmentArr = servicesArr.slice(0, 3)
+  const homeArr = servicesArr.slice(3, 6)
+  const workArr = servicesArr.slice(6)
   return { entertainmentArr, homeArr, workArr }
 }
 

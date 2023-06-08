@@ -22,14 +22,6 @@ export const SERVICES = [
     path: 'spotify',
     bgColor: 'bg-gradient-to-t from-green-800 to-emerald-950'
   },
-
-  {
-    name: 'Hbo MAX',
-    svg: hboMax,
-    path: 'hbomax',
-    bgColor: 'bg-gradient-to-t from-primary to-indigo-800'
-  },
-
   {
     name: 'Netflix',
     svg: netflix,

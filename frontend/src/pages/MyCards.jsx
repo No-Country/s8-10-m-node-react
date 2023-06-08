@@ -16,13 +16,13 @@ export const MyCards = () => {
   const cardName = `${fullName} ${lastName}`
 
   return (
-    <div className='py-6 md:py-4 px-4 flex flex-col gap-4'>
+    <div className='py-6 md:py-4 px-4 flex flex-col gap-4 items-center'>
       <PageTitle>Tarjetas</PageTitle>
-      <h3 className="font-semibold w-full text-xl">Tu tarjeta</h3>
+      <h3 className="font-semibold text-xl">Tu tarjeta</h3>
       <CreditCardWithLink cardName={cardName} isDomino={true} cardNumber={dominoCard} />
       {associateCards.length > 0 ? (
-        <div className='flex flex-col gap-4'>
-          <h2 className="font-semibold w-full text-xl">Tarjetas asociadas</h2>
+        <div className='flex flex-col gap-4 items-center'>
+          <h2 className="font-semibold text-xl">Tarjetas asociadas</h2>
           <div className="flex flex-wrap w-full items-center justify-center gap-6">
             {associateCards.map(card => <CreditCardWithLink key={card.cardNumber} cardNumber={card.cardNumber} cardName={card.holder} />)}
           </div>
