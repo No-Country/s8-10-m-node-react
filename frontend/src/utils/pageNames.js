@@ -7,7 +7,7 @@ export const PAGE_NAMES = {
   sendAmount: 'enviar dinero',
   newContact: 'nuevo contacto',
   services: 'servicios',
-  options: 'opciones',
+  configuracion: 'configuración',
   soporte: 'soporte',
-  perfil: 'perfil'
+  perfil: 'perfil',
 }

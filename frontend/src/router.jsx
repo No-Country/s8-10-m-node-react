@@ -11,10 +11,10 @@ import Transfers from './pages/Transfers'
 import Contacts from './components/Contacts'
 import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
-import { ProfileOptions } from './pages/ProfileOptions'
+import { Configuration } from './pages/Configuration'
 import { UserLayout, loader as userLoader } from './pages/Layout'
 import Soporte from './components/Soporte'
-import { Perfil } from './components/Perfil'
+import { Profile } from './pages/Profile'
 
 import Success from './components/Success'
 import { PayService, loader as payServiceLoader } from './pages/PayService'
@@ -101,8 +101,8 @@ export const router = createBrowserRouter([
         element: <Movements />,
       },
       {
-        path: 'options',
-        element: <ProfileOptions />,
+        path: 'configuracion',
+        element: <Configuration />,
       },
       {
         path: 'soporte',
@@ -110,7 +110,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'perfil',
-        element: <Perfil />,
+        element: <Profile />,
       },
 
       {
