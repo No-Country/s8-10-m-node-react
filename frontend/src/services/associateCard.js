@@ -2,12 +2,12 @@ const BASE_URL = 'https://dominoback.onrender.com/api/associateCards'
 
 export async function associateCard (cardNumber, cvv, type, titular, accountNumber) {
   const data = {
-    cardNumber,
-    cvv,
-    issuingEntity: 'VISA',
-    type,
-    cardholder: titular,
-    accountNumber
+    'cardNumber': cardNumber,
+    'cvv': cvv,
+    'issuingEntity': 'VISA',
+    'type': type,
+    'cardholder': titular,
+    'accountNumber': accountNumber
   }
 
   const reqOptions = {

@@ -16,12 +16,13 @@ export const CreditCard = () => {
   const userData = useRouteLoaderData('userLoggedIn')
 
   const card = isDomino ? userData.payload.accountInfo.dominoCard : userData.payload.accountInfo.associateCards.filter(card => card.cardNumber === creditCardId)
+  console.log(card)
 
   return (
     <div className='py-6 md:py-4 px-4 gap-4 max-w-5xl mx-auto'>
       <PageTitle>Tarjetas</PageTitle>
       <span className='flex items-center w-full justify-center py-4'>
-        <CreditCardComp cardNumber={card.cardNumber} isDomino={isDomino} />
+        <CreditCardComp cardNumber={card[0].cardNumber} name={card[0].holder} isDomino={isDomino} />
       </span>
       <div className="flex flex-col w-full gap-4 font-medium font-roboto px-2 py-6">
         <div className="flex w-full items-center justify-between">

@@ -20,8 +20,9 @@ export const AssociateCard = () => {
   }
 
   async function handleSubmit (e) {
+    setError('')
     e.preventDefault()
-    if (cvv || titular || numero) {
+    if (!cvv || !titular || !numero) {
       setError('Todos los campos deben estar completos')
       return
     }

@@ -9,7 +9,7 @@ export const CreditCardWithLink = ({ cardNumber, cardName, isDomino }) => {
     <span className='flex items-center gap-2'>
       <CreditCardComp cardNumber={cardNumber} name={cardName} isDomino={isDomino} />
       <Link
-        to={`/user/mycards/${cardNumber}${isDomino ? '?domino=true' : null}`}
+        to={`/user/mycards/${cardNumber}${isDomino ? '?domino=true' : ''}`}
       >
         <FaAngleRight fill='##4C27AE' className='h-6' />
       </Link>
