@@ -39,7 +39,7 @@ const Transfers = () => {
   }, [location.pathname, isLocation])
 
   return (
-    <main className=" w-full min-h-screen relative">
+    <main className=" w-full h-full">
       <section className="mb-24 w-full flex justify-center gap-[5.25rem] relative pl-4">
         <Link replace="user/transfers" className="mt-6">
           Contactos
@@ -51,11 +51,10 @@ const Transfers = () => {
           className={`w-72 border-b-2 border-white absolute bottom-[-2px] bg-white`}
         >
           <span
-            className={`border-b-2 border-sky-500  ${
-              isLocation === 'contacts'
-                ? 'w-[50%] transform translate-x-[0%] transition-all duration-300'
-                : 'w-[50%] transform translate-x-[100%] transition-all duration-300'
-            } absolute bottom-[-2px]`}
+            className={`border-b-2 border-sky-500  ${isLocation === 'contacts'
+              ? 'w-[50%] transform translate-x-[0%] transition-all duration-300'
+              : 'w-[50%] transform translate-x-[100%] transition-all duration-300'
+              } absolute bottom-[-2px]`}
           ></span>
         </div>
       </section>

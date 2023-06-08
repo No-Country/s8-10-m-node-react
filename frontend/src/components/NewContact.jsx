@@ -72,7 +72,7 @@ const NewContact = () => {
           {searchOpen && (
             <Modal className="w-full h-full">
               <div
-                className={`w-full h-[400px] bottom-0 bg-white rounded-t-[40px] flex flex-col justify-evenly items-center`}
+                className={`w-full bottom-0 bg-white rounded-t-[40px] flex flex-col justify-evenly items-center`}
               >
                 <div className="w-full text-center relative pt-3">
                   <h3 className="text-2xl font-semibold">

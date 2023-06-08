@@ -29,15 +29,11 @@ const Contacts = ({ listContacts }) => {
       {deleteContact && (
         <Modal closeModal={closeDeleteContact}>
           <div
-            className={`w-full h-[130px] fixed bottom-0 bg-white  ${
-              deleteContact
-                ? 'translate-y-0 duration-300 ease-in'
-                : 'transition-transform translate-y-full duration-300 ease-out delay-300'
-            } rounded-t-[40px] flex justify-center items-center`}
+            className='w-full rounded-t-[40px] flex justify-center items-center h-full'
           >
             <button
               type="button"
-              className="flex items-center gap-4 border border-sky-500 py-4 px-8 rounded-lg cursor-pointer"
+              className="flex items-center gap-4 border border-red-500 py-4 px-8 rounded-lg cursor-pointer"
             >
               <FaTrash size={20} className="text-red-500" />
               Eliminar contacto
