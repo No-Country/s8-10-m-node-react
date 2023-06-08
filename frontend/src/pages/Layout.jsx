@@ -9,11 +9,15 @@ import {
   FaArrowDown,
   FaExchangeAlt,
   FaDollarSign,
+  FaRegCreditCard
 } from 'react-icons/fa'
 import { useLayoutContext } from '../context/LayoutContext'
+import { checkUserData } from '../services/checkUserData.js'
 
 export async function loader () {
   const loggedUserJSON = window.sessionStorage.getItem('dominoUser')
+  const userData = await checkUserData()
+  console.log(userData)
   if (loggedUserJSON) {
     return (JSON.parse(loggedUserJSON))
   } else {
@@ -45,9 +49,9 @@ export const UserLayout = () => {
       condition: windowWidth > 768 ? true : false,
     },
     {
-      name: 'Retirar',
-      icon: <FaArrowDown size={25} />,
-      link: '',
+      name: 'Tarjetas',
+      icon: <FaRegCreditCard size={25} />,
+      link: '/user/mycards',
       condition: windowWidth > 768 ? true : false,
     },
     {
