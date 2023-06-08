@@ -27,6 +27,7 @@ export class UserController extends UserService {
     if(!email) return httpError.response(res, 400, "Email is required");
     try {
       const result = await this.repository.findOne({ where: { email } }) as UserEntity;
+      req.session.user = result;
 
       const payload = generalDto.loginReturn(result);
       res.cookie("user", result, {
