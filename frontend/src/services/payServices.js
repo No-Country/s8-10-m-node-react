@@ -8,8 +8,6 @@ export async function payService (emitter, amount, subject) {
     "subject": subject
   }
 
-  console.log(data)
-
   const reqOptions = {
     method: 'POST',
     headers: {
@@ -20,7 +18,6 @@ export async function payService (emitter, amount, subject) {
 
   try {
     const res = await fetch(BASE_URL, reqOptions)
-    console.log(res)
     return res
   } catch (error) {
     console.error(error)

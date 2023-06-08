@@ -25,44 +25,7 @@ export const UserLayout = () => {
   function toggleOpen () {
     setIsOpen(!isOpen)
   }
-<<<<<<< HEAD
 
-=======
-  const { windowWidth } = useLayoutContext()
-  const menuItems = [
-    {
-      name: 'Home',
-      icon: <FaHome size={25} />,
-      link: '/user/home',
-    },
-    {
-      name: 'Movimientos',
-      icon: <FaExchangeAlt size={25} />,
-      link: '/user/movements',
-    },
-    {
-      name: 'Servicios',
-      icon: <FaDollarSign size={25} />,
-      link: '/user/services',
-      condition: windowWidth > 768 ? true : false,
-    },
-    {
-      name: 'Tarjetas',
-      icon: <FaRegCreditCard size={25} />,
-      link: '/user/mycards',
-    },
-    {
-      name: 'Transferir',
-      icon: <FaArrowRight size={25} />,
-      link: '/user/transfers',
-    },
-    {
-      name: 'Recargar',
-      icon: <FaArrowUp size={25} />,
-      link: '/user/recarga',
-    },
-  ]
->>>>>>> 4706c439b25e237933b6f323e0e056532b70d1d0
   return (
     <main className="md:ml-24 min-h-screen">
       <PanelNavMobile toggleOpen={toggleOpen} />

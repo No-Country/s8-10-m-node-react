@@ -10,7 +10,6 @@ export const loginUser = async (credentials) => {
       body: JSON.stringify(credentials)
     })
     const data = await response.json()
-    console.log(data)
     return data
   } catch (error) {
     return error

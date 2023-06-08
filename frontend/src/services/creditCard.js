@@ -7,7 +7,7 @@ export async function getCreditCardInfo (id) {
     })
     const json = await res.json()
     const data = json.response
-    console.log(data)
+    return (data)
     return data
   } catch (error) {
     console.error(error)

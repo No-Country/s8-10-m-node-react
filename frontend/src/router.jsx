@@ -14,13 +14,13 @@ import ToTransfer from './components/ToTransfer'
 import { Configuration } from './pages/Configuration'
 import { UserLayout, loader as userLoader } from './pages/Layout'
 import Soporte from './components/Soporte'
-import { Perfil } from './components/Perfil'
 import RecargaBilletera from './components/RecargaBilletera'
 
 import Success from './components/Success'
 import { PayService, loader as payServiceLoader } from './pages/PayService'
 import { ErrorPage } from './pages/errorPage'
 import { AssociateCard } from './pages/AssociateCard'
+import { Profile } from './pages/Profile';
 
 export const router = createBrowserRouter([
   {

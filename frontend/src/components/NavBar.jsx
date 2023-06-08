@@ -46,17 +46,13 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
             }  `}
         >
           <p className="text-center text-sm font-roboto tracking-wider">
-<<<<<<< HEAD
-  { userName }
-=======
-           {`${user.payload.profile.fullName} ${user.payload.profile.lastName}`}
->>>>>>> 651944dd77a7d208baf9cc24161ab2b119083764
+            {`${user.payload.profile.fullName} ${user.payload.profile.lastName}`}
           </p >
-  <IoExitOutline
-    size={25}
-    className="rotate-180 cursor-pointer"
-    onClick={logOut}
-  />
+          <IoExitOutline
+            size={25}
+            className="rotate-180 cursor-pointer"
+            onClick={logOut}
+          />
         </div >
       </div >
     </nav >

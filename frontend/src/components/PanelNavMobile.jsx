@@ -4,7 +4,7 @@ import PanelBack from '../components/PanelBack'
 import { useState, useEffect } from 'react'
 import { useUserContext } from '../context/UserContext'
 
-const PanelNavMobile = ({ toggleOpen, items }) => {
+const PanelNavMobile = ({ toggleOpen }) => {
   const [mobilePanel, setMobilePanel] = useState({
     condition: false,
     name: '',
