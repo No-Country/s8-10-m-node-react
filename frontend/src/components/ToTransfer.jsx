@@ -30,7 +30,7 @@ const ToTransfer = ({ setConfirm, close, accountNumber,name }) => {
         amountQuantity: parseInt(amount),
         subject: 'Un mensaje breve'
       };
-      console.log(transferData);
+     
 
       // Realizar solicitud POST a la API
       fetch('https://pagaya.onrender.com/api/business', {

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
   const { logOut } = useUserContext()
+  const { user } = useUserContext()
 
   return (
     <nav
@@ -51,7 +52,7 @@ export const NavBar = ({ isOpen, toggleOpen, setIsOpen, items }) => {
           }  `}
         >
           <p className="text-center text-sm font-roboto tracking-wider">
-            Elizeu Dias
+           {`${user.payload.profile.fullName} ${user.payload.profile.lastName}`}
           </p>
           <IoExitOutline
             size={25}

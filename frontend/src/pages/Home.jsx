@@ -13,7 +13,7 @@ export const Home = () => {
   const user = useRouteLoaderData('userLoggedIn')
   const { payload } = user
   const listMovements = payload?.movements.slice(0, 4)
-console.log()
+
 
 
   return (

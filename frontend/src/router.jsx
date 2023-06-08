@@ -15,7 +15,7 @@ import { ProfileOptions } from './pages/ProfileOptions'
 import { UserLayout, loader as userLoader } from './pages/Layout'
 import Soporte from './components/Soporte'
 import { Perfil } from './components/Perfil'
-import { RecargaBilletera } from './components/RecargaBilletera'
+import RecargaBilletera  from './components/RecargaBilletera'
 
 import Success from './components/Success'
 import { PayService, loader as payServiceLoader } from './pages/PayService'
