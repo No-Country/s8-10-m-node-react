@@ -26,10 +26,7 @@ export const Profile = () => {
 
   const validateUser = async (e) => {
     e.preventDefault()
-    console.log(validateForm)
   }
-  const deleteAccount = () => {}
-
   return (
     <main className="w-full  font-roboto flex flex-col items-center gap-20">
       <section className="mt-10 flex">
