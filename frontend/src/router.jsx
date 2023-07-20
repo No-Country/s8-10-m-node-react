@@ -1,127 +1,83 @@
 import { createBrowserRouter } from 'react-router-dom'
 import OnBoarding from './pages/OnBoarding'
-import { Login, loader as checkUserLoggedLoader } from './pages/Login'
+import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Home } from './pages/Home'
 import { MyCards } from './pages/MyCards'
-import { CreditCard, loader as creditCardPageLoader } from './pages/CreditCard'
-import { Services, loader as servicesLoader } from './pages/Services'
+import { MyCreditCard } from './pages/MyCreditCard'
+import { Services } from './pages/Services'
 import { Movements } from './pages/Movements'
+import{ ProfileOptions } from './pages/ProfileOptions'
 import Transfers from './pages/Transfers'
 import Contacts from './components/Contacts'
 import NewContact from './components/NewContact'
 import ToTransfer from './components/ToTransfer'
-import { Configuration } from './pages/Configuration'
-import { UserLayout, loader as userLoader } from './pages/Layout'
-import Soporte from './components/Soporte'
-import RecargaBilletera from './components/RecargaBilletera'
+import PersonalData from './components/PersonalData'
 
-import Success from './components/Success'
-import { PayService, loader as payServiceLoader } from './pages/PayService'
-import { ErrorPage } from './pages/errorPage'
-import { AssociateCard } from './pages/AssociateCard'
-import { Profile } from './pages/Profile';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <OnBoarding />,
-    errorElement: <ErrorPage />,
+    element: <OnBoarding />
+  },
+  {
+    path: 'home',
+    element: <Home />
   },
   {
     path: 'register',
-    element: <Register />,
-    loader: checkUserLoggedLoader,
+    element: <Register />
   },
   {
     path: 'login',
-    element: <Login />,
-    loader: checkUserLoggedLoader,
+    element: <Login />
   },
   {
-    path: 'user',
-    element: <UserLayout />,
-    loader: userLoader,
-    id: 'userLoggedIn',
+    path: 'mycards',
+    element: <MyCards />
+  },
+  {
+    path: 'mycards/:creditCardId',
+    element: <MyCreditCard />
+  },
+  {
+    path: '/transfers',
+    element: <Transfers />,
     children: [
       {
-        path: 'home',
-        element: <Home />,
-      },
-      {
-        path: 'mycards',
-        element: <MyCards />,
-      },
-      {
-        path: 'mycards/:creditCardId',
-        element: <CreditCard />,
-        loader: creditCardPageLoader,
-      },
-      {
-        path: 'mycards/associateCard',
-        element: <AssociateCard />,
-      },
-      {
-        path: 'transfers',
-        element: <Transfers />,
+        path: '/transfers/contacts',
+        element: <Contacts />,
         children: [
           {
-            path: 'contacts',
-            element: <Contacts />,
-            children: [
-              {
-                path: 'sendAmount',
-                element: <ToTransfer />,
-              },
-            ],
-          },
+            path: '/transfers/contacts/sendAmount',
+            element: <ToTransfer />
+          }
+        ]
+      },
+      {
+        path: '/transfers/newContact',
+        element: <NewContact />,
+        children: [
           {
-            path: 'newContact',
-            element: <NewContact />,
-            children: [
-              {
-                path: 'sendAmount',
-                element: <ToTransfer />,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        path: 'services',
-        element: <Services />,
-        loader: servicesLoader,
-      },
-      {
-        path: 'services/:serviceId',
-        element: <PayService />,
-        loader: payServiceLoader,
-      },
-      {
-        path: 'movements',
-        element: <Movements />,
-      },
-      {
-        path: 'configuracion',
-        element: <Configuration />,
-      },
-      {
-        path: 'soporte',
-        element: <Soporte />,
-      },
-      {
-        path: 'perfil',
-        element: <Profile />,
-      },
-      {
-        path: 'recarga',
-        element: <RecargaBilletera />,
-      },
-
-      {
-        path: 'success',
-        element: <Success qr={true} />,
-      },
-    ],
+            path: '/transfers/newContact/sendAmount',
+            element: <ToTransfer />
+          }
+        ]
+      }
+    ]
   },
+  {
+    path: 'services',
+    element: <Services />
+  },
+  {
+    path: 'movements',
+    element: <Movements />
+  },
+  {
+    path: 'profileoptions',
+    element: <ProfileOptions/>
+    
+  }
+      
 ])
